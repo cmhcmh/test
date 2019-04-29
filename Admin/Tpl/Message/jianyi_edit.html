@@ -1,0 +1,120 @@
+<include file="Index:pageHeader" />
+<script type="text/javascript">
+$(function(){
+	autoHeight(jQuery('.autoHeight'));
+	jQuery(".column_Box").each(function () {
+		var t = jQuery(this);
+		if (t.length < 1) return;
+		Tab_click(t.find('.tab ul li'), t.find(".wrapBox .body"));
+	});
+});
+</script>
+
+<div class="column_Box mainAutoHeight">
+	<div class="tab">
+		<ul>
+			<li class="current"><a href="javascript:">留言</a></li>
+		</ul>
+	</div>
+	<div class="column_Box mainAutoHeight wrapBox">
+        <div class="body">
+        <form method="post" action="{:U('Message/update')}" id="submitForm" name="submitForm" enctype="multipart/form-data">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tbody>							
+						<tr>
+							<td style="text-align:right;">姓名：</td>
+							<td style="text-align:left;">{$info['name']}</td>
+						</tr>
+						<tr>
+							<td style="text-align:right;">联系电话：</td>
+							<td style="text-align:left;">{$info['tel']}</td>
+						</tr>
+
+
+						<tr>
+							<td style="text-align:right;">所在地区：</td>
+							<td style="text-align:left;">{$info.province_name}-{$info.city_name}</td>
+						</tr>
+
+								<tr>
+							<td style="text-align:right;">所在地址：</td>
+							<td style="text-align:left;">{$info.address}</td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">来源的分公司：</td>
+							<td style="text-align:left;">{$info.company_name}</td>
+						</tr>
+				
+
+						<tr>
+							<td style="text-align:right;">留言时间：</td>
+							<td style="text-align:left;">{$info['add_time']}</td>
+						</tr>
+						<tr>
+							<td style="text-align:right;">内容：</td>
+							<td style="text-align:left;">{$info['content']}</td>
+						</tr>
+				
+			
+					</tbody>
+				</table>
+				</form>
+        </div>
+    </div>
+</div>
+</body>
+					<script>
+	$("#admin_province_id").change(function(){
+	var province_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_citys',
+		Type:"POST",
+		data:"province_id="+province_id,
+		dataType:"json",
+		success:function(data){
+			var city = data.city;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			var option1=$("<option></option>");
+			$(option1).val("0");
+			$(option1).html("请选择");
+			$("#admin_city_id").html(option);
+			$("#company_id").html(option1);
+			for(var i in city){
+				var option=$("<option></option>");
+				$(option).val(city[i]['a_id']);
+				$(option).html(city[i]['area_name']);
+				$("#admin_city_id").append(option);
+			}
+		}
+		
+	});
+});
+</script>
+<script>
+$("#admin_city_id").change(function(){
+	var city_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_company',
+		Type:"POST",
+		data:"city_id="+city_id,
+		dataType:"json",
+		success:function(data){
+			var district = data.company;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			$("#company_id").html(option);
+			for(var i in district){
+				var option=$("<option></option>");
+				$(option).val(district[i]['c_id']);
+				$(option).html(district[i]['c_name']);
+				$("#company_id").append(option);
+			}
+		}
+	});
+});
+</script>
+</html>

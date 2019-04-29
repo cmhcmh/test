@@ -1,0 +1,163 @@
+﻿<include file='Public:pageHeader'/>
+<script type="text/javascript">
+	$(function(){
+			$(".ctr_box .hd li").click(function(){
+				var hd = $(this).index();
+
+				$(".ctr_box .hd li").removeClass("on");
+				$(this).addClass("on");
+				$(".ctr_box .bd li").hide();
+				$(".ctr_box .bd li").eq(hd).fadeIn();
+			})
+
+
+	})
+</script>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="/">首页</a> > <a href="{:U('Product/index',array('cat_id'=>$cat_info['cat_id']))}">{$cat_info.cat_name}</a></div>
+			<ul class="clearfix">
+				<li><a href="{:U('Product/index')}">全部产品</a></li>
+				<foreach name="top_cat" item="cat">
+				<li><a href="{:U('Product/index',array('cat_id'=>$cat['cat_id']))}">{$cat.cat_name}</a></li>
+				</foreach>
+				<!-- <li><a href="#">产品系列2</a></li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="pro">
+				<p class="tit">{$cat_info.cat_name}</p>
+				<ul class=" pro_ul">
+					<foreach name="all_detail" item="all_detail">
+					<li <eq name="detail.goods_id" value="$detail['goods_id']"> class="on" </eq> ><a href="{:U('Product/detail',array('id'=>$all_detail['goods_id']))}">{$all_detail.title}</a></li>
+					</foreach>
+				<!-- 	<li><a href="#">KS系列二板直压注塑机</a></li>
+					<li><a href="#">PET系列瓶胚伺服注塑机</a></li>
+					<li><a href="#">KJ系列高精、高效专用机</a></li>
+					<li><a href="#">KH系列高速储能专用注塑机</a></li>
+					<li><a href="#">KSS 系列双料双清色专用机</a></li>
+					<li><a href="#">PPR/PE管件接口专用机</a></li>
+					<li><a href="#">KM 系列注吹专用机</a></li> -->
+				</ul>
+				<div class="pro_pic clearfix">
+				   {$detail.content}
+
+				<!-- 	<div class="img"><img src="__IMG__/img_34.jpg" alt=""></div>
+					<div class="kx-box">
+						<p class="tn">KX系列注塑机</p>
+						<p class="cn">
+							外形尺寸：0201~6575<br><br>
+							容量范围：0.5 pF ~330μF<br><br>
+							额压范围：4V ~ 3kV<br><br>
+							质量等级：宇航级、有失效率等级、七专级、军筛级、普军级、工业级<br>
+							（测试专用参数）
+						</p>
+						
+					</div> -->
+				</div>
+				<!-- <p class="bn">分享至：<a href="#" class="qq"></a> <a href="#" class="xl"></a> <a href="#" class="wx"></a></p> -->
+				<div class="ctr_box">
+					<ul class="hd">
+						<li class="on">介绍参数</li>
+						<li>模 板</li>
+					</ul>
+					<ul class="bd">
+						<li class="on">
+						
+							<div class="ccs">
+									{$detail.content1}
+						<!-- 		<p class="tit">板机主要特点</p>
+								<div class="clearfix">
+									<div class="wen">
+										<p>
+											>高稳定性,科学合理的机械系统,液压系统,<br>
+											<br>
+											>高速高效节能,采用先进的闭环伺服螺杆泵动力系统<br>
+											<br>
+											>超大开模行程<br>
+											<br>
+											>方便快捷的自动调模功能<br>
+											<br>
+											>占地面积小,节省厂房空间<br>
+											<br>
+											>锁模力可控,重复再现性好<br>
+											<br>
+											>模具受力均匀,提高产品精度,保护模具,延长模具用机器的寿命
+										</p>
+									</div>
+									<div class="pic">
+										<img src="__IMG__/pic_28.png" alt="">
+									</div>
+								</div>
+								<div class="h40"></div>
+								<div class="tit">板机主要参数</div>
+								<div class="img"><img src="__IMG__/img_35.jpg" alt=""></div>
+								-->
+							</div> 
+						</li>
+						<li>
+							<div class="ccs">
+								{$detail.content2}
+							<!-- 	<p class="tit">板机主要特点</p>
+								<div class="clearfix">
+									<div class="wen">
+										<p>
+											>高稳定性,科学合理的机械系统,液压系统,<br>
+											<br>
+											>高速高效节能,采用先进的闭环伺服螺杆泵动力系统<br>
+											<br>
+											>超大开模行程<br>
+											<br>
+											>方便快捷的自动调模功能<br>
+											<br>
+											>占地面积小,节省厂房空间<br>
+											<br>
+											>锁模力可控,重复再现性好<br>
+											<br>
+											>模具受力均匀,提高产品精度,保护模具,延长模具用机器的寿命
+										</p>
+									</div>
+									<div class="pic">
+										<img src="__IMG__/pic_28.png" alt="">
+									</div>
+								</div>
+								<div class="h40"></div>
+								<div class="tit">板机主要参数</div>
+								<div class="img"><img src="__IMG__/img_35.jpg" alt=""></div> -->
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="tcy">
+					<p class="tit">产品推荐</p>
+					<ul class="clearfix">
+						<foreach name="is_recommend" item="recommend">
+						<li ><a href="{:U('Product/detail',array('id'=>$recommend['goods_id']))}">
+							<img style="width:100%;height:151px" src="/{$recommend['goods_img']}" alt="">
+							<p>{$recommend.title}</p>
+						</a></li>
+						</foreach>
+
+				<!-- 		<li><a href="#">
+							<img src="__IMG__/img_36.jpg" alt="">
+							<p>PD1088 管件接口注塑机</p>
+						</a></li>
+						<li><a href="#">
+							<img src="__IMG__/img_36.jpg" alt="">
+							<p>PD1088 管件接口注塑机</p>
+						</a></li>
+						<li><a href="#">
+							<img src="__IMG__/img_36.jpg" alt="">
+							<p>PD1088 管件接口注塑机</p>
+						</a></li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

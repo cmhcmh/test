@@ -1,0 +1,80 @@
+﻿<include file='Public:pageHeader'/>
+<script type="text/javascript">
+	
+	$(function(){
+
+		$(".pro_act .hd li").click(function(){
+				var hd = $(this).index();
+
+				$(".pro_act .hd li").removeClass("on");
+				$(this).addClass("on");
+				$(".pro_act .bd li").hide();
+				$(".pro_act .bd li").eq(hd).fadeIn();
+			})
+
+
+	})
+</script>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="/">首页</a> > <a href="{:U('Product/index',array('cat_id'=>$cat_info['cat_id']))}">{$cat.cat_name}</a></div>
+			<ul class="clearfix">
+				<li><a href="{:U('Product/index')}">产品总介绍</a></li>
+				<foreach name="top_cat" item="cat">
+				<li <eq name="cat['cat_id']" value="$cat_info.cat_id"> class="on"  </eq> ><a href="{:U('Product/index',array('cat_id'=>$cat['cat_id']))}">{$cat.cat_name}</a></li>
+				</foreach>
+				<!-- <li><a href="#">产品系列2</a></li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="pro_area">
+				<ul class="area_ul">
+					<foreach name="er_cat" item="cat1">
+					<li <eq name="cat1['cat_id']" value="$cat_info.cat_id"> class="on"  </eq> ><a href="{:U('Product/index',array('cat_id'=>$cat1['cat_id']))}">{$cat1.cat_name}</a></li>
+					</foreach>
+				<!-- 	<li><a href="#">天虹 II 系列2</a></li>
+					<li><a href="#">天虹 II 系列3</a></li>
+					<li><a href="#">天虹 II 系列4</a></li>
+					<li><a href="#">天虹 II 系列5</a></li>
+					<li><a href="#">天虹 II 系列6</a></li> -->
+				</ul>
+                <div class="bd">
+                    
+					<ul >
+						<volist name="all_pro" id="info">
+						<li style="width:240px;float: left;overflow: hidden;  position: relative;"><a href="{:U('Product/detail',array('id'=>$info['goods_id']))}">
+							<div class="img"><span></span><img style=" height: 156px;width:240px" src="/{$info['goods_img']}" alt=""></div>
+							<p style="display: block; border: 1px solid #999999;color: #ffffff;background-color: #999999;font-size: 14px;text-align: center;height: 35px;line-height: 35px;">{$info.title}</p>
+						</a></li>
+						</volist>
+			           <div style="clear:both"></div>
+					</ul>
+				
+                  <div class="h14"></div>
+				<div class="page">
+				{$page}
+				  <span>共{$totalPage}页</span>
+					<!-- <a href="#" class="prev">上一页</a>
+					<a href="#">1</a>
+					<a href="#">2</a>
+					<a href="#" class="next">下一页</a>
+					<span>共2页　到 <input type="text" value="1" class="text">页 <input type="button" value="确定" class="but"></span> -->
+				</div>
+
+
+
+			
+				</div>
+			     
+
+				
+
+			</div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

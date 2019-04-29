@@ -1,0 +1,1262 @@
+﻿<include file='Public:pageHeader'/>
+<style type="text/css">
+
+	.sidel2{display: block;}	
+</style>
+<div class="banner">
+		<foreach name="banner_list" item="list">
+				<div><a href="{$list.link}" target="_blank" class="pic" style="background-image: url(/{$list.original_img});"></a></div>
+		</foreach>
+		<foreach name="banner_public_list" item="list">
+				<div><a href="{$list.link}" target="_blank" class="pic" style="background-image: url(/{$list.original_img});"></a></div>
+		</foreach>
+	
+		
+
+		
+	</div>
+	
+	<div class="index" id="index">
+	
+		<div class="layout">
+			<div class="trun">
+				<ul class="five clearfix">
+				<foreach name="shouye_list" item="list">
+					<li class="clearfix">
+						<i><img src="/{$list.original_img}"></i>
+						<div class="w">
+						<a href="{$list.link}" target="_blank">
+							<span><em class="counter">{$list.nums}</em><b>+</b></span>
+							<p>{$list.title}<!--<em>brand poeer</em>--></p>
+						 </a>
+						</div>
+					</li>
+				</foreach>
+					
+				</ul>
+			</div>
+			
+			<div class="trun">
+				<div class="i_title clearfix">
+					<div class="fl">
+						<h3 style="background-image: url(/{$biaoyu_list[0]['original_img']});">{$biaoyu_list[0]['title']}<em>{$biaoyu_list[0]['title_en']}</em></h3>
+						<p>{$biaoyu_list[0]['description']}</p>
+					</div>
+					<a href="{:U('Case/index')}" class="m"  target="_blank">更多&gt;</a>
+					<ul class="clearfix">
+					   <foreach name="space" item="list">
+								<li><a href="{:U('Gallery/index',array('space_id'=>$list['com_id']))}"  target="_blank">{$list.com_name}</a></li>
+						</foreach>
+					</ul>
+				</div>
+				
+				<div class="index_1">
+					<ul class="clearfix">
+					  <foreach name="pc_case" item="list">
+						<li class="<if condition="$key%4 eq 3">nm</if> wow fadeInUp" data-wow-delay=".2s">
+						<a href="{:U('Case/detail',array('id'=>$list['article_id']))}" target="_blank">
+							<div class="pich"><img src="{$list.original_img|returnhead1=###}"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+							<h3 class="allh3"><em style="width:229px;">{$list.title}</em><b>{$list.counts}</b></h3>
+							<p class="dot">{$list.short}</p>
+						</a>
+							<h4><em><i><a  target="_blank" href="{:U('Case/index',array('style_id'=>$list['com_id']))}">{$list['com_name']}</i></a></em></h4>
+						
+						</li>
+					   </foreach>
+						
+					</ul>
+				</div>
+			</div>
+			
+			<div class="">
+				<div class="i_title clearfix">
+					<div class="fl">
+					<h3 style="background-image: url(/{$biaoyu_list[1]['original_img']});">{$biaoyu_list[1]['title']}<em>{$biaoyu_list[1]['title_en']}</em></h3>
+						<p>{$biaoyu_list[1]['description']}</p>
+					</div>
+					<a rel="nofollow" href="{:U('Vr/index')}" class="m" style="display: none"  target="_blank">更多&gt;</a>
+				</div>
+				
+				<div class="index_2">
+					<a rel="nofollow" href="{$vr_big.link}" class="bimg clearfix" target="_blank">
+						<div class="pic wow slideInLeft" style="background-image: url(/{$vr_big.original_img_recom});"><b></b></div>
+						<div class="fr wow slideInRight">
+							<h3 class="allh3"><em style="font-size: 18px">{$vr_big.title}</em><b style="display: none">{$vr_big.counts}</b></h3>
+							<p class="allp dot">{$vr_big.short}</p>
+						</div>
+					</a>
+					<ul class="clearfix">
+					 <foreach name="vr" item="list">
+						<li class="<if condition="$key%3 eq 2">nm</if> wow fadeInUp" data-wow-delay=".2s">
+						<a href="{$list.link}" target="_blank">
+							<div class="pich"><img src="/{$list.original_img}"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+							<h3 class="allh3"><em>{$list.title}</em><b style="display: none">{$list.counts}</b></h3>
+							<p class="allp dot">{$list.short}</p>
+						</a></li>
+					 </foreach>
+					</ul>
+				</div>
+			</div>
+			<if condition="$company_id==0">
+			<div class="trun">
+				<div class="i_title clearfix">
+					<div class="fl">
+						<h3 style="background-image: url(/{$biaoyu_list[2]['original_img']});">{$biaoyu_list[2]['title']}<em>{$biaoyu_list[2]['title_en']}</em></h3>
+						<p>{$biaoyu_list[2]['description']}</p>
+					</div>
+					<a href="{:U('Design/index')}" class="m"  target="_blank" >更多&gt;</a>
+				</div>
+				
+				<div class="index_3 clearfix">
+					<ul class="fl clearfix">
+						<li class="wow fadeInDownBig" data-wow-delay=".2s">
+							<div class="bd">
+							<foreach name="grade" item="list">
+								<div class="box">
+									<div class="pich"><a href="{:U('Design/detail',array('id'=>$design_left[$list['com_id']][0]['article_id']))}" target="_blank"><img src="{$design_left[$list['com_id']][0]['original_img']|returnhead1=###}" width="178" height="204" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+									<div class="word">
+										<h3>{$design_left[$list['com_id']][0]['title']}</h3>
+										<h4><!--黄埔整装设计中心/-->{$list.com_name}<em></em></h4>
+										<p class="dot">
+										<em>所属公司：{$design_left[$list['com_id']][0]['c_name']}</em>
+										<em>从业时间：{$obtain[$design_left[$list['com_id']][0]['obtain']]['com_name']}</em>
+
+										{$design_left[$list['com_id']][0]['short']}</p>
+										<div class="btn clearfix">
+											<a href="javascript:design_order('{$design_left[$list['com_id']][0]['title']}');"  target="_blank">预约</a>
+											<a href="{:U('Design/detail',array('id'=>$design_left[$list['com_id']][0]['article_id']))}"  target="_blank">详情</a>
+										</div>
+									</div>
+								</div>
+							</foreach>
+			
+							</div>
+							<dl class="hd">
+							<foreach name="grade" item="list">
+								<dd>{$list.com_name}</dd>
+						    </foreach>
+							</dl>
+						</li>
+						<li class="wow fadeInDownBig" data-wow-delay=".4s">
+							<div class="bd">
+								<foreach name="grade" item="list">
+								<div class="box">
+									<div class="pich"><a href="{:U('Design/detail',array('id'=>$design_left[$list['com_id']][1]['article_id']))}" target="_blank"><img src="{$design_left[$list['com_id']][1]['original_img']|returnhead1=###}" width="178" height="204" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+									<div class="word">
+										<h3>{$design_left[$list['com_id']][1]['title']}</h3>
+										<h4><!--黄埔整装设计中心/-->{$list.com_name}<em></em></h4>
+										<p class="dot">
+										<em>所属公司：{$design_left[$list['com_id']][1]['c_name']}</em>
+										<em>从业时间：{$obtain[$design_left[$list['com_id']][1]['obtain']]['com_name']}</em>
+										
+										{$design_left[$list['com_id']][1]['short']}</p>
+										<div class="btn clearfix">
+											<a href="javascript:design_order('{$design_left[$list['com_id']][1]['title']}');"  target="_blank">预约</a>
+											<a href="{:U('Design/detail',array('id'=>$design_left[$list['com_id']][1]['article_id']))}"  target="_blank">详情</a>
+										</div>
+									</div>
+								</div>
+							</foreach>
+							</div>
+							<dl class="hd">
+								<foreach name="grade" item="list">
+								<dd>{$list.com_name}</dd>
+						    </foreach>
+							</dl>
+						</li>
+					</ul>
+					<div class="right">
+						<div class="rbox wow fadeInRightBig" data-wow-delay="1s">
+						<foreach name="designs" item="list">
+							<div>
+								<div class="con clearfix">
+									<div class="word">
+									   <div class="words" style="height:225px;overflow: hidden;">
+										<h3>{$list.title}</h3>
+										<h4>{$grade[$list['grade']]['com_name']}<em></em></h4>
+										<p>
+											<em>从业时间：{$obtain[$list['obtain']]['com_name']}</em>
+											<em>所属公司：{$list['c_name']}</em>
+											<!--
+											毕业学校：广州美术学院 环境艺术设计<br />
+											社会身份：中国高级室内建筑师<br />-->
+											擅长风格：
+											  <foreach name="special_style_data[$list['article_id']]" item="vos">
+                                    				{$vos.com_name}&nbsp;
+                        						</foreach>
+											<br />
+											所获荣誉<div style="height: 130px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{$list.content}</div>
+						
+										</p>
+										</div>
+										<div class="btn clearfix">
+											<a href="javascript:design_order('{$list['title']}');">预约</a>
+											<a href="{:U('Design/detail',array('id'=>$list['article_id']))}" target="_blank">详情</a>
+										</div>
+										</div>
+									
+									<div class="pich"><a href="{:U('Design/detail',array('id'=>$list['article_id']))}" target="_blank"><img src="{$list.original_img|returnhead1=###}"  style="width:98%;margin:6px;" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+								</div>
+							</div>
+						</foreach>
+							
+						</div>
+						<dl class="clearfix">
+						<foreach name="design_right" item="list">
+							<dd class="clearfix wow fadeInDownBig" data-wow-delay=".6s">
+								<div class="pich"><a href="{:U('Design/detail',array('id'=>$list['article_id']))}" target="_blank"><img src="/{$list['original_img']}" style="width:179px;"></a></div>
+								<div class="word">
+									<h3>{$list.title}</h3>
+									<h4>{$grade[$list['grade']]['com_name']}<em></em></h4>
+									<p class="dot"><em>从业时间：{$obtain[$list['obtain']]['com_name']}</em>
+									<em>所属公司：{$list['c_name']}</em>
+									{$list.short}</p>
+									<div class="btn clearfix">
+										<a href="javascript:design_order('{$list['title']}');">预约</a>
+										<a href="{:U('Design/detail',array('id'=>$list['article_id']))}" target="_blank">详情</a>
+									</div>
+								</div>
+							</dd>
+						 </foreach>
+
+						</dl>
+					</div>
+				</div>
+			</div>
+			<else/>
+             <!---------分公司---------->
+			<div class="trun">
+				<div class="i_title clearfix">
+					<div class="fl">
+						<h3 style="background-image: url(__IMG__/ic7.png);">设计团队<em>design team</em></h3>
+						<p>已为2883520业主提供装修解决方案，累积了千万套精品案例</p>
+					</div>
+					<a href="{:U('Design/index')}" target="_blank" class="m">更多&gt;</a>
+				</div>
+				<div class="index_9">
+					<div class="top clearfix">
+						<div class="pich wow bounceInLeft"><a target="_blank" <if condition="$designs_all[0]['title']!=''">href="{:U('Design/detail',array('id'=>$designs_all[0]['article_id']))}"<else/>href="javascript:void(0)"</if>><img src="/{$designs_all[0]['original_img']}" style="width:235px"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+						<div class="wordbox wow bounceInLeft">
+							<h3>{$designs_all[0]['title']}<em>{$grade_arr[$designs_all[0]['grade']]['com_name']}</em><b></b></h3>
+							<p class="dot">{$designs_all[0]['short']}</p>
+							<h4>所属公司：{$designs_all[0]['c_name']}<!--<em>从业时间：11年</em>--></h4>
+							<h5 class="clearfix">
+								<a target="_blank" href="{:U('Design/detail',array('id'=>$designs_all[0]['article_id']))}">预约</a>
+								<a target="_blank" href="{:U('Design/detail',array('id'=>$designs_all[0]['article_id']))}">详情</a>
+							</h5>
+						</div>
+						<a href="#" class="topr wow bounceInRight" style="background-image: url(/{$banner_sheji[0]['original_img']});">
+							<div class="box">
+								<h3><em>{$banner_sheji[0]['title']}</em>{$banner_sheji[0]['description']}</h3>
+							</div>
+						</a>
+					</div>
+					<dl class="clearfix">
+					<for start="1" end="10">
+						<dd class="wow bounceInUp" data-wow-delay=".2s"><a target="_blank" <if condition="$designs_all[$i]['title']!=''">href="{:U('Design/detail',array('id'=>$designs_all[$i]['article_id']))}"<else/>href="javascript:void(0)"</if>>
+							<img src="/{$designs_all[$i]['original_img']}" style="width:171px;"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'">
+							<div class="word"><h3>{$designs_all[$i]['title']}<b></b><em>{$grade_arr[$designs_all[$i]['grade']]['com_name']}</em></h3></div>
+						</a></dd>
+					</for>
+						
+						<dt class="wow bounceInUp" data-wow-delay=".6s">
+							<img src="/{$banner_sheji[1]['original_img']}">
+							<div class="box">
+								<h3>{$banner_sheji[1]['title']}<em></em><a target="_blank" href="{:U('Design/index')}">查看更多设计师 &gt;</a></h3>
+							</div>
+						</dt>
+						<for start="10" end="12">
+						<dd class="wow bounceInUp" data-wow-delay=".7s"><a target="_blank" <if condition="$designs_all[$i]['title']!=''">href="{:U('Design/detail',array('id'=>$designs_all[$i]['article_id']))}"
+						<else/>href="javascrpt:void(0)"</if>>
+							<img src="/{$designs_all[$i]['original_img']}" style="width:171px;" onerror="this.onerror=null; this.src='__IMG__/default.jpg'">
+							<div class="word"><h3>{$designs_all[$i]['title']}<b></b><em>{$grade_arr[$designs_all[$i]['grade']]['com_name']}</em></h3></div>
+						</a></dd>
+						</for>
+						<!--
+						<dd class="wow bounceInUp" data-wow-delay=".8s"><a href="#">
+							<img src="__IMG__/pic64.jpg">
+							<div class="word"><h3>张曼玉<b></b><em>首席设计师</em></h3></div>
+						</a></dd>-->
+					</dl>
+				</div>
+			</div>
+			</if>
+			
+			<div class="trun">
+				<div class="i_title clearfix">
+					<div class="fl">
+						<h3 style="background-image: url(/{$biaoyu_list[3]['original_img']});">{$biaoyu_list[3]['title']}<em>{$biaoyu_list[3]['title_en']}</em></h3>
+						<p>{$biaoyu_list[3]['description']}</p>
+					</div>
+					<a href="{:U('Activi/index')}" target="_blank" class="m" target="_blank">更多&gt;</a>
+				</div>
+				
+				<div class="index_4 clearfix">
+					<div class="lpic wow fadeInLeft">
+					<foreach name="activilist" item="list">
+						<div>
+						<if condition="$list['newurl']==''">
+						<a  target="_blank" href="{:U('Activi/detail',array('id'=>$list['article_id']))}" class="box">
+						<else/>
+						<a href="{$list['newurl']}" target="_blank" class="box">
+						</if>
+						
+							<div class="pich"><img src="/{$list.original_img}" style="width:593px;height: 360px"></div>
+							<div class="word">
+								<h3><if condition="$list['cat_id']==25">【全国】<else/></if>{$list.add_time|date='Y.m.d',###}</h3>
+								<h4>{$list.title}</h4>
+								<p class="dot"><em></em>{$list.short}</p>
+							</div>
+						</a></div>
+					</foreach>
+
+					</div>
+					<ul class="fr">
+					<foreach name="activilist_x" item="list">
+						<li class="wow fadeInRight" data-wow-delay=".2s">
+						
+						<if condition="$list['newurl']==''">
+						<a target="_blank" href="{:U('Activi/detail',array('id'=>$list['article_id']))}" class="clearfix">
+						<else/>
+						<a href="{$list['newurl']}" target="_blank" class="clearfix">
+						</if>
+						
+							<div class="pich"><img src="/{$list.original_img}" style="width:217px"></div>
+							<div class="word">
+								<h3><!--<if condition="$list['cat_id']==25">【全国】<else/>【{$list.c_name}】</if>-->{$list.add_time|date='Y.m.d',###}</h3>
+								<h4>{$list.title}</h4>
+								<p class="dot"><em></em>{$list.short}</p>
+							</div>
+						</a></li>
+					</foreach>
+						
+					</ul>
+				</div>
+			</div>
+   <if condition="$company_id!=0">
+			<div class="trun">
+				<div class="i_title clearfix">
+					<div class="fl">
+						<h3 style="background-image: url(__IMG__/ic18.png);">热装楼盘<em>Hot charging projects</em></h3>
+						<p>已为2883520业主提供装修解决方案，累积了千万套精品案例</p>
+					</div>
+					<a href="{:U('Hourse/index')}" class="m">更多&gt;</a>
+				</div>
+				<div class="index_10 clearfix">
+					<div class="hd wow bounceInLeft">
+						<ul class="clearfix">
+							<li>全部</li>
+							<foreach name="area_arr" item="list">
+
+							<li>{$list.area_name}</li>
+							</foreach>
+
+						</ul>
+						<a href="{:U('Hourse/index')}" class="m" target="_blank"><b>更多</b></a>
+					</div>
+					<div class="bd">
+					<div>
+							<div class="top clearfix">
+								<div class="bpic wow bounceInDown" data-wow-delay=".2s">
+									<a target="_blank" href="{:U('Hourse/detail',array('id'=>$hourse_arr[0]['article_id']))}">
+										<div class="pich"><img src="/{$hourse_arr[0]['original_img']}"></div>
+										<p>{$hourse_arr[0]['title']|mySubstr=23,'..'}</p>
+									</a>
+								</div>
+								<ul class="clearfix">
+								<for start="1" end="3">
+								    <if condition="$hourse_arr[$i]['title']!=''">
+									<li class="wow bounceInDown" data-wow-delay=".3s"><a target="_blank" href="{:U('Hourse/detail',array('id'=>$hourse_arr[$i]['article_id']))}">
+										<div class="con">
+											<img src="/{$hourse_arr[$i]['original_img']}" style="width:266px;height:183px"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'">
+											<div class="box">
+												<h3>{$hourse_arr[$i]['title']}<b></b><em>开工户数：{$hourse_arr[$i]['start_number']}户</em></h3>
+											</div>
+										</div>
+										<p>{$hourse_arr[$i]['title']|mySubstr=23,'..'}</p>
+									</a></li>
+									</if>
+								</for>
+								
+								</ul>
+							</div>
+							<ul class="botul clearfix">
+									<for start="3" end="6">
+									<if condition="$hourse_arr[$i]['title']!=''">
+									<li class="wow bounceInDown" data-wow-delay=".3s"><a target="_blank" href="{:U('Hourse/detail',array('id'=>$hourse_arr[$i]['article_id']))}">
+										<div class="con">
+											<img src="/{$hourse_arr[$i]['original_img']}" style="width:266px;height:183px"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'">
+											<div class="box">
+												<h3>{$hourse_arr[$i]['title']}<b></b><em>开工户数：{$hourse_arr[$i]['start_number']}户</em></h3>
+											</div>
+										</div>
+										<p>{$hourse_arr[$i]['title']|mySubstr=23,'..'}</p>
+									</a></li>
+									</if>
+								</for>
+							</ul>
+						</div>
+					<foreach name="area_arr" item="list" >
+						<div>
+							<div class="top clearfix">
+								<div class="bpic" data-wow-delay=".2s">
+									<a target="_blank" href="{:U('Hourse/detail',array('id'=>$hourse_arr_new[$list['a_id']][0]['article_id']))}">
+										<div class="pich"><img src="/{$hourse_arr_new[$list['a_id']][0]['original_img']}"></div>
+										<p>{$hourse_arr_new[$list['a_id']][0]['title']|mySubstr=23,'..'}</p>
+									</a>
+								</div>
+								<ul class="clearfix">
+								<for start="1" end="3">
+								    <if condition="$hourse_arr_new[$list['a_id']][$i]['title']!=''">
+									<li class="wow bounceInDown" data-wow-delay=".3s"><a target="_blank" href="{:U('Hourse/detail',array('id'=>$hourse_arr_new[$list['a_id']][$i]['article_id']))}">
+										<div class="con">
+											<img src="/{$hourse_arr_new[$list['a_id']][$i]['original_img']}" style="width:266px;height:183px"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'">
+											<div class="box">
+												<h3>{$hourse_arr_new[$list['a_id']][$i]['title']}<b></b><em>开工户数：{$hourse_arr_new[$list['a_id']][$i]['start_number']}户</em></h3>
+											</div>
+										</div>
+										<p>{$hourse_arr_new[$list['a_id']][$i]['title']|mySubstr=23,'..'}</p>
+									</a></li>
+									</if>
+								</for>
+								
+								</ul>
+							</div>
+							<ul class="botul clearfix">
+									<for start="3" end="6">
+									<if condition="$hourse_arr_new[$list['a_id']][$i]['title']!=''">
+									<li class="wow bounceInDown" data-wow-delay=".3s"><a target="_blank" href="{:U('Hourse/detail',array('id'=>$hourse_arr_new[$list['a_id']][$i]['article_id']))}">
+										<div class="con">
+											<img src="/{$hourse_arr_new[$list['a_id']][$i]['original_img']}" style="width:266px;height:183px"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'">
+											<div class="box">
+												<h3>{$hourse_arr_new[$list['a_id']][$i]['title']}<b></b><em>开工户数：{$hourse_arr_new[$list['a_id']][$i]['start_number']}户</em></h3>
+											</div>
+										</div>
+										<p>{$hourse_arr_new[$list['a_id']][$i]['title']|mySubstr=23,'..'}</p>
+									</a></li>
+									</if>
+								</for>
+							</ul>
+						</div>
+					</foreach>
+
+						
+					</div>
+				</div>
+			</div>
+
+	
+			</if>
+			
+		</div>
+		
+		
+	
+		<script type="text/javascript">
+                        $('.vidb').click(function(){
+                        	var view_str =$(this).attr("id");
+                        	var arr = view_str.split('_');
+                        	var view_id = arr[1];
+            	         document.getElementById("vid_"+view_id).play();
+             	        $('#vidb_'+view_id).hide()
+                         })
+		    </script>
+			<!--
+			<script type="text/javascript">
+			  $('#vidb').click(function(){
+            	document.getElementById("vid").play();
+             	$('#vidb').hide()
+             })
+		</script>-->
+		
+		<div class="layout">
+		<if condition="$company_id==0">
+			<div class="trun">
+				<div class="i_title clearfix">
+					<div class="fl">
+						<h3 style="background-image: url(/{$biaoyu_list[5]['original_img']});">{$biaoyu_list[5]['title']}<em>{$biaoyu_list[5]['title_en']}</em></h3>
+						<p>{$biaoyu_list[5]['description']}</p>
+					</div>
+				</div>
+				<div class="index_6">
+					<div class="tit wow fadeInDownBig"></div>
+					<div class="chinamap wow fadeIn" data-wow-delay=".6s">
+						<img src="__IMG__/pic56.png" width="1016" height="844" />
+						<div class="city" style="left: 3px; top: 106px; width:407px; height:310px;">
+						    <b>
+						    	<div class="citybg" style="background-image:url(__IMG__/xinjiang.png);"></div>
+							    <a style="left: 200px; top: 180px;">新疆</a>
+							    <div class="chulai" style="left: 53%;top: 26%;">
+							    	<div class="box">
+						        		<h3>新疆<em></em></h3>
+						        		<p><em class="counter">{$p_company[31][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 47px; top: 392px; width:394px; height:243px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/xizang.png);"></div>
+							    <a  style="left: 150px; top: 100px;">西藏</a>
+							    <div class="chulai" style="left: 42%;top: 0%;">
+							    	<div class="box">
+						        		<h3>西藏<em></em></h3>
+						        		<p><em class="counter">{$p_company[26][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 261px; top: 344px; width:258px; height:186px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/qinghai.png);"></div>
+							    <a  style="left: 120px; top: 70px;">青海</a>
+							    <div class="chulai" style="left: 53%;top: -16%;">
+							    	<div class="box">
+						        		<h3>青海<em></em></h3>
+						        		<p><em class="counter">{$p_company[29][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 399px; top: 587px; width:183px; height:192px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/yunnan.png);"></div>
+							    <a style="left: 70px; top: 100px;">云南</a>
+							    <div class="chulai" style="left: 48%;top: 0%;">
+							    	<div class="box">
+						        		<h3>云南<em></em></h3>
+						        		<p><em class="counter">{$p_company[25][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 406px; top: 466px; width:226px; height:199px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/sichuan.png);"></div>
+							    <a  style="left: 90px; top: 80px;">四川</a>
+							    <div class="chulai" style="left: 48%;top: -9%;">
+							    	<div class="box">
+						        		<h3>四川<em></em></h3>
+						        		<p><em class="counter">{$p_company[23][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 339px; top: 269px; width:289px; height:245px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/gansu.png);"></div>
+							    <a style="left: 185px; top: 165px;">甘肃</a>
+							    <div class="chulai" style="left: 70%;top: 26%;">
+							    	<div class="box">
+						        		<h3>甘肃<em></em></h3>
+						        		<p><em class="counter">{$p_company[28][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 425px; top: 15px; width:446px; height:383px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/neimenggu.png);"></div>
+							    <a style="left: 185px; top: 282px;">内蒙古</a>
+							    <div class="chulai" style="left: 46%;top: 48%;">
+							    	<div class="box">
+						        		<h3>内蒙古<em></em></h3>
+						        		<p><em class="counter">{$p_company[5][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 540px; top: 352px; width:63px; height:101px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/ningxia.png);"></div>
+							    <a style="left: 20px; top: 30px;">宁夏</a>
+							    <div class="chulai" style="left: 54%;top: -63%;">
+							    	<div class="box">
+						        		<h3>宁夏<em></em></h3>
+						        		<p><em class="counter">{$p_company[30][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 567px; top: 348px; width:105px; height:182px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/shanxi2.png);"></div>
+							    <a style="left: 38px; top: 112px;">陕西</a>
+							    <div class="chulai" style="left: 52%;top: 9%;">
+							    	<div class="box">
+						        		<h3>陕西<em></em></h3>
+						        		<p><em class="counter">{$p_company[27][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 652px; top: 315px; width:74px; height:153px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/shanxi.png);"></div>
+							    <a style="left: 20px; top: 65px;">山西</a>
+							    <div class="chulai" style="left: 50%;top: -20%;">
+							    	<div class="box">
+						        		<h3>山西<em></em></h3>
+						        		<p><em class="counter">{$p_company[4][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 740px; top: 303px; width:38px; height:38px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/beijing.png);"></div>
+							    <a style="left: 8px; top: 14px; font-size: 12px;line-height: 14px;">北京</a>
+							    <div class="chulai" style="left: 46%;top: -230%;">
+							    	<div class="box">
+						        		<h3>北京<em></em></h3>
+						        		<p><em class="counter">{$p_company[1][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 765px; top: 318px; width:29px; height:40px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/tianjin.png);"></div>
+							    <a style="left: 0px; top: 13px; font-size: 12px;line-height: 14px;">天津</a>
+							    <div class="chulai" style="left: 46%;top: -228%;">
+							    	<div class="box">
+						        		<h3>天津<em></em></h3>
+						        		<p><em class="counter">{$p_company[2][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="left: 708px; top: 264px; width:115px; height:160px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/hebei.png);"></div>
+							    <a style="left: 20px; top: 90px;">河北</a>
+							    <div class="chulai" style="left: 27%;top: -4%;">
+							    	<div class="box">
+						        		<h3>河北<em></em></h3>
+						        		<p><em class="counter">{$p_company[3][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 3px; top: 5px; width:228px; height:209px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/heilongjiang.png);"></div>
+							    <a style="left: 105px; top: 110px;">黑龙江</a>
+							    <div class="chulai" style="left: 53%;top: 7%;">
+							    	<div class="box">
+						        		<h3>黑龙江<em></em></h3>
+						        		<p><em class="counter">{$p_company[8][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 25px; top: 165px; width:170px; height:117px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/jilin.png);"></div>
+							    <a  style="left: 73px; top: 35px;">吉林</a>
+							    <div class="chulai" style="left: 52%;top: -52%;">
+							    	<div class="box">
+						        		<h3>吉林<em></em></h3>
+						        		<p><em class="counter">{$p_company[7][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 99px; top: 230px; width:121px; height:117px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/liaoning.png);"></div>
+							    <a style="left: 60px; top: 36px;">辽宁</a>
+							    <div class="chulai" style="left: 63%;top: -50%;">
+							    	<div class="box">
+						        		<h3>辽宁<em></em></h3>
+						        		<p><em class="counter">{$p_company[6][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 133px; top: 366px; width:142px; height:90px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/shandong.png);"></div>
+							    <a style="left: 45px; top: 27px;">山东</a>
+							    <div class="chulai" style="left: 46%;top: -78%;">
+							    	<div class="box">
+						        		<h3>山东<em></em></h3>
+						        		<p><em class="counter">{$p_company[15][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 169px; bottom: 269px; width:106px; height:129px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/anhui.png);"></div>
+							    <a style="left: 38px; top: 54px;">安徽</a>
+							    <div class="chulai" style="left: 50%;top: -31%;">
+							    	<div class="box">
+						        		<h3>安徽<em></em></h3>
+						        		<p><em class="counter">{$p_company[12][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 239px; bottom: 315px; width:118px; height:117px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/henan.png);"></div>
+							    <a style="left: 44px; top: 41px;">河南</a>
+							    <div class="chulai" style="left: 46%;top: -48%;">
+							    	<div class="box">
+						        		<h3>河南<em></em></h3>
+						        		<p><em class="counter">{$p_company[21][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 121px; bottom: 312px; width:129px; height:99px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/jiangsu.png);"></div>
+							    <a style="left: 68px; top: 52px;">江苏</a>
+							    <div class="chulai wow fadeIn"  data-wow-delay="1s" style="left: 64%;top: -40%;">
+							    	<div class="box">
+						        		<h3>江苏<em></em></h3>
+						        		<p><em class="counter">{$p_company[10][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 123px; bottom: 314px; width:25px; height:24px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/shanghai.png);"></div>
+							    <a style="left: 0px; top: 6px; font-size: 12px;line-height: 14px;">上海</a>
+							    <div class="chulai" style="left: 64%;top: -406%;">
+							    	<div class="box">
+						        		<h3>上海<em></em></h3>
+						        		<p><em class="counter">{$p_company[9][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 116px; bottom: 227px; width:83px; height:94px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/zhejiang.png);"></div>
+							    <a style="left: 25px; top: 32px;">浙江</a>
+							    <div class="chulai" style="left: 50%;top: -68%;">
+							    	<div class="box">
+						        		<h3>浙江<em></em></h3>
+						        		<p><em class="counter">{$p_company[11][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 236px; bottom: 253px; width:156px; height:100px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/hubei.png);"></div>
+							    <a style="left: 68px; top: 34px;">湖北</a>
+							    <div class="chulai" style="left: 54%;top: -62%;">
+							    	<div class="box">
+						        		<h3>湖北<em></em></h3>
+						        		<p><em class="counter">{$p_company[17][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 356px; bottom: 229px; width:93px; height:95px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/chongqing.png);"></div>
+							    <a style="left: 27px; top: 38px;">重庆</a>
+							    <div class="chulai" style="left: 48%;top: -64%;">
+							    	<div class="box">
+						        		<h3>重庆<em></em></h3>
+						        		<p><em class="counter">{$p_company[22][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 364px; bottom: 151px; width:126px; height:108px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/guizhou.png);"></div>
+							    <a style="left: 51px; top: 42px;">贵州</a>
+							    <div class="chulai" style="left: 54%;top: -50%;">
+							    	<div class="box">
+						        		<h3>贵州<em></em></h3>
+						        		<p><em class="counter">{$p_company[24][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 268px; bottom: 152px; width:112px; height:130px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/hunan.png);"></div>
+							    <a style="left: 41px; top: 41px;">湖南</a>
+							    <div class="chulai" style="left: 50%;top: -42%;">
+							    	<div class="box">
+						        		<h3>湖南<em></em></h3>
+						        		<p><em class="counter">{$p_company[18][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 185px; bottom: 153px; width:103px; height:133px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/jiangxi.png);"></div>
+							    <a style="left: 30px; top: 30px;">江西</a>
+							    <div class="chulai" style="left: 45%;top: -51%;">
+							    	<div class="box">
+						        		<h3>江西<em></em></h3>
+						        		<p><em class="counter">{$p_company[14][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 143px; bottom: 141px; width:93px; height:113px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/fujian.png);"></div>
+							    <a style="left: 30px; top: 40px;">福建</a>
+							    <div class="chulai" style="left: 49%;top: -50%;">
+							    	<div class="box">
+						        		<h3>福建<em></em></h3>
+						        		<p><em class="counter">{$p_company[13][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 195px; bottom: 49px; width:166px; height:130px;">
+							<b class="hover">
+							    <div class="citybg" style="background-image:url(__IMG__/guangdong.png);"></div>
+							    <a style="left: 73px; top: 25px;">广东</a>
+							    <div class="chulai" style="left: 52%;top: -53%;">
+							    	<div class="box">
+						        		<h3>广东<em></em></h3>
+						        		<p><em class="counter">{$p_company[19][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 308px; bottom: 70px; width:161px; height:125px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/guangxi.png);"></div>
+							    <a style="left: 76px; top: 50px;">广西</a>
+							    <div class="chulai" style="left: 64%;top: -40%;">
+							    	<div class="box">
+						        		<h3>广西<em></em></h3>
+						        		<p><em class="counter">{$p_company[20][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 329px; bottom: 4px; width:53px; height:48px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/hainan.png);"></div>
+							    <a style="left: 11px; top: 7px;">海南</a>
+							    <div class="chulai" style="left: 64%;top: -186%;">
+							    	<div class="box">
+						        		<h3>海南<em></em></h3>
+						        		<p><em class="counter">{$p_company[21][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+						<div class="city" style="right: 105px; bottom: 107px; width:39px; height:86px;">
+							<b>
+							    <div class="citybg" style="background-image:url(__IMG__/taiwan.png);"></div>
+							    <a style="left: 1px; top: 26px;">台湾</a>
+							    <div class="chulai" style="left: 54%;top: -79%;">
+							    	<div class="box">
+						        		<h3>台湾<em></em></h3>
+						        		<p><em class="counter">{$p_company[32][num]}</em><i>家分公司</i></p>
+						        	</div>
+							    </div>
+						    </b>
+						</div>
+					</div>
+				</div>
+			</div>
+			</if>
+			<!--
+			<div class="trun">
+				<div class="i_title clearfix">
+					<div class="fl">
+						<h3 style="background-image: url(/{$biaoyu_list[6]['original_img']});">{$biaoyu_list[6]['title']}<em>{$biaoyu_list[6]['title_en']}</em></h3>
+						<p>{$biaoyu_list[6]['description']}</p>
+					</div>
+					<a href="{:U('News/index',array('cat_id'=>11))}" class="m">更多&gt;</a>
+					<dl class="clearfix">
+						<dd class="on"><a href="{:U('News/index',array('cat_id'=>11))}">企业动态</a></dd>
+						<dd><a href="{:U('News/index',array('cat_id'=>36))}">装修指南</a></dd>
+						<dd><a href="{:U('News/index',array('cat_id'=>34))}">装修故事</a></dd>
+					</dl>
+				</div>
+				
+				<div class="index_7 clearfix">
+					<div class="scroll-pane">
+						<ul>
+						<foreach name="information" item="list">
+							<li class="wow fadeInUp" data-wow-delay=".2s"><a href="{:U('News/detail',array('id'=>$list['article_id']))}">
+								<h3><i>{$list.add_time|date='Y/m/d',###}</i><em>{$list.title}</em></h3>
+								<p class="dot">{$list.short}</p>
+							</a></li>
+						</foreach>
+							
+						</ul>
+					</div>
+					<div class="index_7pic">
+						<div>
+							<a href="{:U('News/detail',array('id'=>$information_one['article_id']))}" class="box clearfix">
+								<div class="pich wow fadeIn" data-wow-duration="2s"><img src="/{$information_one.original_img_recom}"></div>
+								<div class="word wow fadeInRight">
+									<div class="sj">{$information_one.add_time|date='d',###}<span>{$information_one.add_time|date='Y/m',###}</span></div>
+									<h3 class="allh3"><em>{$information_one.title}</em><b>39254</b></h3>
+									<p class="allp dot">{$information_one.short}</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+		
+			</div>-->
+			
+
+			<div class="trun huan">
+				<div class="i_title clearfix">
+					<div class="fl">
+							<h3 style="background-image: url(/{$biaoyu_list[6]['original_img']});">{$biaoyu_list[6]['title']}<em>{$biaoyu_list[6]['title_en']}</em></h3>
+						<p>{$biaoyu_list[6]['description']}</p>
+					</div>
+					<a href="{:U('News/index',array('cat_id'=>11))}" class="m" target="_blank">更多&gt;</a>
+					<dl class="clearfix">
+						<dd class="on"><a href="{:U('News/index',array('cat_id'=>11))}">企业动态</a></dd>
+						<dd><a href="{:U('News/index',array('cat_id'=>36))}">装修指南</a></dd>
+						<dd><a href="{:U('News/index',array('cat_id'=>34))}">装修故事</a></dd>
+					</dl>
+				</div>
+				
+				
+				<div class="heh wow fadeInUp">
+					<div class="index_7 clearfix">
+						<div class="scroll-pane">
+							<ul>
+									<foreach name="information" item="list">
+								<li><a href="{:U('News/detail',array('id'=>$list['article_id']))}" target="_blank">
+									<h3><i>{$list.add_time|date='Y/m/d',###}</i><em>{$list.title}</em></h3>
+									<p class="dot">{$list.short}</p>
+								</a></li>
+							</foreach>
+							</ul>
+						</div>
+						<div class="index_7pic">
+							<foreach name="information" item="list">
+							<div>
+								<a href="{:U('News/detail',array('id'=>$list['article_id']))}" class="box clearfix" target="_blank">
+									<div class="pich"><img src="{$list.original_img|returnhead1=###}"></div>
+									<div class="word">
+										<div class="sj">{$list.add_time|date='d',###}<span>{$list.add_time|date='Y/m',###}</span></div>
+										<h3 class="allh3"><em>{$list.title}</em><b style="display: none">39254</b></h3>
+										<p class="allp dot">{$list.short}</p>
+									</div>
+								</a>
+							</div>
+							</foreach>
+							
+							
+							
+						</div>
+					</div>
+					<div class="index_7 clearfix">
+						<div class="scroll-pane">
+							<ul>
+							 <foreach name="guide" item="list">
+								<li><a href="{:U('News/detail',array('id'=>$list['article_id']))}" target="_blank">
+									<h3><i>{$list.add_time|date='Y/m/d',###}</i><em>{$list.title}</em></h3>
+									<p class="dot">{$list.short}</p>
+								</a></li>
+							</foreach>
+							</ul>
+						</div>
+						<div class="index_7pic">
+							
+								<foreach name="guide" item="list">
+							<div>
+								<a href="{:U('News/detail',array('id'=>$list['article_id']))}" class="box clearfix" target="_blank">
+									<div class="pich"><img src="{$list.original_img|returnhead1=###}"></div>
+									<div class="word">
+										<div class="sj">{$list.add_time|date='d',###}<span>{$list.add_time|date='Y/m',###}</span></div>
+										<h3 class="allh3"><em>{$list.title}</em><b style="display: none">39254</b></h3>
+										<p class="allp dot">{$list.short}</p>
+									</div>
+								</a>
+							</div>
+							</foreach>
+							
+						</div>
+					</div>
+					<div class="index_7 clearfix">
+						<div class="scroll-pane">
+							<ul>
+								 <foreach name="Story" item="list">
+								<li><a href="{:U('News/detail',array('id'=>$list['article_id']))}" target="_blank">
+									<h3><i>{$list.add_time|date='Y/m/d',###}</i><em>{$list.title}</em></h3>
+									<p class="dot">{$list.short}</p>
+								</a></li>
+							</foreach>
+							</ul>
+						</div>
+						<div class="index_7pic">
+							
+						<foreach name="Story" item="list">
+							<div>
+								<a href="{:U('News/detail',array('id'=>$list['article_id']))}" class="box clearfix" target="_blank">
+									<div class="pich"><img src="{$list.original_img|returnhead1=###}"></div>
+									<div class="word">
+										<div class="sj">{$list.add_time|date='d',###}<span>{$list.add_time|date='Y/m',###}</span></div>
+										<h3 class="allh3"><em>{$list.title}</em><b style="display: none">39254</b></h3>
+										<p class="allp dot">{$list.short}</p>
+									</div>
+								</a>
+							</div>
+							</foreach>
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="trun">
+			<div class="index_8">
+				<div class="layout">
+					<div class="tit wow fadeInDown" data-wow-delay=".4s">选择华浔品味装饰<em class="wow fadeInDown" data-wow-delay=".2s">做一个工程   树一个样板</em></div>
+					<ul class="clearfix">
+
+					<foreach name="ditu_list" item="list">
+					    
+						<li class="wow fadeInDown" data-wow-delay=".2s">
+							<a href="{$list.link}" target="_blank"><i><img src="/{$list.original_img}"></i></a>
+							<p>{$list.title}</p>
+						</li>
+
+					</foreach>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+	<!--<div class="sidel">
+			<ul>
+				<li class="li1"></li>
+				<li class="li2"></li>
+				<li class="li3"></li>
+				<li class="li4"></li>
+				<if condition="$company_id gt 0">
+						<li class="li9"></li>
+				<else/>
+						<li class="li5"></li>
+				</if>
+				<li class="li6"></li>
+				
+				
+			</ul>
+			
+			<if condition="$company_id gt 0">
+				<a class="backjt" href="http://{$host}"></a>
+			</if>
+		
+
+	</div>-->
+
+<include file='Public:pageFooter'/>
+
+	
+	<!--10182-->
+	<!--
+	<div class="Region">
+        <div class="R-bg"></div>
+        <div class="R-box">
+            <div class="R-cg clearfix">
+                <p>当前位置：<em>{$ipcity.area_name}</em></p>
+                <span><em>{$ipcity.area_name}</em>有以下{$companynum}家华浔</span>
+                <i></i>
+            </div>
+            <ul id="ul_ou">
+             <foreach name="companydata" item="list" key='k'>
+              <if condition="($list['c_domain']!='')">
+            	<li><p><a href="http://{$list['c_domain']}.{$host_domain}">{$list.c_name}</a></p></li>
+              </if>
+            </foreach>
+            </ul>
+        </div>
+    </div>-->
+	<!--10182-->
+   <if condition="$company_id==0">
+<script>
+
+     /*
+		$('.layer-demolist').on('click', function(){
+		  var file_path = $(this).attr('data');
+ 
+		  var loadstr='<video width="100%" height="100%"  controls="controls" autobuffer="autobuffer"  autoplay="autoplay" loop="loop" style="position:fixed!important;top:0;left:0;"><source src="'+file_path+'" type="video/mp4"></source></video>'
+			layer.open({
+			  type:1,
+			  title: true,
+			  area: ['730px', '460px'],
+			  shade: 0,
+			  closeBtn: 1,
+			  content: loadstr,
+			});
+		})*/
+		$(function(){
+			$('.banner').slick({
+				infinite: true,
+				dots: true,
+				autoplay: true,
+				arrows: false
+			});
+			$('.counter').countUp();
+			$('.index_3 .rbox').slick({
+				infinite: true,
+				dots: false,
+				autoplay: true,
+				arrows: true
+			});
+			jQuery(".index_3 .fl li").slide({titCell:"dl dd"});
+			$('.index_4 .lpic').slick({
+				infinite: true,
+				dots: false,
+				autoplay: true,
+				arrows: true
+			});
+			$('.index_5 .biggun').slick({
+				slidesToShow:1,
+				infinite: true,
+				dots: false,
+				//autoplay: true,
+				arrows: false,
+				asNavFor:".index_5 .smallpic"
+			});
+			$('.index_5 .smallpic').slick({
+				infinite: true,
+				dots: false,
+				autoplay: true,
+				arrows: true,
+				slidesToShow:4,
+				asNavFor:".index_5 .biggun",
+				focusOnSelect:true
+			});
+			$('.scroll-pane').jScrollPane();
+			//$('.index_7pic').slick({
+			//	infinite: true,
+			//	dots: false,
+			//	autoplay: true,
+			//	arrows: true
+			//});
+			jQuery(".index_7").slide({titCell:".scroll-pane li",mainCell:".index_7pic"});
+			jQuery(".huan").slide({titCell:".i_title dd",mainCell:".heh"});
+			selectphone('.c_select','.c_name');
+			$(".calculate .tit").click(function() {
+				$(this).parents(".calculate").find(".con").slideDown();
+			});$(".calculate .close").click(function() {
+				$(this).parents(".calculate").find(".con").slideUp();
+			});
+			if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+				new WOW().init();
+			};
+		})
+	</script>
+<else/>
+	<script>
+		$(function(){
+			$('.banner').slick({
+				infinite: true,
+				dots: true,
+				autoplay: true,
+				arrows: false
+			});
+			$('.counter').countUp();
+			$('.index_4 .lpic').slick({
+				infinite: true,
+				dots: false,
+				autoplay: true,
+				arrows: true
+			});
+			$('.index_5 .biggun').slick({
+				slidesToShow:1,
+				infinite: true,
+				dots: false,
+				//autoplay: true,
+				arrows: false,
+				asNavFor:".index_5 .smallpic"
+			});
+			$('.index_5 .smallpic').slick({
+				infinite: true,
+				dots: false,
+				autoplay: true,
+				arrows: true,
+				slidesToShow:4,
+				asNavFor:".index_5 .biggun",
+				focusOnSelect:true
+			});
+			$('.scroll-pane').jScrollPane();
+	//		$('.index_7pic').slick({
+		//		infinite: true,
+	//			dots: false,
+		//		autoplay: true,
+	//			arrows: true
+	//		});
+			jQuery(".index_7").slide({titCell:".scroll-pane li",mainCell:".index_7pic"});
+			jQuery(".huan").slide({titCell:".i_title dd",mainCell:".heh"});
+			selectphone('.c_select','.c_name');
+			$(".calculate .tit").click(function() {
+				$(this).parents(".calculate").find(".con").slideDown();
+			});$(".calculate .close").click(function() {
+				$(this).parents(".calculate").find(".con").slideUp();
+			});
+			if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+				new WOW().init();
+			};
+			
+			jQuery(".index_10").slide({trigger:"click"});
+		})
+	</script>
+	</if>
+	<script type="text/javascript">
+		$(function(){
+			// 2017-10-17波
+
+			$('.close').click(function(){
+				$('.bo_Box,.bo_fide').hide()
+			})
+
+			$('.boPro').click(function(){
+				$('.item0,.bo_fide').show()
+				return false
+			})
+			$('.boOrder').click(function(){
+				$('.item1,.bo_fide').show()
+				return false
+			})
+
+		    })
+	</script>
+	   
+ <if condition="($company_id==0) AND ($companydata!='')">
+ 	<script type="text/javascript">
+		$(function(){
+		
+//			10182
+			var T = setInterval(function () {
+                $('.Region').fadeIn();
+                clearInterval(T);
+            }, 5000);
+
+            var Y = setInterval(function () {
+                $('.Region').fadeOut();
+                clearInterval(Y);
+            }, 30000);
+
+			$('.Region .R-box .R-cg i').on('click', function () {
+		        $(this).parents('.Region').fadeOut();
+		    });
+		    })
+	</script>
+</if>
+</body>
+</html>		

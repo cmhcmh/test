@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="__CSS__/animate.css">
+<link type="text/css" rel="stylesheet" href="__CSS__/style.css" />
+<script type="text/javascript" src="__JS__/jquery.js"></script> 
+<script type="text/javascript" src="__JS__/slick.js"></script>
+<script type="text/javascript" src="__JS__/jquery.dotdotdot.js"></script>
+<script type="text/javascript" src="__JS__/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="__JS__/js.js"></script>
+<script type="text/javascript" src="__JS__/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="__JS__/jquery.jscrollpane.min.js"></script>
+<script src="__JS__/jquery.waypoints.min.js"></script>
+<script src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/jquery.countup.min.js"></script>
+<script src="__JS__/wow.min.js"></script>
+<title>{$site_title}</title>
+<meta name='keywords' content="{$site_keywords}"/>
+<meta name='description' content="{$site_description}"/>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*
+	    window.onload = function () {
+	        var hei = $(".sidel,.sider").offset().top;
+	        var foot = document.getElementById("index").scrollHeight - 46;
+	        $(window).scroll(function () {
+	            var wh = $(window).scrollTop();
+	            if (wh > hei) {
+	                $(".sidel,.sider").addClass("sidel2");
+	                $("#siderry").addClass("sidel2");
+	                
+
+	            } else {
+	                $(".sidel,.sider").removeClass("sidel2");
+
+	            }
+	            if (wh > foot) {
+	                $(".sidel,.sider").removeClass("sidel2");
+	                $(".sidel,.sider").addClass("sidel3");
+	      
+	                //$(".sidel_s").css("top",'702px');
+	            } else {
+	                $(".sidel,.sider").removeClass("sidel3");
+	            }
+	        })
+	    }*/
+	    side('.sidel li','.trun','on');
+    });
+  
+
+    
+</script>
+<if condition="$company_id==71">
+<script>
+//惠州单独统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5dc3388a60f14fb6be4d750d38363ef1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</if>
+<if condition="$company_id==191">
+<script>
+//南昌
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?51d8f5d5ae493e32e5114aa05a42aa8c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+//南昌
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c97c420c364631c3ca8989d1e6a6317b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</if>
+<if condition="$company_id==76">
+<script>
+//中山单独统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d4699f9775d9f9f886f59043c95064c9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</if>
+
+<if condition="$company_id==147">
+
+<script>
+//无锡单独统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3b9cddf2f6ad8f59b929553eb5e8905f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</if>
+
+<style>
+.city-option-box {
+    position: absolute;
+    top: 85px;
+    z-index: 7047;
+    display: none;
+    width: 406px;
+    height: auto;
+    border: 1px solid #d8d8d8;
+	background: #fff;
+}
+.city-option-box .city-option-list {
+    width: 100%;
+    height: 38px;
+    border-bottom: 1px #d8d8d8 solid;
+    background-color: #f4f4f4;
+}
+.city-option-box .city-option-list span.on {
+    height: 37px;
+    color: #ED7020;
+    border-bottom: 2px #ED7020 solid;
+}
+.city-option-box .city-option-list span {
+    float: left;
+    width: 65px;
+    height: 38px;
+    margin-right: 2px;
+    line-height: 38px;
+    color: #333;
+    text-align: center;
+    cursor: pointer;
+	font-size:14px;
+}
+.city-option-ul-box {
+    position: relative;
+}
+.city-option-content div ul {
+    width: 100%;
+}
+dl, ol, ul {
+    list-style: none;
+}
+
+.city-option-content{
+padding: 15px;
+}
+
+.city-option-content div ul li {
+    float: left;
+    width: 62px;
+    overflow: hidden;
+    color: #666;
+    text-align: left;
+    height: 28px;
+    line-height: 28px;
+}
+.city-option-content div ul li a {
+    font-size: 12px;
+    color: #666;
+}
+</style>
+<script>
+	$(function(){
+		$(".cadd").mouseover(function(){
+				$(".city-option-box").css("display","block")
+			});
+		$(".city-option-box").mouseover(function(){
+			$(".city-option-box").css("display","block")
+		});
+		$(".cadd").mouseout(function(){
+				$(".city-option-box").css("display","none")
+		});	
+		$(".city-option-box").mouseout(function(){
+				$(".city-option-box").css("display","none")
+		});	
+	});
+
+</script>
+
+</head>
+<body style='<if condition="$nid eq 1">padding-bottom: 70px;</if>{$css_style}''>
+	<div class="header">
+		<div class="layout clearfix">
+			<a href="/" class="logo" style="background: url(/{$other_logo.original_img}) center no-repeat;"></a>
+			<div class="cadd">
+				<a href="{:U('Dot/index')}">切换城市</a>
+				<if condition="$company_id==0">
+				<h3>全国</h3>
+				<else/>
+				 <h3 style="font-size: 16px">{$company_info['c_name']}</h3>
+				</if>
+			</div>
+			<div class="city-option-box">
+<div class="city-option-list"><span class="city-option-hot on">热门城市</span></div>
+<div class="city-option-content">
+<div class="city-hot-content" style="display: ;">
+<div class="city-option-ul-box city-option-manage">
+<ul class="clearfix">
+<li><a href="http://www.hxdec.com/" city_code="bj" title="" style="font-weight:bold;font-size:14px;">总部</a></li>
+<li><a href="http://zq.hxdec.com/" city_code="sh" title="">肇庆</a></li>
+<li><a href="http://sg.hxdec.com/" city_code="gz" title="">韶关</a></li>
+<li><a href="http://jm.hxdec.com/" city_code="sz" title="">江门</a></li>
+<li><a href="http://ts.hxdec.com/" city_code="cd" title="">台山</a></li>
+<li class="row-end"><a href="http://yangjiang.hxdec.com/" city_code="cq" title="">阳江</a></li>
+
+<li><a href="http://st.hxdec.com/" city_code="wh" title="">汕头</a></li>
+<li><a href="http://nd.hxdec.com/" city_code="sy" title="">宁德</a></li>
+<li><a href="http://changle.hxdec.com/" city_code="dl" title="">长乐</a></li>
+<li><a href="http://pt.hxdec.com/" city_code="zz" title="">平潭</a></li>
+<li><a href="http://sss.hxdec.com/" city_code="xa" title="">石狮</a></li>
+<li class="row-end"><a href="http://zzs.hxdec.com/" city_code="nj" title="">漳州</a></li>
+
+<li><a href="http://lys.hxdec.com/" city_code="wh" title="">龙岩</a></li>
+<li><a href="http://pts.hxdec.com/" city_code="sy" title="">莆田</a></li>
+<li><a href="http://np.hxdec.com/" city_code="dl" title="">南平</a></li>
+<li><a href="http://fq.hxdec.com/" city_code="zz" title="">福清</a></li>
+<li><a href="http://sx.hxdec.com/" city_code="xa" title="">绍兴</a></li>
+<li class="row-end"><a href="http://tz.hxdec.com/" city_code="nj" title="">台州</a></li>
+
+<li><a href="http://jx.hxdec.com/" city_code="wh" title="">嘉兴</a></li>
+<li><a href="http://hn.hxdec.com/" city_code="sy" title="">海宁</a></li>
+<li><a href="http://cx.hxdec.com/" city_code="dl" title="">长兴</a></li>
+<li><a href="http://sj.hxdec.com/" city_code="zz" title="">松江</a></li>
+<li><a href="http://ls.hxdec.com/" city_code="xa" title="">丽水</a></li>
+<li class="row-end"><a href="http://zj.hxdec.com/" city_code="nj" title="">镇江</a></li>
+
+<li><a href="http://yz.hxdec.com/" city_code="wh" title="">扬州</a></li>
+<li><a href="http://weihai.hxdec.com/" city_code="sy" title="">威海</a></li>
+<li><a href="http://yt.hxdec.com/" city_code="dl" title="">烟台</a></li>
+<li><a href="http://dongying.hxdec.com/" city_code="zz" title="">东营</a></li>
+<li><a href="http://hf.hxdec.com/" city_code="xa" title="">合肥</a></li>
+<li class="row-end"><a href="http://gzs.hxdec.com/" city_code="nj" title="">赣州</a></li>
+
+<li><a href="http://ty.hxdec.com/" city_code="wh" title="">太原</a></li>
+<li><a href="http://cs.hxdec.com/" city_code="sy" title="">长沙</a></li>
+<li><a href="http://zz.hxdec.com/" city_code="dl" title="">株洲</a></li>
+<li><a href="http://lzs.hxdec.com/" city_code="zz" title="">柳州</a></li>
+<li><a href="http://bs.hxdec.com/" city_code="xa" title="">百色</a></li>
+<li class="row-end"><a href="http://yl.hxdec.com/" city_code="nj" title="">玉林</a></li>
+
+<li><a href="http://gl.hxdec.com/" city_code="wh" title="">桂林</a></li>
+<li><a href="http://wzs.hxdec.com/" city_code="sy" title="">梧州</a></li>
+<li><a href="http://hk.hxdec.com/" city_code="dl" title="">海口</a></li>
+<li><a href="http://lz.hxdec.com/" city_code="zz" title="">泸州</a></li>
+<li><a href="http://qj.hxdec.com/" city_code="xa" title="">曲靖</a></li>
+<li class="row-end"><a href="http://lzs.hxdec.com/" city_code="nj" title="">柳州</a></li>
+
+<li><a href="/index.php/Dot/index" city_code="xa" title="">更多</a></li>
+</ul>
+</div>
+</div>
+</div></div>
+			<div class="fr">
+				<form class="clearfix" name="searchmyform" id="searchmyform">
+				    <if condition="$company_id==0">
+					<div class="call">
+						<div class="dianh"><div class="dhic"></div><b>全国咨询热线</b><font style="font-size:20px">{$site_info_com.tel}</font></div>
+						<dl>
+							<dd><i>全国售后：</i>{$site_info.tel1}</dd>
+						</dl>
+					</div>
+					<else/>
+					<style>
+					.header .call:hover{
+						border-color: #FFF;
+					}
+					</style>
+					 <div class="call">
+						<div class="dianh"><div class="dhic"></div><b>公司咨询热线</b><font style="font-size:20px">{$site_info.tel}</font></div>
+					</div>
+
+					</if>
+					<div class="box">
+						<div class="xiala">
+			                <div class="xz xzs">案例</div>
+			                <ul>
+			                    <li id="Case">案例</li>
+			                    <li id="Design">设计师</li>
+			                </ul>
+			            </div>
+			            <input type="text" class="text"  name="keywords" id="keywords"/>
+			             <input type="hidden" name="act" value="Case" id="act">
+			            <input type="button" class="button"  id="jsBtn" />
+		            </div>
+				</form>
+				<script type="text/javascript">
+					  	      //js提交   
+        $("#jsBtn").click(function(){ 
+            var action=$("#act").val();
+            var url="/index.php/"+action+"/index";  
+
+            document.searchmyform.action= url;  
+            document.searchmyform.submit();     
+        })  
+		
+		
+			</script>
+				<ul class="menu clearfix">
+					<li>
+						<h3><a href="/">首页</a></h3>
+					</li>
+					<li>
+						<h3><a target="_blank" href="<if condition="$company_id==0">http://www.hxdec.com/ppsl/index.php<else/><if condition="$all_cats[1]['cat_link'] eq ''">{:U('News/index')}<else/>{$all_cats[1]['cat_link']}</if></if>">{$all_cats[1]['cat_name']}</a></h3>
+						<dl>
+						<foreach name="all_cats[1]['sub_cat']" item="list" key='k'>
+                            <if condition="($list['cat_id'] neq 14)">
+							<dd><a href="<if condition="$list['cat_link'] eq ''"> <if condition="($company_id eq 0 && $list['cat_link2'] neq '')   ">{$list['cat_link2']}<else/>{:U('News/index',array('cat_id'=>$list['cat_id']))}</if> <else/>{$list['cat_link']}</if>">{$list.cat_name}</a></dd>
+							</if>
+						</foreach>
+						</dl>
+					</li>
+					<li>
+						<h3><a href="{:U('Case/index')}">{$all_cats[2]['cat_name']}</a></h3>
+						<dl>
+
+							<dd><a href="{$all_cats[2]['sub_cat'][15]['cat_link']}" target="_blank">{$all_cats[2]['sub_cat'][15]['cat_name']}</a></dd>
+							<dd><a href="{:U('Case/index')}">{$all_cats[2]['sub_cat'][16]['cat_name']}</a></dd>
+							<dd><a href="{:U('Gallery/index')}">{$all_cats[2]['sub_cat'][17]['cat_name']}</a></dd>
+							<dd><a href="{:U('Vr/index')}">{$all_cats[2]['sub_cat'][18]['cat_name']}</a></dd>
+							<dd><a href="{:U('Hourse/index')}">{$all_cats[2]['sub_cat'][19]['cat_name']}</a></dd>
+							<dd><a href="{:U('Work/index')}">{$all_cats[2]['sub_cat'][20]['cat_name']}</a></dd>
+						</dl>
+					</li>
+					<li>
+						<h3><a href="{:U('Design/index')}">{$all_cats[3]['cat_name']}</a></h3>
+						<dl>
+							<dd style="display: none"><a href="#">{$all_cats[3]['sub_cat'][22]['cat_name']}</a></dd>
+							<dd><a href="{:U('Design/index')}">{$all_cats[3]['sub_cat'][23]['cat_name']}</a></dd>
+							<if condition="$company_id==0"><dd><a href="{:U('Dot/index')}">{$all_cats[3]['sub_cat'][24]['cat_name']}</a></dd></if>
+						</dl>
+					</li>
+					<li>
+						<h3><a href="{:U('Activi/index',array('cat_id'=>26))}">{$all_cats[4]['cat_name']}</a></h3>
+						<dl>
+							<if condition="$company_id==0"><dd><a href="{:U('Activi/index',array('cat_id'=>25))}">{$all_cats[4]['sub_cat'][25]['cat_name']}</a></dd></if>
+							<dd><a href="{:U('Activi/index',array('cat_id'=>26))}">{$all_cats[4]['sub_cat'][26]['cat_name']}</a></dd>
+						</dl>
+					</li>
+					<li><!--<if condition="$list['cat_link'] eq ''"> <if condition="$company_id==0">{$list['cat_link2']}<else/>{:U('News/index',array('cat_id'=>$list['cat_id']))}</if> <else/>{$list['cat_link']}</if>"> -->
+					
+					
+						<h3><a href="<if condition="$company_id==0">http://www.hxdec.com/gy/<else/>{:U('Page/index',array('cat_id'=>28))}</if>">{$all_cats[5]['cat_name']}</a></h3>
+						<dl>
+							<dd><a href="<if condition="$all_cats[5]['sub_cat'][27]['cat_link'] eq ''">{:U('Page/index',array('cat_id'=>27))}<else/>{$all_cats[5]['sub_cat'][27]['cat_link']}</if>">{$all_cats[5]['sub_cat'][27]['cat_name']}</a></dd>
+							<dd><a href="<if condition="$company_id==0">{$all_cats[5]['sub_cat'][28]['cat_link2']}<else/><if condition="$all_cats[5]['sub_cat'][28]['cat_link'] eq ''">{:U('Page/index',array('cat_id'=>28))}<else/>{$all_cats[5]['sub_cat'][28]['cat_link']}</if></if>">{$all_cats[5]['sub_cat'][28]['cat_name']}</a></dd>
+						</dl>
+					</li>
+					<li>
+						<h3><a href="{:U('Page/index',array('cat_id'=>30))}">{$all_cats[6]['cat_name']}</a></h3>
+						<dl>
+							<dd><a href="{:U('Page/index',array('cat_id'=>30))}">{$all_cats[6]['sub_cat'][30]['cat_name']}</a></dd>
+							<dd><a href="#" class="boOrder">{$all_cats[6]['sub_cat'][31]['cat_name']}</a></dd>
+							<!--<dd><a href="#"  class="boOrder">{$all_cats[6]['sub_cat'][32]['cat_name']}</a></dd>-->
+							<dd><a href="{:U('Design/index')}"  >{$all_cats[6]['sub_cat'][32]['cat_name']}</a></dd>
+							<dd><a href="#" class="boPro">{$all_cats[6]['sub_cat'][33]['cat_name']}</a></dd>
+							<dd><a href="{:U('News/index',array('cat_id'=>34))}">{$all_cats[6]['sub_cat'][34]['cat_name']}</a></dd>
+						</dl>
+					</li>
+					<li>
+						<h3><a href="{:U('News/index',array('cat_id'=>36))}">{$all_cats[36]['cat_name']}</a></h3>
+					</li>
+					<li class="last">
+					<if condition="$company_id==71">
+						<h3><a target="_blank" style="color:red;" href="http://test.hzhxdec.com/">新版网站</a></h3>
+					<else/>
+						<h3><a target="_blank" href="http://www.hamilan.cn">设计院</a></h3>
+					</if>
+					</li>
+					<li class="last">
+						<h3><a target="_blank" href="http://www.hxdec123.com/R-soft-hxdec071/login.asp">办公管理</a></h3>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+		<div class="sider" style="left: 50%;  margin-left: -675px;">
+			<ul>
+				<!--<li class="li1"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2547410506&site=qq&menu=yes"></a></li>
+				 <li class="li2"><a href="#" class="more" onclick="order_show();"></a></li> -->
+				<li class="li2"><a href="#"  onclick="order_show();"></a></li>
+				<li class="li3"><a href="https://cloud.hxdec.com/?c=a-92d/#/" target="_blank"></a></li>
+				<li class="li4"><a href="http://www.hxdec123.com/R-soft-hxdec071/login.asp" target="_blank"></a></li>
+				<li class="li5"><a href="javascript:void(0);" class="backtop"></a></li>
+			</ul>
+				<if condition="$company_id gt 0">
+				<a class="backjt" href="http://{$host}"></a>
+			</if>
+		</div>

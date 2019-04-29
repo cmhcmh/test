@@ -1,0 +1,75 @@
+<include file="Index:pageHeader" />
+	<script src="__PUBLIC__/Admin/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+$(function(){
+	autoHeight(jQuery('.autoHeight'));
+	jQuery(".column_Box").each(function () {
+		var t = jQuery(this);
+		if (t.length < 1) return;
+		Tab_click(t.find('.tab ul li'), t.find(".wrapBox .body"));
+	});
+});
+
+KindEditor.ready(function(K) {
+	K.create('#content', {
+		allowFileManager : false,
+		pasteType : 2,
+		newlineTag : 'p',
+		urlType : 'domain'
+	});
+});
+</script>
+
+<div class="column_Box mainAutoHeight">
+	<div class="tab">
+		<ul>
+			<li class="current"><a href="javascript:">添加推广区分</a></li>
+		</ul>
+	</div>
+	<div class="column_Box mainAutoHeight wrapBox">
+        <div class="body">
+			<form method="post" action="{:U('Qufen/insert')}" id="submitForm" name="submitForm" enctype="multipart/form-data">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td style="text-align:right;">识别参数：</td>
+							<td style="text-align:left;"><input type="text" name="shibie" value="" size="35" /><em>*</em></td>
+						</tr>
+						<tr>
+							<td style="text-align:right;">电话：</td>
+							<td style="text-align:left;"><input type="text" name="tel" value="" size="35" /><em>*</em></td>
+						</tr>
+
+						 <tr>
+                                <th align='right'>客服代码PC：</th>
+                                <td><textarea rows="6" cols="50" name="kefupc"  value="" /></textarea>
+                                         <br/>
+                                </td>
+                        
+                            </tr>
+							<tr>
+                                <th align='right'>客服代码手机版：</th>
+                                <td><textarea rows="6" cols="50" name="kefuwap"  value="" /></textarea>
+                                <br/>
+                                </td>
+                        
+                            </tr>
+						
+						<tr>
+							<td>&nbsp;</td>
+							<td style="text-align:left;">
+								<input type="hidden" name="cid" value="{$info.c_id}"/>
+								<input type="hidden" name="prefix" value="{$prefix}"/>
+								<input type="submit" value="提交"/>
+							</td>
+						</tr>
+						<tr><tr>
+					</tbody>
+				</table>
+
+			</form>
+        </div>
+    </div>
+</div>
+</body>
+</htm

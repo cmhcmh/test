@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华浔品味装饰云设计平台</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link type="text/css" rel="stylesheet" href="__CSS__/login.css">
+    <script type="text/javascript" src="__JS__/jquery.min.js"></script>
+	
+
+</head>
+<body class="login_bj" >
+
+<div class="zhuce_body">
+	
+    <div class="zhuce_kong">
+    	<div class="zc">
+        	<div class="bj_bai">
+            <h3>欢迎注册</h3>
+       	  	  <form action="/index.php/Member/add" method="POST">
+                <input  type="text" name="username" class="kuang_txt phone" placeholder="姓名" >
+				<input  type="text" name="phone" class="kuang_txt phone" placeholder="手机号">
+                <input  type="text" name="password" class="kuang_txt possword" placeholder="密码">
+                <input  type="hidden" name="password2" class="kuang_txt possword" placeholder="密码">
+				
+                <input  type="hidden" name="email" class="kuang_txt email"value="252424602@qq.com" placeholder="邮箱">
+                
+                <div style="width:100%;">
+					<input style="width:80px;" type="text" name="verify" class="kuang_txt yanzm" placeholder="验证码">
+                	<div class="hui_kuang" style="float:left;"><a href="javascript:void(0);" onclick="document.getElementById('imgverify').src+='?rand='+Math.random();"><img src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="imgverify" style="width: 81px;"></a><a href="javascript:void(0);" onclick="document.getElementById('imgverify').src+='?rand='+Math.random();">换一张</a></div>
+                </div>
+                <div style="margin-top:10px;">
+                </div>
+                <input name="注册" type="submit" class="btn_zhuce" value="注册">
+                <p>已有账号？<a href="{:U('Member/member')}">立即登录</a></p>
+                </form>
+            </div>
+        	
+        </div>
+        
+    </div>
+
+</div>
+    <div style="    text-align: center;
+    color: #fff;
+	font-size:19px;
+    bottom: 20px;
+    position: absolute;left:39%;">欢迎登陆华浔品味装饰3D云在线设计平台</div>
+
+</body>
+</html>

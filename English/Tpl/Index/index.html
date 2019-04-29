@@ -1,0 +1,117 @@
+﻿<include file='Public:pageHeader'/>
+<div id="main">
+	<div class="slider_banner single-item">
+	    <foreach name="banner_list" item="list">
+		<div><img src="/{$list['original_img']}" alt=""></div>
+		</foreach>
+	<!-- 	<div><img src="__IMG__/banner.jpg" alt=""></div>
+		<div><img src="__IMG__/banner.jpg" alt=""></div> -->
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('.single-item').slick({arrows:false,dots:true});
+		})
+	</script>
+	<div class="white">
+		<div class="layout">
+			<div class="clearfix index_about">
+				<div class="about_l">
+					<p class="title">公司简介 <i>/ About us</i></p>
+					<p class="act">
+					{$intr_c.content}
+					
+					</p>
+					<a href="{:U('Intro/index')}">查看更多 >></a>
+				</div>
+				<div class="about_r"><img src="/{$intr_c['cat_img']}" alt=""></div>
+			</div>
+
+		</div>
+	</div>
+	<div class="black">
+		<div class="layout">
+			<p class="index_title">产品展示 <i>/ product</i></p>
+			<div class="tab_box">
+				<ul class="hd clearfix">
+					<volist name="goodscat_info" id="info" key="k" >
+					<li <eq name="k" value="1"> class="on" </eq>   >{$info.cat_name}</li>
+					</volist>
+			
+				</ul>
+				<div class="bd">
+                    <volist name="arr" id="goods_info" key="k">
+					<ul <eq name='k' value="1"> class="clearfix opa" </eq> >
+						<volist name="goods_info.info" id="info">
+						<li><a href="{:U('Product/detail',array('id'=>$info['goods_id']))}">
+							<div class="img"><span></span><img src="/{$info['goods_img']}" alt=""></div>
+							<p>{$info.title}</p>
+						</a></li>
+						</volist>
+			
+					</ul>
+					</volist>
+
+
+
+
+			
+				</div>
+				<script type="text/javascript">
+					$(function(){
+						$(".tab_box .hd li").click(function () {
+							var _this = $(this).index();
+							$(".tab_box .hd li").removeClass("on");
+							$(this).addClass("on");
+							$(".tab_box .bd ul").hide();
+							$(".tab_box .bd ul").eq(_this).fadeIn();
+
+						})
+					})
+				</script>
+			</div>
+			<div class="h14"></div>
+			<a href="{:U('Product/index')}" class="more">more</a>
+			<div class="h40"></div>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<p class="index_title">企业资讯 <i>/ NEWS</i></p>
+			<div class="layout">
+				<div class="clearfix pad_lr">
+					<div class="new_l">
+						<div class="new_pic">
+							<img src="/{$news_c['cat_img']}" alt="">
+							<div class="ope">
+							{$news_c.content}
+							<!-- 	<p class="tn">国家节能环保政策出台 生物塑料渐渐在市场走强</p>
+								<p class="cn">全球经济不明朗，但以巴西为首的南美洲凭汽车业、医疗业及生物塑料的发展，仍然可为橡塑行业带来另一片新气象。</p> -->
+							</div>
+						</div>
+					</div>
+					<div class="new_r">
+						<ul>
+                            <foreach name="news_list" item="news_list">
+							<li class="clearfix"><a href="{:U('News/detail',array('id'=>$news_list['article_id']))}">
+								<img src="/{$news_list['original_img']}" alt="">
+								<div class="act">
+									<p class="tn">{$news_list.title}</p>
+									<p class="cn">
+										{$news_list.short}
+									</p>
+									<p class="time">{$news_list.add_time|date="Y-m-d",###}</p>
+								</div>
+							</a></li>
+							</foreach>
+				
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="h40"></div>
+			<a href="{:U('News/index')}" class="more">more</a>
+			<div class="h40"></div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

@@ -1,0 +1,60 @@
+	<include file='Public:pageHeader'/>
+	  <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main layout">
+        <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Activi/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Activi/index',array('cat_id'=>$cat_id))}">{$cat_less_info.cat_name}</a></p></div>
+        <div class="action clearfix">
+            <div class="left">
+                <div class="hd changehd">
+                    <ul class="clearfix">
+                      <if condition="$company_id eq 0">  <li <if condition="(!$cat_id) OR ($cat_id==25)">class="on"</if>><a href="{:U('Activi/index',array('cat_id'=>25))}">全国活动</a></li></if>
+                        <li <if condition="($cat_id==26)">class="on"</if>><a href="{:U('Activi/index',array('cat_id'=>26))}">分公司活动</a></li>
+                    </ul>
+                </div>
+                <div class="bd">
+                    <div class="change">
+                        <ul>
+                         <foreach name="activilist" item="list">
+                            <li class="clearfix">
+                                <div class="pich"><if condition="$list['newurl']==''">
+                                        <a href="{:U('Activi/detail',array('id'=>$list['article_id']))}">
+										<else/>
+                                        <a href="{$list.newurl}" target="_blank">
+										</if><img src="/{$list.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+                                <div class="word">
+                                    <h3><if condition="$list['cat_id']==25">【全国】<else/>【{$list.c_name}】</if>{$list.title|mySubstr=20,'..'}</h3>
+                                    <p>{$list.short}</p>
+                                    <!--
+                                    <h4>
+                                        <em>特享五重优惠</em>
+                                        <em>你装修我补贴 100抵1000</em>
+                                    </h4>-->
+                                    <h4>发布时间 {$list.add_time|date='Y-m-d',###}</h4>
+                                    <div class="link clearfix">
+										<if condition="$list['newurl']==''">
+                                        <a href="{:U('Activi/detail',array('id'=>$list['article_id']))}">查看详情</a>
+										<else/>
+                                        <a href="{$list.newurl}" target="_blank">查看详情</a>
+										</if>
+                                        <a href="javascript:void(0)" onclick="order_show();">点击报名</a>
+                                    </div>
+                                </div>
+                            </li>
+                         </foreach>
+                          
+                        </ul>
+                        <div class="page">
+                            <div class="dis">
+                                {$page}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <include file="Public:pcright" thumb_width='54' thumb_height='41'/>
+            
+        </div>
+    </div>
+    
+<include file='Public:pageFooter'/>
+</body>
+</html>

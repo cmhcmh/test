@@ -1,0 +1,22 @@
+<div class="wbanner tc" style="background-image: url(/{$banner});">
+		<div class="baseWidth">
+			<h1>{$cat_info.cat_en_name}</h1>
+			<h2>{$cat_info.cat_name}</h2>
+			<div class="square">
+				<div class="box">
+					<h3>{$cat_info.cat_name}</h3>
+					<p>{$cat_info.cat_en_name}</p>
+					<span class="tit"></span>
+				</div>
+				<div class="m_nav1">
+	                <div class="arrow"></div>
+	                <ul>
+	                    <li><i class="ico1" style="background-image: url(__IMG__/icon5.png);"></i><a href="/Cia/index">{$all_cat[0]['cat_name']}</a></li>
+	                    <li><i class="ico2" style="background-image: url(__IMG__/icon6.png);"></i><a href="/Cia/intro">{$all_cat[1]['cat_name']}</a></li>
+	                    <li><i class="ico3" style="background-image: url(__IMG__/icon7.png);"></i><a href="/Cia/map">{$all_cat[2]['cat_name']}</a></li>
+	                </ul>
+	            </div>
+			</div>
+			<div class="path"><a href="/">首页</a><font>&gt;</font><span>{$cat_info.cat_name}</span><notempty name="cat_less_info"><font>&gt;</font><span>{$cat_less_info.cat_name}</span></notempty></div>
+		</div>
+	</div>

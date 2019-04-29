@@ -1,0 +1,160 @@
+﻿<include file='Public:pagesHeader'/>
+	<div class="content">
+		<div class="appoin">
+			<div class="ad" style="background:url(/{$banner}) center no-repeat;background-size: contain;">
+				<h2>专业设计师在线</h2>
+				<h2>为您提供完整报价</h2>
+				<!-- <p><span>{$message_num}</span>名业主进行了预约</p> -->
+			</div>
+        	<div class="yy"> 
+	        	<div class="swiper-container yuy ">
+					<!-- <div class="swiper-wrapper">
+					   <foreach name="message" item="list" key='k'>
+					    <div class="swiper-slide"><a href="">{$list.add_time|date='Y/m/d',###}&nbsp;{$list['name']|mySubstr=1,'**'}预约了家装服务</a></div>
+					</foreach>
+					</div> -->
+				</div>
+        	</div> 
+        	<form id="form2">
+        	  <if condition="$type==2">
+        	    <input type="text" name="design_name" id="design_name" placeholder="梁璟堂"<if condition="$design_name!=''"> value="{$design_name}" style="color: #999;" disabled="true"</if>  >
+        	    <if condition="$design_name!=''">		<input type="hidden"  name="design_new" value="{$design_name}"></if>
+        	    </if>
+				<input type="text" placeholder="请输入您的名字" id="name" name="name">
+				<input type="tel" placeholder="请输入手机号码" id="mobile" name="mobile">
+				<input type="text" placeholder="请输入您的面积" id="mianji"name="mianji">
+				<input type="text" placeholder="请输入您的楼盘名称" id="hourse"name="hourse"<if condition="$hourse!=''"> disabled="true" value="{$hourse}" style="color: #999;"</if> >
+				<if condition="$hourse!=''">		<input type="hidden"  name="hourse_new" value="{$hourse}"></if>
+				
+				<input type="hidden"  name="type" value="{$type}">
+				<input type="hidden"  name="company_id" value="{$company_id}">
+				 <input type="hidden"  name="is_equ" value="2">
+				
+				<p><font color='red' size='-1' id='cmresult'></font></p>
+				<input type="button" class="sub_btn" value="立即预约" onclick="mySubmit('form2','{:U('/Contact/message')}','cmresult')">
+			</form>
+			   <script type="text/javascript">
+                /****提交表单************/
+			    function mySubmit(theForm,url,result){
+			        var name=$('#name').val();
+			        var mobile=$('#mobile').val();
+			        var verify=$('#mianji').val();
+			        var hourse=$('#hourse').val();
+
+
+			          if(hourse==''){
+			            layer.open({
+                                        content: "请填写楼盘"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			            if(name==''){
+			            layer.open({
+                                        content: "请填写姓名"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			            if(mobile==''){
+			            layer.open({
+                                        content: "请填写手机"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			        
+			           if(mianji==''){
+			            layer.open({
+                                        content: "请填写面积"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+		
+			        //$('#form').submit();
+			        function default_callback(res){
+			            
+			            if(res.status=='1'){
+			                //document.getElementById(theForm).reset();
+			                  layer.open({
+                                        content: "留言提交成功"
+                                        ,time: 2
+                                    });
+			                location.reload();
+			                document.getElementById(theForm).reset();
+
+
+			            }else{
+			                //result.html(res.info);
+			                   layer.closeAll('loading');
+			                layer.open({
+                                        content: res.info
+                                        ,time: 2
+                                    });
+
+			                return false;
+			            }
+			        }
+
+			        var callback = arguments[3] || default_callback;
+
+			        var result = $('#'+result);
+			       // result.html('loading...');
+			        layer.open({type: 2});
+			        var data = $('#'+theForm).serialize();//2014/10/07更新
+
+			        $.post(url,data,callback,'json');
+			        return false;
+			    }
+
+			</script>
+
+			<script>
+				$("#province_id").change(function(){
+				var province_id=$(this).val();
+				$.ajax({
+					url:'/mobile.php/Areacompany/get_citys',
+					Type:"POST",
+					data:"province_id="+province_id,
+					dataType:"json",
+					success:function(data){
+						var city = data.city;
+						var option=$("<option></option>");
+						$(option).val("0");
+						$(option).html("请选择");
+						var option1=$("<option></option>");
+						$(option1).val("0");
+						$(option1).html("请选择");
+						$("#city_id").html(option);
+						//$("#company_id").html(option1);
+						for(var i in city){
+							var option=$("<option></option>");
+							$(option).val(city[i]['a_id']);
+							$(option).html(city[i]['area_name']);
+							$("#city_id").append(option);
+						}
+					}
+					
+				});
+			});
+			</script>
+			<p class="baom">我们承诺：您所填写的信息将被严格保密，请放心填写!</p>
+		</div>
+	</div>
+<include file='Public:pageFooter'/>
+<script>
+	//单独页面上的js
+	$(function(){
+		var focusSwiper = new Swiper('.yuy',{
+                loop: true,
+                 direction: 'vertical',
+                autoplay: 5000,
+                autoHeight: true,
+            })
+	})
+</script>

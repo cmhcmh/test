@@ -1,0 +1,96 @@
+	<include file='Public:pagesHeader'/>
+	<div class="content">
+		<div class="hd">
+			<div class="actList">
+			    <foreach name="activilist" item="list">
+				<div class="item clearfixs">
+				    <a href="{:U('Activi/detail',array('id'=>$list['article_id']))}">
+					    <div class="pic lazy" style="height:202px;overflow: hidden;">
+							<img data-original="/{$list.original_img}" class="lazy_img">
+							<em></em>
+					    </div>
+				    </a>
+				    <h2 style=" position: relative;"><if condition="$list['cat_id']==25">【全国】<else/>【{$list.c_name|str_replace='','公司',###}】</if>{$list.title|mySubstr=20,'..'}</h2>
+				</div>
+				</foreach>
+			</div>
+			<div class="adm tc">
+        			<p class="more">加载更多</p>
+        	</div>
+		</div>
+	</div>
+
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    $(function(){
+
+        var cat_id ={$cat_id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Activi/load",
+                //提交的数据
+                data:{pages:num,cat_id:cat_id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.actList').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多了"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            /*
+            var html = "";
+            html += '<div class="item" style="display:none;"><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="__IMG__/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="__IMG__/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li></div>';
+            $('.ser_list ul').append(html);
+            $('.ser_list ul .item:last-child').fadeIn('400',function(){
+                $('.ser_list .item li').unwrap();
+            });*/
+        });
+    });
+</script>
+<script>
+	//单独页面上的js
+	$(function(){
+			$(".lazy_img").lazyload({ effect: "fadeIn" });
+	})
+</script>

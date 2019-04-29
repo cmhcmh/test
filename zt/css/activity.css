@@ -1,0 +1,121 @@
+﻿@charset "utf-8";
+*{ margin:0; padding:0; border: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+html{ font-size: 62.5%; width: 100%; height: 100%; font-family:"微软雅黑";}
+body { max-width: 750px; margin:0px auto; height: 100%; font-family:"微软雅黑"; background:#fff; font-size:1rem; color: #333;}
+@media screen and (max-width:320px){html{font-size:12px}}
+@media screen and (min-width:321px) and (max-width:375px){html{font-size:14px}}
+@media screen and (min-width:376px) and (max-width:500px){html{font-size:16px}}
+@media screen and (min-width:501px) and (max-width:600px){html{font-size:18px}}
+@media screen and (min-width:601px){html{font-size:24px}}
+a{text-decoration:none;}
+img{ border:0; max-width: 100%; vertical-align: middle;}
+body>img:last-of-type{ display: none;}
+
+:-moz-placeholder{ color: #b6b6b6;}
+::-webkit-input-placeholder{ color: #b6b6b6;}
+:-ms-input-placeholder{ color: #b6b6b6;}
+::placeholder{ color: #b6b6b6;}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{ background: transparent;}
+
+/*去掉苹果设备input_CSS样式*/
+input,button,select{ -webkit-appearance: none; -moz-appearance: none; appearance: none; font-family:"微软雅黑"; outline: none;}
+
+.actCon{ position: relative; min-height: 45.543rem; overflow: auto;}
+.order{ position: relative; background: #facd89; overflow: hidden;}
+.order .orderName{ padding: 2.285rem 0 2rem; font-size: 1.143rem; color: #333; text-align: center;}
+.order .orderName span{ margin: 0.5rem; color: #ea4924; font-weight: bold; font-size: 1.357rem;
+    text-shadow:#fff 0.107rem 0 0,#fff 0 0.107rem 0,#fff -0.107rem 0 0,#fff 0 -0.107rem 0;}
+.order .orderBox{ width: 100%; margin-bottom: 2.572rem;}
+.order p{ margin-bottom:.623rem; height: 2.929rem;}
+.order label{ float: left; display: inline-block; width: 19.46%; padding-right: 1.286rem; line-height: 2.929rem; text-align: right; color: #000;}
+.order .inputText,.order select{ display: block; padding: 0.5rem 1.143rem; width: 71.46%; height: 2.929rem; line-height: 1.929rem; background: #fff; font-size: 1rem; color: #333;}
+.order .orderBtn{ display: block; margin-top: 1rem; width: 71.46%; height: 3.071rem; line-height: 2.857rem; border-radius: 0.357rem; background: #ea4924; border-bottom: 0.214rem solid #fe623e; text-align: center; font-size: 1.286rem; font-weight: bold; color:#fff; letter-spacing: .2rem;}
+
+.order2{ background: none;}
+.order2 .orderName{ position: absolute; top:0; left: 0; z-index: 1; width: 100%; padding: 0.715rem 0 1.214rem; font-size: 1.143rem; letter-spacing: 1px; line-height: 1.143rem;}
+.order2 .orderName span{ font-size:1.143rem; text-shadow: none; font-weight: normal;}
+.order2 .orderBox{ position: absolute; top:3.1rem; left: 5%; z-index: 1; width: 90%; padding: 1.143rem 0 0.949rem;  background: #fc9e39;}
+.order2 label{ width: 16.8%;}
+.order2 .inputText,.order2 select,.order2 .orderBtn{ width: 79.1%;}
+
+.order3{ background: #fff;}
+.order3 label{ color: #333;}
+.order3 .orderBox{ margin-bottom: 1.572rem;}
+.order3 .inputText,.order3 select{ border: 1px solid #a6a6a6;}
+
+.company{ background: #dadada; height: 2.872rem; line-height: 2.872rem; text-align: center; color: #666; font-size: .623rem; margin-bottom: 2.872rem;}
+
+.box {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.footer_href {
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+    position: fixed;
+    z-index: 90;
+    bottom: 0;
+    padding: 0.15rem 0;
+	height: 2.872rem;
+}
+
+.footer_href a {
+    display: block;
+    font-size: 0.30rem;
+    text-align: center;
+    color: #fff;
+    border-right: 1px solid #525252;
+    height:2.872rem;
+    line-height:2.872rem;
+    width: 50%;
+}
+
+
+
+span {
+    display: inline-block;
+    vertical-align: middle;
+	font-size:1.33rem;
+}
+
+.fg{
+	display:inline-block;
+	width:46%;
+	height:9.5rem;
+    border:none;
+	position:absolute;
+}
+
+.fg1{
+	margin-top:7.7rem;
+	margin-left:1.5%;
+}
+
+.fg2{
+	margin-top:7.7rem;
+	left:50%;
+	margin-left:1.5%;
+}
+
+.fg3{
+	margin-top:18rem;
+	margin-left:1.5%;
+	
+}
+
+.fg4{
+	left:50%;
+	margin-top:18rem;
+	margin-left:1.5%;
+	
+}
+.clear{clear:both;}
+.fgdiv{ margin-bottom:1rem;}
+.fgdiv  .img-box{display:block; width:50% !important;  margin:0; margin-bottom:1rem; overflow:hidden; padding:0; float:left;}
+
+
+

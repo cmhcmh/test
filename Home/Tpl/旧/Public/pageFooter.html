@@ -1,0 +1,842 @@
+
+	<div class="sider siderry"  id="siderry" style="display: none; left: 50%;  margin-left: -675px;">
+			<ul>
+				<li class="li1"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2547410506&site=qq&menu=yes"></a></li>
+				<!--<li class="li2"><a href="#" class="more" onclick="order_show();"></a></li>-->
+				<li class="li2"><a href="#"  onclick="order_show();"></a></li>
+				<li class="li3"><a href="#"></a></li>
+				<li class="li4"><a href="#"></a></li>
+				<li class="li5"><a href="javascript:void(0);" class="backtop"></a></li>
+			</ul>
+		</div>
+<div class="foot">
+		<div class="layout">
+			<div class="ftop clearfix">
+				<dl class="clearfix">
+					<dt><h3><if condition="$company_id==0">{$all_cats[1]['cat_name']}<else/>公司介绍</if></h3></dt>
+						<foreach name="all_cats[1]['sub_cat']" item="list" key='k'>
+                            <if condition="($list['cat_id'] neq 14)">
+							<dd><a href="{:U('News/index',array('cat_id'=>$list['cat_id']))}" target="_blank">{$list.cat_name}</a></dd>
+							</if>
+						</foreach>
+				</dl>
+				<dl class="clearfix">
+					<dt><h3>{$all_cats[2]['cat_name']}</h3></dt>
+					
+							<if condition="$company_id==0"><dd><a href="{:U('Case/index')}"  target="_blank">{$all_cats[2]['sub_cat'][15]['cat_name']}</a></dd></if>
+							<dd><a href="{:U('Case/index')}"  target="_blank">{$all_cats[2]['sub_cat'][16]['cat_name']}</a></dd>
+							<dd><a href="{:U('Gallery/index')}"  target="_blank">{$all_cats[2]['sub_cat'][17]['cat_name']}</a></dd>
+							<dd><a href="{:U('Vr/index')}"  target="_blank">{$all_cats[2]['sub_cat'][18]['cat_name']}</a></dd>
+							<dd><a href="{:U('Hourse/index')}"  target="_blank">{$all_cats[2]['sub_cat'][19]['cat_name']}</a></dd>
+							<dd><a href="{:U('Work/index')}"  target="_blank">{$all_cats[2]['sub_cat'][20]['cat_name']}</a></dd>
+				</dl>
+
+				<dl class="clearfix">
+					<dt><h3>{$all_cats[3]['cat_name']}</h3></dt>
+						<!--<dd><a href="#">{$all_cats[3]['sub_cat'][22]['cat_name']}</a></dd>-->
+						<dd><a href="{:U('Design/index')}"  target="_blank">{$all_cats[3]['sub_cat'][23]['cat_name']}</a></dd>
+						<if condition="$company_id==0"><dd><a href="{:U('Dot/index')}"  target="_blank">{$all_cats[3]['sub_cat'][24]['cat_name']}</a></dd></if>
+				</dl>
+				<dl class="clearfix">
+					<dt><h3>{$all_cats[4]['cat_name']}</h3></dt>
+					<if condition="$company_id==0"><dd><a href="{:U('Activi/index',array('cat_id'=>25))}"  target="_blank">{$all_cats[4]['sub_cat'][25]['cat_name']}</a></dd></if>
+					<dd><a href="{:U('Activi/index',array('cat_id'=>26))}"  target="_blank">{$all_cats[4]['sub_cat'][26]['cat_name']}</a></dd>
+				</dl>
+
+				<div class="box">
+					<h3>为您推荐</h3>
+					<div class="pich"><a target="_blank" href="{$tuijian[0]['link']}"><img src="/{$tuijian[0]['original_img']}"></a></div> 
+				</div>
+				<form id="form3" method="post">
+					<h3>在线下单尊享贵宾体验</h3>
+					<input type="text" class="text" placeholder="联系人" name="name" id="name" />
+					<input type="text" class="text" placeholder="联系电话"  name="mobile" id="mobile"/>
+					  <div class="clearfix">
+                                <input type="text" class="text text2" placeholder="验证码"   name="verify" id="verify" style="margin-right: 15px;width: 101px;float:left;" />
+                                <div class="yzm"><img src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="imgverify" style="width: 81px;"></div>
+                                <span><a href="javascript:void(0);" onclick="document.getElementById('imgverify').src+='?rand='+Math.random();">看不清，换一张</a></span>
+                       </div>
+					 <input type="hidden"  name="company_id" value="{$company_id}">
+					     <input type="hidden"  name="is_equ" value="1">
+                     <input type="hidden"  name="type" value="1">
+					<p><font color='red' size='-1' id='s_cmresult_3'></font></p>
+					<input type="button" class="button" value="提交" onclick="s_mySubmit_3('form3','{:U('/Contact/message')}','s_cmresult_3')" />
+				</form>
+
+				
+
+				           <script type="text/javascript">
+                /****提交表单************/
+                function s_mySubmit_3(theForm,url,result){
+                    var province_id=$('#province').val();
+                    var city_id=$('#city').val();
+                    var name=$('#name').val();
+                    var mobile=$('#mobile').val();
+                    var verify=$('#verify').val();
+                    var hourse=$('#hourse').val();
+
+              
+                    if(name==''){
+                         layer.msg('请填写姓名');
+                        return false;
+                    }
+                        if(mobile==''){
+                         layer.msg('请填写手机');
+                        return false;
+                    }
+
+                          if(verify==''){
+
+                        layer.msg('请填写验证码');
+                        return false;
+                    }
+
+        
+                    //$('#form').submit();
+                    function default_callback(res){
+                        
+                        if(res.status=='1'){
+                            //document.getElementById(theForm).reset();
+
+                        layer.msg('留言提交成功');
+                            location.reload();
+                            document.getElementById(theForm).reset();
+
+
+                        }else{
+                            result.html(res.info);
+                        }
+                    }
+
+                    var callback = arguments[3] || default_callback;
+
+                    var result = $('#'+result);
+                    result.html('loading...');
+                    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+                    $.post(url,data,callback,'json');
+                    return false;
+                }
+
+            </script>
+                 <if condition="$company_id==0">
+				<div class="ewm">
+					<span style="font-size:16px; text-align:left;">亲！关注我们</span>
+					<!--<div class="pic"><img src="/{$other_public.original_img}"></div>-->
+					<p>周一到周日 9：00-18：00<em>{$site_info.tel}</em></p>
+				</div>
+				<else/>
+				<div class="ewm">
+					<span style="font-size:16px; text-align:left;">亲！关注我们</span>
+					<!--<div class="pic"><img src="/{$other_public.original_img}"></div>-->
+					<p>周一到周日 9：00-18：00<em>{$site_info.tel}</em></p>
+				</div>
+				</if>
+			</div>
+			<dl class="link clearfix">
+				<dt>友情链接</dt>
+				<dd>
+					<div class="link_line">
+
+					
+							
+							<foreach name="arr_links" key="k" item="list">
+							<div>
+							   <foreach name="list" key="k" item="lists">
+							      {$lists}
+							   </foreach>
+							</div>
+								
+							</foreach>
+		
+					</div>
+				</dd>
+			</dl>
+			<div class="copyright">版权信息：1998-2017 广东华浔品味装饰集团       ICP备案号:<a href="http://www.miitbeian.gov.cn/">粤ICP备15089103号</a><if condition="$company_id!=0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分公司地址：{$company_info['c_address']}</if></div>
+				<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1263522543'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1263522543%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</div>
+	</div>
+	
+	<div class="calculate" <if condition="$nid neq 1"> style=""</if>>
+		<div class="tit<if condition="$company_id!=0">2</if>"></div>
+		<div class="con">
+			<div class="box">
+				<div class="top clearfix">
+					<div class="close">&times;</div>
+					<div class="star" onclick="mySubmit_f4('form4','{:U('/Contact/message')}','cmresult4')"></div>
+					<div class="left">
+						<h3>预约报名<em>今天已有 {$message_num} 位业主获取了装修预算</em></h3>
+						<form class="lform" id="form4" method="post">
+							<div class="int clearfix">
+								<span><em>*</em>所在城市：</span>
+								<div class="sel">
+						            <i class="c_name"></i>
+						            <select class="c_select" id="province_f4" name="province_id">
+						                <option>省/市</option>
+						          <foreach name="provincelist" item="list" key='k'>
+                                    <option value="{$list.a_id}">{$list.area_name}</option>
+                                  </foreach>
+						            </select>
+						        </div>
+								<div class="sel">
+						            <i class="c_name"></i>
+						            <select class="c_select"  id="city_f4" name="city_id">
+						                <option>地区</option>
+						            </select>
+						        </div>
+							</div>
+							<div class="int clearfix">
+								<span><em>*</em>你的姓名：</span>
+								<div class="text">
+									<input type="text" placeholder="输入你的姓名" name="name" id="name_f4" />
+									
+								</div>
+							</div>
+							<div class="int clearfix">
+								<span><em>*</em>你的电话：</span>
+								<div class="text">
+									<input type="text" placeholder="输入你的手机号码" name="mobile" id="mobile_f4" />
+									
+								</div>
+							</div>
+							<div class="int clearfix">
+								<span><em>*</em>所在的楼盘：</span>
+								<div class="text">
+									<input type="text" placeholder="输入你的楼盘名称" name="hourse" id="hourse_f4" />
+									
+								</div>
+							</div>
+							
+							
+							
+<style>
+input{
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: none;
+    border:none;
+}
+
+.wrapa{
+    margin: 0px;
+}
+
+.boxa {
+    position: relative;
+    width: 200px!important;
+    height: 30px;
+    border-radius: 20px;
+    background: #686B69;
+    line-height: 30px;
+
+    margin-bottom: 40px;
+    color: #fff;
+    font-size: 12px;
+	left:150px;
+}
+
+.btna {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    max-width: 200px!important;
+    background: #ED7020;
+    border-radius: 20px;
+    text-align: center;
+	
+}
+
+.tipsa {
+    text-align: center;
+}
+
+#submita{
+    line-height: 28px;
+    border-radius: 3px;
+    background: #0c7;
+    width: 200px;
+    text-align: center;
+    color: #fff;
+}
+</style>
+							 <div class="int clearfix">
+							 <span style="width:200px;"><em>*</em>请拖动滑块验证！</span>
+								<div class="wrapa">
+								　　<div class="boxa">
+								　　　　<div class="btna" id="dragEle">>>></div>
+								　　　　<div class="tipsa" style="color:#000;">>>拖动滑块验证<<</div>
+								　　</div>
+									<!--<input type="button" value="提交验证" id="submita" />-->
+								</div>
+								<script type="text/javascript">
+    function DragValidate (dargEle,msgEle){
+        var dragging = false;//滑块拖动标识
+        var iX;
+        dargEle.mousedown(function(e) {
+            msgEle.text("");
+            dragging = true;
+            iX = e.clientX; //获取初始坐标
+        });
+        $(document).mousemove(function(e) {
+            if (dragging) {
+                var e = e || window.event;
+                var oX = e.clientX - iX;
+                if(oX < 30){
+                    return false;
+                };
+                if(oX >= 210){//容器宽度+10
+                    oX = 200;
+                    return false;
+                };
+                dargEle.width(oX + "px");
+                //console.log(oX);
+                return false;
+            };
+        });
+        $(document).mouseup(function(e) {
+            var width = dargEle.width();
+            if(width < 200){
+                //console.log(width);
+                dargEle.width("30px");
+                msgEle.text(">>请先拖动滑块验证！<<");
+            }else{
+                dargEle.attr("validate","true").text("验证成功！").unbind("mousedown");
+            };
+            dragging = false;
+        });
+    };
+
+    $(function(){
+		DragValidate($("#dragEle"),$(".tipsa"));
+		$("#submita").click(function(){
+
+		if(!$("#dragEle").attr("validate")){
+		alert("请先拖动滑块验证！");
+		}else{
+		alert("验证成功！");
+		}
+		});
+	});
+</script>
+							 </div>
+                            <p><font color='red' size='-1' id='cmresult4'></font></p>
+                               <input type="hidden"  name="company_id" value="{$company_id}">
+                            <input type="hidden"  name="type" value="1">
+                             <input type="hidden"  name="is_equ" value="1">
+						</form>
+					</div>
+				
+					<div class="right">
+						<h3>高端品味空间引领者</h3>
+						<div class="money">
+							<p>20年粤派工艺</p>
+							<p>200+城</p>
+							<p>200万人居范本</p>
+			
+						</div>
+						<div style="text-align:center;font-size:15px;margin-top:15px;margin-left:80px;">
+                        已有 
+												<span style="float:none; padding:0px; margin:0px; color:red; width:inherit;">{$message_num}</span>
+						
+						位业主预约报名
+                    </div>
+					</div>
+					
+				</div>
+				            <script type="text/javascript">
+                /****提交表单************/
+                function mySubmit_f4(theForm,url,result){
+                    var province_id=$('#province_f4').val();
+                    var city_id=$('#city_f4').val();
+                    var name=$('#name_f4').val();
+                    var mobile=$('#mobile_f4').val();
+                    var verify=$('#verify_f4').val();
+                    var hourse=$('#hourse_f4').val();
+                    
+                    
+                    if(province_id==''){
+
+                         layer.msg('请选择省份');
+                        return false;
+                    }
+                     if(city_id==0){
+
+                        layer.msg('请选择城市');
+                        return false;
+                    }
+                             if(name==''){
+                         layer.msg('请填写姓名');
+                        return false;
+                    }
+          
+               
+                        if(mobile==''){
+                         layer.msg('请填写手机');
+                        return false;
+                    }
+                                if(hourse==''){
+
+                        layer.msg('请填写楼盘');
+                        return false;
+                    }
+                       if(dragEle==false){
+                         layer.msg('请拖动滑块');
+                        return false;
+                    }
+					if(!$("#dragEle").attr("validate")){
+					 layer.msg('请拖动滑块');
+					 return false;
+					}
+					
+        
+                    //$('#form').submit();
+                    function default_callback(res){
+                        
+                        if(res.status=='1'){
+                            //document.getElementById(theForm).reset();
+
+                        layer.msg('留言提交成功');
+                            location.reload();
+                            document.getElementById(theForm).reset();
+
+
+                        }else{
+                            result.html(res.info);
+                        }
+                    }
+
+                    var callback = arguments[3] || default_callback;
+
+                    var result = $('#'+result);
+                    result.html('loading...');
+                    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+                    $.post(url,data,callback,'json');
+                    return false;
+                }
+
+            </script>
+
+            <script>
+                $("#province_f4").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/index.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_f4").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_f4").append(option);
+                        }
+                    }
+                    
+                });
+            });
+            </script>
+			
+			</div>
+		</div>
+	</div>
+
+		<!-- 2017-10-17波 -->
+	<div class="bo_fide"></div>
+	<div class="item0 bo_Box">
+		<div class="bo_title">投诉建议</div>
+		<div class="bo_form">
+		<form id="form_tan2" method="post">
+		        
+				<div class="mb">
+				    <!--
+					<span><input type="radio" name="sex" value="male">投诉</span>
+					<span><input type="radio" name="sex" value="female">建议</span>-->
+				</div>
+				<div class="mx">
+					<label><i>* </i>您的名字：</label>
+					<input type="tel" name="name" id="name_tan2">
+				</div>
+				<div class="mx">
+					<label><i>* </i>联系电话：</label>
+					<input type="tel" name="mobile" id="mobile_tan2">
+				</div>
+			   <div class="mx">
+					<label><i>* </i>所在城市：</label>
+					<select id="province_tan2" name="province_id">
+					 <option value="">选择省份</option>
+						   <foreach name="provincelist" item="list" key='k'>
+                                    <option value="{$list.a_id}">{$list.area_name}</option>
+                              </foreach>
+					</select>
+					<select id="city_tan2" name="city_id" >
+						<option value="">选择市区</option>
+
+					</select>        
+				</div>
+				<div class="mz">
+					<label><i>* </i> 详细地址：</label>
+					<input type="text"  name="address" id="address_tan2">
+				</div>
+				<div class="mz">
+					<label><i>* </i> 投诉/意见：</label>
+					<textarea  name="content" id="content_tan2"></textarea>
+				</div>
+				<div class="mx" style="padding-left: 187px;">
+				 <label style="float: left;"><i>* </i>验 证 码：</label>
+				
+                                <input type="text" class="text text2" placeholder="验证码" name="verify" id="verify_tan2" style="width:50px;float: left;" />
+                                <div class="yzm"><img style="float: left;margin: 5px;" src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="tan2_imgverify"></div>
+                  
+                               
+                </div>
+				 <input type="hidden"  name="company_id" value="{$company_id}">
+                  <input type="hidden"  name="type" value="3">
+                   <input type="hidden"  name="is_equ" value="1">
+                      <p class="mx"><font style="text-align: center;" color='red' size='-1' id='cmresult_tan2'></font></p>
+				<input type="button" name="submit" class="submit" value="立即提交" onclick="mySubmit_tan2('form_tan2','{:U('/Contact/message')}','cmresult_tan2')">
+			</form>
+		</div>
+		<div class="close"><img src="__IMG__/bo_close.jpg"></div>
+	</div>
+	<div class="item1 bo_Box">
+		<div class="bo_title">在线下单</div>
+		<div class="bo_form">
+			<form id="form_tan" method="post">
+
+				<div class="mx">
+					<label><i>* </i>所在城市：</label>
+					<select id="province_tan" name="province_id">
+					 <option value="">选择省份</option>
+						   <foreach name="provincelist" item="list" key='k'>
+                                    <option value="{$list.a_id}">{$list.area_name}</option>
+                              </foreach>
+					</select>
+					<select id="city_tan" name="city_id" >
+						<option value="">选择市区</option>
+
+					</select>        
+				</div>
+				<div class="mx" style="display: none" id="design_div">
+					<label><i>* </i>设 计 师：</label>
+					<input type="text" name="design_name"   disabled="true" id="design_name_tan" value="">
+					 <input type="hidden"  name="design_new" value="" id="design_new" >
+				</div>
+				<div class="mx">
+					<label><i>* </i>楼盘名字：</label>
+					<input type="text" name="hourse"  id="hourse_tan">
+				</div>
+				<div class="mx">
+					<label><i>* </i>您的名字：</label>
+					<input type="tel" name="name" id="name_tan">
+				</div>
+				<div class="mx">
+					<label><i>* </i>联系电话：</label>
+					<input type="tel" name="mobile" id="mobile_tan">
+				</div>
+				 <div class="mx" style="padding-left: 187px;">
+				 <label style="float: left;"><i>* </i>验 证 码：</label>
+				
+                                <input type="text" class="text text2" placeholder="验证码" name="verify" id="verify_tan" style="width:50px;float: left;" />
+                                <div class="yzm"><img style="float: left;margin: 5px;" src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="tan_imgverify"></div>
+                  
+                               
+                  </div>
+                     <input type="hidden"  name="company_id" value="{$company_id}">
+                            <input type="hidden"  name="type" value="1" id="type_tan">
+                             <input type="hidden"  name="is_equ" value="1">
+                   <p class="mx"><font style="text-align: center;" color='red' size='-1' id='cmresult_tan'></font></p>
+				<input type="button" name="submit" class="submit" value="立即提交" onclick="mySubmit_tan('form_tan','{:U('/Contact/message')}','cmresult_tan')">
+			</form>
+		</div>
+
+		<div class="close"><img src="__IMG__/bo_close.jpg"></div>
+	
+
+		  <script type="text/javascript">
+                /****提交表单************/
+                function mySubmit_tan(theForm,url,result){
+                    var province_id=$('#province_tan').val();
+                    var city_id=$('#city_tan').val();
+                    var name=$('#name_tan').val();
+                    var mobile=$('#mobile_tan').val();
+                    var verify=$('#verify_tan').val();
+                    var hourse=$('#hourse_tan').val();
+
+                    if(province_id==''){
+
+                         layer.msg('请选择省份');
+                        return false;
+                    }
+                     if(city_id==0){
+
+                        layer.msg('请选择城市');
+                        return false;
+                    }
+                      if(hourse==''){
+
+                        layer.msg('请填写楼盘');
+                        return false;
+                    }
+                        if(name==''){
+                         layer.msg('请填写姓名');
+                        return false;
+                    }
+                        if(mobile==''){
+                         layer.msg('请填写手机');
+                        return false;
+                    }
+                   
+                       if(verify==''){
+
+                        layer.msg('请填写验证码');
+                        return false;
+                    }
+        
+                    //$('#form').submit();
+                    function default_callback(res){
+                        
+                        if(res.status=='1'){
+                            //document.getElementById(theForm).reset();
+
+                        layer.msg('留言提交成功');
+                            location.reload();
+                            document.getElementById(theForm).reset();
+
+
+                        }else{
+                            result.html(res.info);
+                        }
+                    }
+
+                    var callback = arguments[3] || default_callback;
+
+                    var result = $('#'+result);
+                    result.html('loading...');
+                    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+                    $.post(url,data,callback,'json');
+                    return false;
+                }
+
+                       /****提交表单************/
+                function mySubmit_tan2(theForm,url,result){
+                    var province_id=$('#province_tan2').val();
+                    var city_id=$('#city_tan2').val();
+                    var name=$('#name_tan2').val();
+                    var mobile=$('#mobile_tan2').val();
+                    var verify=$('#verify_tan2').val();
+                    var hourse=$('#hourse_tan2').val();
+
+                    if(province_id==''){
+
+                         layer.msg('请选择省份');
+                        return false;
+                    }
+                     if(city_id==0){
+
+                        layer.msg('请选择城市');
+                        return false;
+                    }
+                      if(hourse==''){
+
+                        layer.msg('请填写楼盘');
+                        return false;
+                    }
+                        if(name==''){
+                         layer.msg('请填写姓名');
+                        return false;
+                    }
+                        if(mobile==''){
+                         layer.msg('请填写手机');
+                        return false;
+                    }
+                   
+                       if(verify==''){
+
+                        layer.msg('请填写验证码');
+                        return false;
+                    }
+        
+                    //$('#form').submit();
+                    function default_callback(res){
+                        
+                        if(res.status=='1'){
+                            //document.getElementById(theForm).reset();
+
+                        layer.msg('留言提交成功');
+                            location.reload();
+                            document.getElementById(theForm).reset();
+
+
+                        }else{
+                            result.html(res.info);
+                        }
+                    }
+
+                    var callback = arguments[3] || default_callback;
+
+                    var result = $('#'+result);
+                    result.html('loading...');
+                    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+                    $.post(url,data,callback,'json');
+                    return false;
+                }
+
+
+            </script>
+
+            <script>
+                $("#province_tan").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_tan").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_tan").append(option);
+                        }
+                    }
+                    
+                });
+            });
+                 $("#province_tan2").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_tan2").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_tan2").append(option);
+                        }
+                    }
+                    
+                });
+            });
+            </script>
+	</div>
+<style>
+	#kfqq{ position:fixed; right:0px; top:10%;  }
+	#kfqq img{ width:130px; }
+</style>
+		<script type="text/javascript">
+		$(function(){
+			// 2017-10-17波
+
+			$('.close').click(function(){
+				$('.bo_Box,.bo_fide').hide()
+			})
+
+			$('.boPro').click(function(){
+				$('.item0,.bo_fide').show()
+				$('.bo_title').html('投诉建议');
+				return false
+			})
+			$('.boOrder').click(function(){
+				$('.item1,.bo_fide').show();
+				$('.bo_title').html('在线下单');
+			$('#type_tan').val(1);
+			$('#design_new').val('');
+				$('#design_name_tan').val('');
+						$('#hourse_tan').val('');
+			$('#design_div').hide();
+				return false
+			})
+
+		    })
+	</script>
+	<script type="text/javascript">
+		function design_order(design_name)
+		{
+			$('.item1,.bo_fide').show();
+			$('.bo_title').html('预约装修');
+			$('#type_tan').val(2);
+			$('#design_new').val(design_name);
+				$('#design_name_tan').val(design_name);
+			$('#design_div').show();
+		}
+
+	    function order_show(hourse_name)
+		{
+			if(hourse_name)
+			{
+				$('.item1,.bo_fide').show();
+				$('.bo_title').html('在线下单');
+				$('#type_tan').val(1);
+				$('#hourse_tan').val(hourse_name);
+
+			}else{
+
+				$('.item1,.bo_fide').show();
+				$('.bo_title').html('在线下单');
+				$('#type_tan').val(1);
+				$('#design_new').val('');
+				$('#design_name_tan').val('');
+				$('#design_div').hide();
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		selectphone('.c_select','.c_name');
+					$(".calculate .tit").click(function() {
+				$(this).parents(".calculate").find(".con").slideDown();
+			});$(".calculate .close").click(function() {
+				$(this).parents(".calculate").find(".con").slideUp();
+			});
+			if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+				new WOW().init();
+			};
+	</script>
+	<script type="text/javascript">
+		selectphone('.c_select','.c_name');
+					$(".calculate .tit2").click(function() {
+				$(this).parents(".calculate").find(".con").slideDown();
+			});$(".calculate .close").click(function() {
+				$(this).parents(".calculate").find(".con").slideUp();
+			});
+			if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+				new WOW().init();
+			};
+	</script>
+	{$site_info['kefu']}

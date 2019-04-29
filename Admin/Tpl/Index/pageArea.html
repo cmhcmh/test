@@ -1,0 +1,127 @@
+
+				<if condition="($admin_info['action_list']!='all') AND $admin_info['company_id']">
+					<tr>
+							<td style="text-align:right;">所属的公司1：</td>
+							<td style="text-align:left;">
+
+				  				 省份：
+				  				 <select name="admin_province_id" id="admin_province_id" style="width:150px;" <if condition="$admin_info['action_list']!='all'">disabled="disabled"</if>>
+											<option value=0>请选择</option>
+	        								<volist name="admin_province_list" id="province">
+	        								   <option  value="{$province.a_id}" <if condition="$province['a_id']==$admin_info['c_province']">selected</if>>{$province.area_name}</option>
+	        								</volist>                                                  
+	   							</select>&nbsp;
+	   							 城市：
+		 						<select name="admin_city_id"  id="admin_city_id" style="width:150px;"  <if condition="$admin_info['action_list']!='all'">disabled="disabled"</if>>
+			 						<option>请选择</option>
+									 <volist name="admin_city_list" id="city">
+			 							<option value="{$city.a_id}" <if condition="$city['a_id']==$admin_info['c_city']">selected</if>>{$city.area_name}</option>
+			 						</volist>                                                  
+		 						 </select>&nbsp;
+		 						  公司：
+								<select name="company_id" id="company_id" onchange="checkcat(this);" 	<if condition="$admin_info['action_list']!='all'">disabled="disabled"</if>>
+									<option value="0">请选择...</option>
+									<volist name="admin_company_list" id="company">
+					
+									        <option value="{$company.c_id}" <if condition="$company['c_id']==$admin_info['company_id']">selected</if>>{$company.c_name}</option>
+			  					
+			  						</volist>  
+								</select>
+							<if condition="$admin_info['action_list']=='all'">
+								<em>不选，默认为集团</em>
+							</if>
+							</td>
+						</tr>
+				<elseif condition="$new_cat_id neq 25"/>
+
+
+					<tr  style="{$is_hidden}">
+							<td style="text-align:right;">所属的公司：</td>
+							<td style="text-align:left;">
+
+				  				 省份：
+				  				 <select name="admin_province_id" id="admin_province_id" style="width:150px;" >
+											<option value=0>请选择</option>
+	        								<volist name="admin_province_list" id="province">
+	        								   <option  value="{$province.a_id}" <if condition="$province['a_id']==$info['admin_province_id']">selected</if>>{$province.area_name}</option>
+	        								</volist>                                                  
+	   							</select>&nbsp;
+	   							 城市：
+		 						<select name="admin_city_id"  id="admin_city_id" style="width:150px;" >
+			 						<option>请选择</option>
+									 <volist name="admin_city_list" id="city">
+			 							<option value="{$city.a_id}" <if condition="$city['a_id']==$info['admin_city_id']">selected</if>>{$city.area_name}</option>
+			 						</volist>                                                  
+		 						 </select>&nbsp;
+		 						  公司：
+								<select name="company_id" id="company_id" onchange="checkcat(this);" >
+									<option value="0">请选择...</option>
+									<volist name="admin_company_list" id="company">
+					
+									        <option value="{$company.c_id}" <if condition="$company['c_id']==$info['company_id']">selected</if>>{$company.c_name}</option>
+			  					
+			  						</volist>  
+								</select>
+							<if condition="$admin_info['action_list']=='all'">
+								<em>不选，默认为集团</em>
+							</if>
+							</td>
+						</tr>
+		</if>
+		</if>
+
+
+						<script>
+	$("#admin_province_id").change(function(){
+	var province_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_citys',
+		Type:"POST",
+		data:"province_id="+province_id,
+		dataType:"json",
+		success:function(data){
+			var city = data.city;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			var option1=$("<option></option>");
+			$(option1).val("0");
+			$(option1).html("请选择");
+			$("#admin_city_id").html(option);
+			$("#company_id").html(option1);
+			for(var i in city){
+				var option=$("<option></option>");
+				$(option).val(city[i]['a_id']);
+				$(option).html(city[i]['area_name']);
+				$("#admin_city_id").append(option);
+			}
+		}
+		
+	});
+});
+</script>
+<script>
+$("#admin_city_id").change(function(){
+	var city_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_company',
+		Type:"POST",
+		data:"city_id="+city_id,
+		dataType:"json",
+		success:function(data){
+			var district = data.company;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			$("#company_id").html(option);
+			for(var i in district){
+				var option=$("<option></option>");
+				$(option).val(district[i]['c_id']);
+				$(option).html(district[i]['c_name']);
+				$("#company_id").append(option);
+			}
+		}
+	});
+});
+</script>
+		

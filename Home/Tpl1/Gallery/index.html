@@ -1,0 +1,45 @@
+<include file='Public:pageHeader'/>
+ <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+	<div class="main layout">
+		<div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Gallery/index')}">{$cat_less_info.cat_name}</a></p></div>
+		<div class="choose_box">
+			<dl class="clearfix">
+				<dt>空间</dt>
+				<dd class="clearfix">
+					<a href="{:U('Gallery/index',array('space_id'=>0,'style_id'=>$style_id))}" <if condition="$space_id==0">class="on"</if>>全部</a>
+					 <foreach name="space" item="list">
+                             <a href="{:U('Gallery/index',array('space_id'=>$list['com_id'],'style_id'=>$style_id))}" <if condition="$space_id==$list['com_id']">class="on"</if>>{$list.com_name}</a>
+                        </foreach>
+				</dd>
+			</dl>
+			<dl class="clearfix">
+				<dt>风格</dt>
+				<dd class="clearfix">
+				 <a href="{:U('Gallery/index',array('style_id'=>0,'space_id'=>$space_id))}"  <if condition="$style_id==0">class="active"</if>>全部</a>
+					<foreach name="style" item="list">
+                             <a href="{:U('Gallery/index',array('style_id'=>$list['com_id'],'space_id'=>$space_id))}"<if condition="$style_id==$list['com_id']">class="on"</if>>{$list.com_name}</a>
+                        </foreach>
+				</dd>
+			</dl>
+		</div>
+		<ul class="xq_cse xq_cse3 clearfix">
+		<foreach name="gallery" item="list" key='k'>
+			<li <if condition="$k%4 eq 3">class="nomar"</if>><a href="{:U('Gallery/detail',array('id'=>$list['p_id']))}" >
+				<div class="pich"><img src="/{$list.p_path}" width="287px" height="286px;"></div>
+				<div class="box">
+					<h3>{$space[$list['p_comid']]['com_name']}-{$list.title|mySubstr=23,'..'}-{$style[$list['style']]['com_name']}</h3>
+					<!--<p>{$space[$list['p_comid']]['com_name']}│{$style[$list['style']]['com_name']}</p>-->
+				</div>
+			</a></li>
+		</foreach>
+			
+		</ul>
+		<div class="page">
+			<div class="dis">
+				{$page}
+			</div>
+		</div>
+	</div>
+<include file='Public:pageFooter'/>
+</body>
+</html>

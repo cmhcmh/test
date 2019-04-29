@@ -1,0 +1,10 @@
+  <div class="lnav">
+                <ul class="navlist">
+                    <li  <if condition="($cat_id eq 35)"> class="on"</if>><a href="{:U('News/index',array('cat_id'=>35))}"><i>{$all_cats[1]['sub_cat'][35]['cat_name']}</i></a></li>
+                    <li <if condition="($cat_id eq 9)"> class="on"</if>><a href="{:U('News/index',array('cat_id'=>9))}"><i>{$all_cats[1]['sub_cat'][9]['cat_name']}</i></a></li>
+                    <li <if condition="($cat_id eq 10)"> class="on"</if>><a href="{:U('News/index',array('cat_id'=>10))}"><i>{$all_cats[1]['sub_cat'][10]['cat_name']}</i></a></li>
+                    <li <if condition="($cat_id eq 11)"> class="on"</if>><a href="{:U('News/index',array('cat_id'=>11))}"><i>{$all_cats[1]['sub_cat'][11]['cat_name']}</i></a></li>
+                    <li <if condition="($cat_id eq 12)"> class="on"</if>><a href="{:U('News/index',array('cat_id'=>12))}"><i>{$all_cats[1]['sub_cat'][12]['cat_name']}</i></a></li>
+                </ul>
+                <div class="ggpicl pich"><a href="{$tuijian[2]['link']}"><img src="/{$tuijian[2]['original_img']}"></a></div>
+            </div>

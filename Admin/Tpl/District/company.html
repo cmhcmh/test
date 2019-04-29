@@ -1,0 +1,83 @@
+
+            <!--广告图列表-->
+           
+        <if condition="$admin_info['action_list']=='all'">
+					
+					<select name="province_id" id="province_id" style="width:150px;">
+						<option value=0>请选择省份</option>
+				        <volist name="province_list" id="province">
+				        	<option  value="{$province.a_id}"   <if condition="$province['a_id']==$province_id">selected</if>>{$province.area_name}</option>
+				        </volist>                                                  
+				     </select>
+					 <select name="city_id"  id="city_id" style="width:150px;" >
+						 <option value="0">请选择城市</option>
+						 <volist name="city_list" id="city">
+						 	<option value="{$city.a_id}" <if condition="$city['a_id']==$city_id">selected</if>>{$city.area_name}</option>
+						 </volist>                                                  
+					  </select>
+
+					  <select name="company_id"  id="company_id" style="width:150px;" >
+						  <option value="0">请选择公司</option>
+						  <volist name="company_list" id="com">
+						   <option value="{$com.c_id}" <if condition="$com['c_id']==$company_id">selected</if>>{$com.c_name}</option>
+						  </volist>                                              
+					   </select>  
+				
+	
+
+           
+
+<script>
+	$("#province_id").change(function(){
+	var province_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_citys',
+		Type:"POST",
+		data:"province_id="+province_id,
+		dataType:"json",
+		success:function(data){
+			var city = data.city;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			var option1=$("<option></option>");
+			$(option1).val("0");
+			$(option1).html("请选择");
+			$("#city_id").html(option);
+			$("#company_id").html(option1);
+			for(var i in city){
+				var option=$("<option></option>");
+				$(option).val(city[i]['a_id']);
+				$(option).html(city[i]['area_name']);
+				$("#city_id").append(option);
+			}
+		}
+		
+	});
+});
+</script>
+<script>
+$("#city_id").change(function(){
+	var city_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_company',
+		Type:"POST",
+		data:"city_id="+city_id,
+		dataType:"json",
+		success:function(data){
+			var district = data.company;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			$("#company_id").html(option);
+			for(var i in district){
+				var option=$("<option></option>");
+				$(option).val(district[i]['c_id']);
+				$(option).html(district[i]['c_name']);
+				$("#company_id").append(option);
+			}
+		}
+	});
+});
+</script>
+</if>

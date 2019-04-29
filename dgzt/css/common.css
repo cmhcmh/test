@@ -1,0 +1,40 @@
+﻿/* 底部条 */
+.footer_float{width: 100%;height: 100px;overflow: hidden;background-color: rgba(0,0,0,0.8);position: fixed;bottom: 0;z-index: 999;}
+	.f_f_box{height: 100%;margin: 0 auto;box-sizing:content-box;}
+	.f_f_box>div{height: 100%;float: left;}
+	.f_f_box .f_l,.f_f_box .f_r{width: 30%;color: #f6f6f6;text-align: center;}
+	.f_f_box .f_l img{float: left;margin: 24px 15px 0;width: auto;}
+	.f_f_box .f_l h3,.f_f_box .f_l p{float: left;}
+	.f_f_box .f_r{width: 20%;position: relative;}
+	.f_f_box h3{font-size: 1.2rem;font-weight: 500;margin-top: 24px;}
+	.f_f_box p span{color: #d6000f;}
+	.f_f_box .f_r h3,.f_f_box .f_r p{font-size: 20px;text-align: left;}
+	.f_f_box .f_r h3{letter-spacing: 0;margin-top: 18px;}
+	.f_f_box .f_r p{letter-spacing: 3px;}
+	.f_f_box .f_c{width: 50%;}
+	.f_c .book{width: 100%;height: 100%;position: relative;left: 5%;}
+
+	.f_c .book dd{    float: left;width: 35%;margin-bottom: 10px;margin-right: 1%;}
+	.f_c .book dd>span{display: block;height: 30px;}
+	.f_c .book dd>span>span{top:3px;}
+	.f_c .book .m_t{margin-top: 16px;}
+	.f_c .book dd input{width: 100%;outline: none;border: none;height: 30px;text-indent: 0.8em;}
+	.f_c .book dd input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: #333;}
+	.f_c .book dd input:-moz-placeholder, textarea:-moz-placeholder {color: #333;}
+	.f_c .book dd input::-moz-placeholder, textarea::-moz-placeholder { color: #333;}
+	.f_c .book dd input:-ms-input-placeholder, textarea:-ms-input-placeholder {color: #333;}
+	.f_c .book .last{position: absolute;right: 16%;top: 16px;width: 10%;margin: 0;height: 70px;}
+	.f_c .book .last .bon{width: 100%;height: 100%;border: none;color: #fff;background: #d7000f;font-size: 1.2em;}
+	/* .f_c .book .last .btm{background-image: url(../images/subbtn.png);background-size: cover;} */
+	.f_c .book .last .bon:hover{opacity: 0.8;filter: alpha(opacity=80);}
+
+	.footer_float .togg{position: absolute;right: 20px;top:50%;font-size: 30px;line-height: 22px;color: #aeadad;cursor: default;transform: translateY(-50%);}
+	.footer_float .togg:hover{color: #fff}
+	.footer_float .getshow{position: fixed;bottom: 0;left: -100px;height: 100px;}
+	.footer_float .getshow img{height: 100%;}
+@media only screen and (min-width: 1280px) {
+	.f_f_box{padding: 0 8%;}
+	.f_f_box h3{letter-spacing: 5px}
+	.f_f_box p{letter-spacing: 2px}
+}
+

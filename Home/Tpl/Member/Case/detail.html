@@ -1,0 +1,100 @@
+<include file='Public:pageHeader'/>
+    <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main layout">
+        <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_less_info.cat_name}</a><em>&gt;</em><san>{$article_detail.title}</san></p></div>
+        <div class="case_tit"><p><em>浏览量：{$article_detail.counts}</em>{$article_detail.title}</p></div>
+        <div class="clearfix">
+            <div class="leftall">
+                <div class="sj_box clearfix">
+                    <div class="picbox"><a href="{:U('Design/detail',array('id'=>$design['article_id']))}">
+                        <div class="pich"><img title="{$design.title }"alt="{$design.title }"src="{$design.original_img|returnhead1=###}" style="width:200px"></div>
+                        <h3><em>{$design.title}</em>{$grade[$design['grade']]['com_name']}</h3>
+                    </a></div>
+                    <div class="word">
+                        <div class="clearfix wbox">
+                            <dl class="clearfix">
+                                <dd><b>所属公司：</b>{$article_detail.c_name}</dd>
+                                <dd><b>楼盘名称：</b>{$hourse_info.title}</dd>
+                                <dd><b>户型：</b>{$layout[$article_detail['layout']]['com_name']}</dd>
+                                <dd><b>面积：</b>{$acreage[$article_detail['acreage']]['com_name']}</dd>
+                                <dd><b>风格：</b>{$style[$article_detail['style']]['com_name']}</dd>
+                            </dl>
+                          <!--  <a href="{:U('Design/detail',array('type'=>2,'id'=>$article_detail['be_design']))}" class="more">预约TA</a>-->
+                          <a href="javascript:design_order('{$design.title}');" class="more">预约TA</a>
+                         
+                        </div>
+                        <h4><em>设计说明：</em>{$article_detail.short}</h4>
+                    </div>
+                </div>
+                <div class="mao_box clearfix" id="mao_box">
+                    <div class="flmd">
+                        <b></b>
+                        <ul>
+                          <foreach name="pace_img" item="list" key='k'>
+                          <if condition="$list['data']!=''">
+                            <li>{$list.space}</li>
+                          </if>
+                          </foreach>
+                        </ul>
+                    </div>
+                    <ul class="frcon">
+                    <foreach name="pace_img" item="list" key='k'>
+                    <if condition="$list['data']!=''">
+                        <li>
+						
+                        <foreach name="list['data']" item="lists" key='k'>
+                            <div class="pic"><img title="{$list.space}"alt="{$list.space}"src="{$lists.p_path|returnhead1=###}"></div>
+                            <p>{$list.space}</p>
+                        </foreach>
+                            
+                        </li>
+                    </if>
+                    </foreach>
+                      
+                    </ul>
+                </div>
+            </div>
+           <include file="Public:pcright" thumb_width='54' thumb_height='41'/>
+        </div>
+        <div class="about_case">
+            <div class="tit"><a href="{:U('Case/index')}">更多&gt;</a>相关家装案例</div>
+            <ul class="clearfix" style="width:1222px">
+            <foreach name="case" item="list">
+                <li><a href="{:U('Case/detail',array('id'=>$list['article_id']))}">
+                    <div class="pich"><img title="{$list.title }"alt="{$list.title }"src="{$list.original_img|returnhead1=###}" style="width:190px;height: 150px;"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                    <div class="box">
+                        <h3>{$list.title}</h3>
+                        <p>{$acreage[$list['acreage']]['com_name']}/{$style[$list['style']]['com_name']}</p>
+                    </div>
+                </a></li>
+        </foreach>
+                
+            </ul>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+<script type="text/javascript">
+    $(document).ready(function(){
+        window.onload = function () {
+            var gg = $(".flmd").offset().top;
+            var foot = document.getElementById("mao_box").scrollHeight - 46;
+            $(window).scroll(function () {
+                var wh = $(window).scrollTop();
+                if (wh > gg) {
+                    $(".flmd").addClass("fixtop");
+                } else {
+                    $(".flmd").removeClass("fixtop");
+                }
+                if (wh > foot) {
+                    $(".flmd").removeClass("fixtop");
+                    $(".flmd").addClass("fixbot");
+                } else {
+                    $(".flmd").removeClass("fixbot");
+                }
+            })
+        }
+        side('.flmd li','.frcon li','on');
+    });
+</script>
+</body>
+</html>     

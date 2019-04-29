@@ -1,0 +1,22 @@
+<div class="wbanner tc" style="background-image: url(/{$banner});">
+    <div class="baseWidth">
+        <h1>{$cat_info.cat_en_name}</h1>
+        <h2>{$cat_info.cat_name}</h2>
+        <div class="square">
+            <div class="box">
+                <h3>{$cat_info.cat_en_name}</h3>
+                <p>{$cat_info.cat_name}</p>
+                <span class="tit"></span>
+            </div>
+            <div class="m_nav1">
+                <div class="arrow"></div>
+                <ul>
+                    <foreach name="all_cat" item="list">
+                      <li><i class="ico1" style="background-image: url(__IMG__/icon5.png);"></i><a href="/Case/clist/pid/{$list.cat_id}">{$list.cat_name}</a></li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+        <div class="path"><a href="/">首页</a><font>&gt;</font><a href="/Case/clist">{$cat_info.cat_name}</a><notempty name="cat_less_info"><font>&gt;</font><span>{$cat_less_info.cat_name}</span></notempty><notempty name="cat_less_info"><font>&gt;</font><span>{$cat_lessmore_info.cat_name}</span></notempty></div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<include file='Public:pagesHeader'/>
+    <div class="content">
+        <div class="rez">
+            <div class="rez_top clearfix">
+                <div class="lazy fl"><img data-original="/{$article_detail.original_img}" class="lazy_img"></div>
+                <div class="fr rez_r">
+                    <h2 class="txt_overflow">{$article_detail.title}（{$article_detail.area_name}）</h2>
+                    <p><span>建筑时间：</span>{$article_detail.add_time|date="Y",###}年</p>
+                    <p><span>小区地址：</span>{$article_detail.address}</p>
+                    <p><span>小区概述：</span>{$article_detail.short}<!--<em>[展开]</em>--></p>
+                    <div class="num"><span>咨询户数：{$article_detail.com_number}户</span> <span>开工户数：{$article_detail.start_number}户</span></div>
+                    <a href="{:U('Contact/index',array('type'=>1,'hourse_id'=>$article_detail['article_id']))}">工地预约</a>
+                </div>
+            </div>
+            <div class="rez_q">
+                <div class="rez_t">
+                    <h2>小区案例</h2>
+                    <em></em>
+                </div>
+                <ul class="clearfix rez_list">
+                 <foreach name="case" item="list" key='k'>
+                    <li>
+                        <div class="lazy"><a href="{:U('Case/detail',array('id'=>$list['article_id']))}"><img data-original="/{$list.original_img}" class="lazy_img"></a></div>
+                        <div class="rez_inf">
+                            <a href="{:U('Case/detail',array('id'=>$list['article_id']))}"><h2>{$list.title|mySubstr=15,'..'}</h2></a>
+                            <p>{$layout[$list['layout']]['com_name']}<font>│</font>{$acreage[$list['acreage']]['com_name']}<font>│</font>{$style[$list['style']]['com_name']}</p>
+                            <div class="pos" style="display: none"><a href="{:U('Desgin/detail',array('id'=>$list['desgin']['article_id']))}"><img data-original="/{$list['desgin']['original_img']}" class="lazy_img"></a></div>
+                        </div>
+                    </li>
+                 </foreach>
+                </ul>
+            </div>
+            <div class="rez_q">
+                <div class="rez_t">
+                    <h2>在建工地</h2>
+                    <em></em>
+                </div>
+                <ul class="clearfix rez_list">
+                <foreach name="startwork" item="list" key='k'>
+                    <li>
+                        <div class="lazy"><a href="{:U('Work/detail',array('id'=>$list['article_id']))}"><img data-original="/{$list.original_img}" class="lazy_img"></a></div>
+                        <div class="rez_inf">
+                            <h2><a href="{:U('Work/detail',array('id'=>$list['article_id']))}">{$list.title}</a></h2>
+                            <p>{$work[$list['construct_end']]['com_name']}</p>
+                        </div>
+                    </li>
+                </foreach>
+                </ul>
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    //单独页面上的js
+    $(function(){
+            $(".lazy_img").lazyload({ effect: "fadeIn" });
+    })
+</script>

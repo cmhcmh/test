@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<link href="__CSS__/swiper-3.4.1.min.css" type="text/css" rel="stylesheet" />
+	<link href="__CSS__/style.css" type="text/css" rel="stylesheet" />
+    <title>{$site_title}</title>
+    <meta name='keywords' content="{$site_keywords}"/>
+<meta name='description' content="{$site_description}"/>
+    <script src="__JS__/jquery.js"></script>
+     <script src="__JS__/layer_mobile/layer.js"></script>
+<if condition="$site_info['kefuwap']!='' ">
+{$site_info['kefuwap']}
+<else/>
+{$site_info2['kefuwap']}
+</if>
+
+</head>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=38z4vZlVWK6oAdbrNuXnq1mB"></script>
+ <if condition="($get_city_action==1) AND ($is_action!=1)">
+<script type="text/javascript">  
+
+var geolocation = new BMap.Geolocation();    
+var gc = new BMap.Geocoder();     
+  
+geolocation.getCurrentPosition( function(r) {  
+  
+        if(this.getStatus() == BMAP_STATUS_SUCCESS)  
+        {   
+            var pt = r.point;    
+            gc.getLocation(pt, function(rs){    
+                var addComp = rs.addressComponents;    
+                
+                window.location.href="{$REQUEST_URI}&ipcity="+addComp.city+'&search_city=1';
+                return false;
+            });  
+        }  
+        else   
+        {  
+            switch( this.getStatus() )  
+            {  
+                case 2:  
+                    alert( '位置结果未知 获取位置失败.' );  
+                break;  
+                case 3:  
+                    alert( '导航结果未知 获取位置失败..' );  
+                break;  
+                case 4:  
+                    alert( '非法密钥 获取位置失败.' );  
+                break;  
+                case 5:  alert( '对不起,非法请求位置  获取位置失败.' );  
+                break;  
+                case 6:  
+                    alert( '对不起,当前 没有权限 获取位置失败.' );  
+                break;  
+                case 7:  
+                    alert( '对不起,服务不可用 获取位置失败.' );  
+                break;  
+                case 8:  
+                    alert( '对不起,请求超时 获取位置失败.' );  
+                break;  
+                  
+            }  
+        }          
+  
+    },  
+    {enableHighAccuracy: true}  
+)  
+
+</script> 
+</if>
+<body data-psd-width="750">
+	<div class="header tc">
+	    <div class="fl back" onclick="history.go(-1)">
+	        <i></i>
+	    </div>
+	   <h2><if condition="$news_site_title neq ''">{$news_site_title}<else/>{$site_title}</if></h2>
+		<a class="search" href="{:U('Index/search')}"></a>
+	    <em class="menu">
+		    <i></i>
+		    <i></i>
+		    <i></i>
+		</em>
+	    <div class="black_block"></div>
+	</div>
+	<div class="menu_detail">
+		<div class="menu_detail_box clearfix tc">
+			<a href="/">
+				<img src="__IMG__/at.png" class="icon">
+				<span class="txt_overflow">首页</span>
+			</a>
+			<a href="{:U('Case/index')}">
+				<img src="/{$all_cats[2]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[2]['cat_name']}</span>
+			</a>
+			<a href="{:U('Activi/index')}">
+				<img src="/{$all_cats[4]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[4]['cat_name']}</span>
+			</a>
+			<a href="{:U('Design/index')}">
+				<img src="/{$all_cats[3]['sub_cat'][23]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[3]['sub_cat'][23]['cat_name']}</span>
+			</a>
+			<a href="/mobile.php?get_city_action=1">
+				<img src="__IMG__/a4.png" class="icon">
+				<span class="txt_overflow">附近华浔</span>
+			</a>
+			<a href="{:U('Hourse/index')}">
+				<img src="/{$all_cats[2]['sub_cat'][19]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[2]['sub_cat'][19]['cat_name']}</span>
+			</a>
+			<a href="{:U('News/index',array('cat_id'=>36))}">
+				<img src="/{$all_cats[36]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[36]['cat_name']}</span>
+			</a>
+			<a href="{:U('Contact/index',array('type'=>1))}">
+				<img src="__IMG__/a7.png" class="icon">
+				<span class="txt_overflow">免费报价</span>
+			</a>
+			<a href="{:U('Gallery/index')}">
+				<img src="/{$all_cats[2]['sub_cat'][17]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[2]['sub_cat'][17]['cat_name']}</span>
+			</a>
+		</div>
+	</div>
+	<div class="location_detail fadeInUp">
+		<form class="bgc">
+			<div class="box">
+				<select name="" class="flex1" id="prov">
+					<option value="">省/市</option>
+					<option value="1">北京</option><option value="2">上海</option><option value="3">天津</option><option value="4">重庆</option><option value="5">黑龙江</option><option value="6">吉林</option><option value="7">辽宁</option><option value="8">内蒙古</option><option value="9">宁夏</option><option value="10">新疆</option><option value="11">青海</option><option value="12">甘肃</option><option value="13">陕西</option><option value="14">河北</option><option value="15">河南</option><option value="16">山东</option><option value="17">山西</option><option value="18">湖北</option><option value="19">湖南</option><option value="20">安徽</option><option value="21">江苏</option><option value="22">浙江</option><option value="23">江西</option><option value="24">广东</option><option value="25">广西</option><option value="26">福建</option><option value="27">四川</option><option value="28">云南</option><option value="29">贵州</option><option value="30">西藏</option><option value="31">海南</option><option value="32">香港</option><option value="33">澳门</option><option value="34">台湾</option>
+				</select>
+				<i style="display: block;width: 0.19rem;"></i>
+				<select name="" class="flex1" id="city"><option value="" data-index="0">市/区</option></select>
+				</div>
+		</form>
+		<div class="geo_title">
+			<i class="geo_close"></i>
+			<h1 class="ellipsis">附近华浔</h1>
+		</div>
+		<div class="geo bg_white">
+			<div class="geoResult">
+				<p class="current tc">
+					当前定位：<span class="fc_e60012">广州市</span>
+				</p>
+				<p class="tit tc">广州有以下13家华浔</p>
+				<div class="fendian">
+				</div>
+			</div>
+			<ul id="ul_ou">
+				<li><div><a href="">广州公司总部</a></div></li>
+				<li><div><a href="">黄埔设计中心（整装）</a></div></li>
+				<li><div><a href="">维家思分部</a></div></li>
+				<li><div><a href="">德政北分部</a></div></li>
+				<li><div><a href="">海珠分部</a></div></li>
+				<li><div><a href="">白云公司</a></div></li>
+				<li><div><a href="">番禺公司</a></div></li>
+				<li><div><a href="">增城公司</a></div></li>
+				<li><div><a href="">新塘公司</a></div></li>
+				<li><div><a href="">花都公司</a></div></li>
+				<li><div><a href="">南沙公司</a></div></li>
+				<li><div><a href="">从化公司</a></div></li>
+
+			</ul>
+		</div>
+	</div>

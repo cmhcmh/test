@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="__CSS__/style.css" />
+<script type="text/javascript" src="__JS__/jquery.js"></script> 
+<script type="text/javascript" src="__JS__/slick.js"></script>
+<script type="text/javascript" src="__JS__/jquery.dotdotdot.js"></script>
+<script type="text/javascript" src="__JS__/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="__JS__/js.js"></script>
+<script type="text/javascript" src="__JS__/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="__JS__/jquery.jscrollpane.min.js"></script>
+<script src="__JS__/jquery.waypoints.min.js"></script>
+<script src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/jquery.countup.min.js"></script>
+<script src="__JS__/wow.min.js"></script>
+<title>搜索</title>
+</head>
+<body>
+	<form class="search" id="searchmyform" name="searchmyform">
+		<a href="#" class="slogo"></a>
+		<div class="clearfix box">
+			<div class="xiala">
+                <div class="xz">案例</div>
+                <ul>
+                    <li id="Case">案例</li>
+			         <li id="Design">设计师</li>
+                </ul>
+            </div>
+            <input type="text" class="text"  name="keywords" value="{$keywords}"/>
+             <input type="hidden" name="act1" value="Case" id="act1">
+            <input type="button" class="button" id="jsBtn1" />
+		</div>
+		<div class="hotsearch clearfix">
+			<span>热门搜索：</span>
+			 <foreach name="search_info" item="list" key='k'>
+                   	<a href="">{$list}</a>
+              </foreach>
+		</div>
+	</form>
+</body>
+</html>
+	<script type="text/javascript">
+					  	      //js提交   
+        $("#jsBtn1").click(function(){ 
+            var action=$("#act1").val();
+            var url="/index.php/"+action+"/index";  
+            document.searchmyform.action= url;  
+            document.searchmyform.submit();     
+        })  
+				</script>

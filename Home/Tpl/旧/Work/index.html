@@ -1,0 +1,70 @@
+	<include file='Public:pageHeader'/>
+	<div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main clearfix layout">
+        <div class="leftall">
+            <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Work/index')}">{$cat_less_info.cat_name}</a></p></div>
+            <div class="choose_box choose_box2">
+                <dl class="clearfix">
+                    <dt>阶段</dt>
+                    <dd class="clearfix">
+                        <a  <if condition="$work_id==0">class="on"</if> href="{:U('Work/index',array('work_id'=>0))}">全部</a>
+                          <foreach name="work" item="list">
+                      <a <if condition="$work_id==$list['com_id']">class="on"</if> href="{:U('Work/index',array('work_id'=>$list['com_id']))}">{$list.com_name}</a>
+                    </foreach>
+                    </dd>
+                </dl>
+            </div>
+            <form class="find_box find_box2 find_box3 clearfix" action="{:U('Work/index')}">
+                <span style="display: none">查找您附近的华浔</span>
+                 <span>查找工地</span>
+                <div data-toggle="distpicker" class="target clearfix" style="display:none">
+                    <select class="form-control" id="province" data-province="广东省"></select>
+                    <select class="form-control" id="city"></select>
+                </div>
+                <input type="button" class="button" style="display:none"/>
+                <input type="text" class="text" placeholder="请输入楼盘名称"  name="keywords" value="{$keywords}"/>
+                <input type="submit" class="button" style="font-size:0px"/>
+            </form>
+            <ul class="dipan_list">
+             <foreach name="worklist" item="list" key='k'>
+                <li class="clearfix">
+                    <div class="pich"><img src="/{$list.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                    <div class="fr">
+                        <div class="top clearfix">
+                            <h3>{$list.title}</h3>
+                            <a href="{:U('Work/detail',array('id'=>$list['article_id']))}" class="more">查看工地</a>
+                        </div>
+                        <dl class="wdl clearfix">
+                            <dd>户型：{$layout[$list['layout']]['com_name']}</dd>
+                            <dd>面积：{$acreage[$list['acreage']]['com_name']}</dd>
+                            <dd>设计风格：{$style[$list['style']]['com_name']}</dd>
+                            <dd>施工单位：{$list['construct']}</dd>
+                            <dd>设计师：  {$list['design_title']}</dd>
+                            <dd>所在楼盘：{$list['hourse_title']}</dd>
+                        </dl>
+                        <dl class="lcdl clearfix">
+                         <foreach name="work" item="list_w">
+                         <if condition="in_array($list_w['com_id'],$list['construct_data'])">
+                            <dd>{$list_w.com_name}</dd>
+                         </if>
+                        </foreach>
+
+                        </dl>
+                    </div>
+                </li>
+            </foreach>
+                
+            </ul>
+            <div class="page page3">
+                <div class="dis">
+                    {$page}
+                </div>
+            </div>
+        </div>
+          <include file="Public:pcright" thumb_width='54' thumb_height='41'/>
+    </div>
+    
+<include file='Public:pageFooter'/>
+</body>
+
+</html>

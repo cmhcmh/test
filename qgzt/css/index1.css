@@ -1,0 +1,468 @@
+﻿*{margin: 0;padding: 0;}
+.clear{clear: both;}
+body{min-width: 1200px;}
+.Shou_width{
+	width: 1200px;
+	position: relative;
+	margin: auto;
+}
+.Advantage{
+	width: 100%;
+	height: 850px;
+	background: url(../images/img_top.jpg) no-repeat;
+	background-position: center;
+}
+.The_old_house{
+	width: 100.1%;
+	height:570px ;
+		background: url(../images/img_top2.jpg) no-repeat;
+	background-position: center;
+}
+.Case{
+	margin-top:367px;
+		width: 100%;
+	height:755px ;
+		
+	background-position: center;
+}
+.Centent_df{
+	width:1199px;
+	height: 755px;
+	position: relative;
+	margin: auto;
+	background: url(../images/HZ2_403.png) no-repeat;
+	background-position: center;
+}
+.Yun_dsad{
+	width: 158px;
+	height: 78px;
+	background: url(../images/yun.png) no-repeat;
+	right: -40px;
+	top: 50px;
+	position: absolute;
+}
+
+.COp_un{
+	width: 1180px;
+	margin: auto;
+	height: 482px;
+}
+#Tab{
+	height: 100%;
+}
+
+li{
+	list-style: none;
+}
+#Tab_c{
+	padding-top: 130px;
+	width: 1180px;
+	height: 592px;
+}
+#Tab_c li{
+	float: left;
+	width: 353px;
+	box-sizing: border-box;
+	margin-left: 30px;
+	
+}
+a{
+	text-decoration: none;
+}
+#display{
+	margin-bottom: 10px;
+	display: block;
+}
+#Tab_c li p{
+	float: left;
+	margin-right: 7px;
+}
+.P_right{
+	width: 70px;
+	height: 79px;
+	float: right;
+	margin-bottom: 20px;
+	color: #a0a0a0;
+	text-align: center;
+	line-height: 79px;
+	background: #f5f5f5;
+}
+
+#Tab_c li span{
+	padding-top: 100px;
+	display: block;
+	font-weight: 800;
+	line-height: 25px;
+	color: #333333;
+}
+#Tab_c li dir{
+	padding-top: 4px;
+	color: #999999;
+}
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next{
+	background: url(../images/left.png);
+    width: 64px;
+    bottom: 0px;
+    height: 32px;
+    top: auto;
+    left: 435px;
+}
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+	    background: url(../images/right.png);
+    width: 64px;
+    bottom: 0px;
+    height: 32px;
+    top: auto;
+    right: 435px;
+    }
+.swiper-pagination-bullet{
+	height: 16px;	
+	width: 16px;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{
+	margin:-6px 4px;
+}
+.swiper-pagination-bullet {
+	background: none;
+	border-radius: 50%;
+	opacity: 1;
+	border: 1px solid red;
+}
+.swiper-pagination-bullet-active{
+background: none;	
+background:url(../images/dain.png);
+}
+
+
+
+.Shen_dadakjll{
+	width: 100%;
+	height: 656px;
+	background: url(../images/img_top4.jpg) no-repeat;
+	background-position: center;
+}
+.team_box{
+	position: absolute;
+	top: 165px;
+	box-sizing: border-box;
+	padding: 30px;
+	width: 1200px;
+	height: 490px;
+	background: url(../images/kuang.jpg) no-repeat;
+	background-position: center;
+}
+.Reservation_design{
+	width: 330px;
+	box-sizing: border-box;
+	padding:0px 30px;
+	height: 430px;
+
+	float: left;
+	background: #fd6139;
+	
+}
+.Title{
+	padding-top: 55px;
+	font-size: 30px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid #fff;
+	color: #fff;
+}
+.Title span{
+	font-size: 16px;
+}
+.space{
+	border-bottom: 1px solid #fff;
+	margin-bottom: 30px;
+	padding: 20px 0px;
+}
+.space p{
+	color: #fff;
+	line-height: 30px;
+}
+.space p span{
+	color: #f5f186;
+}
+.Button{
+	width: 140px;
+	height: 40px;
+	text-align: center;
+	background: #fff;
+	color: #F5AD66;
+	line-height: 40px;
+}
+.problem{
+	color: #FFFFFF;
+	padding-top: 10px;
+}
+.Reservation_right{
+	width: 810px;
+	float: right;
+	height: ;
+}
+.Reservation_right p{
+	margin-left: 12px;
+	margin-bottom: 8px;
+	float: left;
+}
+.form_she{
+		width: 100%;
+	background: url(../images/img_top5.jpg) no-repeat;
+	background-position: center;
+	height: 940px;
+}
+.form_box{
+	width: 100%;
+	height: 360px;
+	background: url(../images/kuang1.jpg) no-repeat;
+	background-position: center;
+	position: absolute;
+
+	box-sizing: border-box;
+}
+#form_Centent{
+	width: 100%;
+	height: 100%;
+	background: #f0422a;
+}
+#form_Centent .Opcp{
+	margin-top: 70px;
+	margin-left: 112px;
+	display: block;
+	float: left;
+}
+.House_ccbInputText {
+    width: 360px;
+    height: 50px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    line-height: 50px;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    color: #666666;
+}
+.Form_input{
+	margin-top: 40px;
+	width: 460px;
+	float: right;
+	height: ;
+}
+.House_ccbInputbuttom {
+    width: 360px;
+    height: 50px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    background: #f1ec9a;
+    text-align: center;
+    font-size: 18px;
+    color: #f45337;
+    line-height: 50px;
+}
+.House_ccbInputText input {
+    outline: none;
+    border: none;
+    width: 310px;
+    color: #fff;
+    background: rgba(0,0,0,0);
+    text-indent: 28px;
+    font-size: 16px;
+}
+.Vr_c{
+	width: 100%;
+	height:708px ;
+	background: url(../images/img_top6.jpg) no-repeat;
+	background-position: center;
+	}
+
+.Vr_cBox{
+	width: 100%;
+	position: absolute;
+	top: 166px;
+	padding:10px ;
+	box-sizing: border-box;
+	height: 540px;
+	background: url(../images/kuang2.jpg) no-repeat;
+
+	
+}
+.Shen_fafa{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	padding-bottom: 50px;
+}
+.Shen_fafa p{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -40px;
+	margin-top: -40px;
+	width: 80%;
+	height: 80%;
+}
+.swiper-pagination1{
+	text-align: center;
+}
+.swiper-pagination1 .swiper-pagination-bullet {
+	border: 1px solid #fff;
+	text-align: center;
+}
+.days_dash .swiper-pagination-bullet{
+	border: 1px solid #fff;
+}
+.days_dash .swiper-pagination-bullet-active{
+	background: url(../images/dain1.png);
+}
+.Let_df{
+	background: url(../images/left1.png);
+}
+.Topoa_ri{
+	background: url(../images/right1.png);
+}
+
+
+.Shen_dfafa{
+	width:100% ;
+	height: 1377px;
+	background: url(../images/img_top7.jpg) no-repeat;
+	background-position: center;
+}
+.Decoration_class{
+		width:100% ;
+	height: 863px;
+	background: url(../images/img_top8.jpg) no-repeat;
+	background-position: center;
+}
+.Decoration_class_fd{
+	width: 100%;
+	height: 600px;
+	position: absolute;
+	top: 166px;
+	padding: 30px;
+	box-sizing: border-box;
+	background: url(../images/kuang3.jpg) no-repeat;
+	background-position: center;
+}
+.img_dfaf{
+	position: relative;
+	width:558px ;
+	height: 540px;
+	float: left;
+}
+.img_dfaf img{
+	height: 100%;
+	width: 100%;
+}
+.img_dfaf p{
+	position: absolute;
+	bottom:0;
+	height: 50px;
+	color: #fff;
+	line-height: 50px;
+	text-align: center;
+	background: rgba(0,0,0,.5);
+	width: 100%;
+}
+.Tab{
+	float: right;
+	width: 560px;
+}
+.Tab ul {
+	width: 560px;
+	height: 60px;
+}
+.Tab ul li{
+	float: left;
+	width: 177px;
+	text-align: center;
+	line-height: 60px;
+	background: #faa332;
+	margin-right: 14px;
+	height: 60px;
+	color: #fff;
+}
+.Tab ul .shen{
+	background: #e6002d;
+}
+.Tab_se{
+	width: 100%;
+	background: #fff;
+	height: 480px;
+	display: none;
+}
+.Tab_se .LI{
+	color: #333333;
+	padding: 0 20px;
+	padding-top: 20px;
+	font-size: 18px;
+}
+.Tab_se .LI a{
+	color: #333333;
+}
+.Tab_se .LI p{
+	float: right;
+}
+.Vada{
+	width:1200px;
+	position: absolute;
+	top: 557px;
+	padding: 20px;
+	box-sizing: border-box;
+	background: url(../images/kuang4.jpg) no-repeat;
+	height: 540px;
+}
+.Vada img{
+}
+.qiantaoCheng{
+	width: 394px;
+	height: 260px;
+	background: rgba(255,29,0,.8);
+}
+.qiantaoCheng{
+	padding: 20px;
+	box-sizing: border-box;
+	background: url(../images/xiaokuai.jpg) no-repeat;
+	float: left;
+	position: relative;
+	margin-left: -20px;
+	margin-right: 30px;
+}
+.Vada div:nth-child(4){
+	margin-right: -22px;
+	float: right;
+}
+.qiantaoCheng p{
+	position: absolute;
+	bottom: 20px;
+	background: rgba(0,0,0,.5);
+	text-align: center;
+	line-height: 50px;
+	color: #fff;
+	height: 50px;	
+	font-weight: 800;
+	font-size: 20px;
+	width: 352px;
+}
+.Vada video{
+	width: 100%;
+	margin-top: -115px;
+	height: 624px;
+}
+#shen_dafa{
+	height: 500px;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+/* 修改后的渐变字体 */
+.Gradient{
+	text-align: center;
+	padding-top: 130px;
+	font-weight: 600;
+	/*transition:0.2s all linear;*/
+	/*-webkit-transform: scale(0.9);*/
+}
+/*.Gradient:hover{*/
+	/*-webkit-transform: scale(1);*/
+/*}*/

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta name='keywords' content="{$site_keywords|strip_tags=###}"/>
+    <meta name='description' content="{$site_description|strip_tags=###}"/>
+    <meta name='author' content="互诺科技:http://www.hunuo.com"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link href="__CSS__/style.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/slick.css">
+    <link rel="stylesheet" href="__CSS__/jquery.fancybox.css">
+    <script src="__JS__/jquery.js"></script>
+    <script src="__JS__/fastclick.js"></script>
+    <script src="__JS__/slick.js"></script>
+    <script src="__JS__/js.js"></script> 
+    <script src="__JS__/layer.js"></script> 
+    <title>{$site_title}</title>
+    <script type="text/javascript">
+        $(function(){
+            $(".fixed li a").hover(function(){
+                $(this).next(".display").stop(false,true).animate({opacity: "1"},250);
+            },function(){
+                $(this).next(".display").stop(false,true).animate({opacity: "0"},250);
+            })
+        })
+    </script>
+
+</head>
+<body>
+<div id="header">
+    <div class="head_top">
+        <div class="layout">
+            <ul class="clearfix fr">
+                <li><a href="{:U('Contact/index')}"><i class="ico_1"></i>联系方式</a></li>
+                <li><a href="{:U('Contact/index')}"><i class="ico_2"></i>电子地图</a></li>
+                <li><a href="{:U('Contact/index')}"><i class="ico_3"></i>留言反馈</a></li>
+            </ul>
+            欢迎来到广东佳明机器有限公司官方网站！
+        </div>
+    </div>
+    <div class="head_main">
+        <div class="layout">
+            <div class="logo">
+                <div class="img"><a href="/"><img src="/{$logo.0.original_img}" alt=""></a></div>
+                <div class="phone">
+                    <img src="__IMG__/pic_1.png" alt="">
+                    联系电话：<i>{$site_info.tel}</i>
+                </div>
+                <a href="/english.php"><img src="/{$logo.1.original_img}" alt="" class="logo_pic"></a>
+            </div>
+        </div>
+    </div>
+    <div class="head_footer">
+        <div class="layout">
+            <div class="ap_nav"></div>
+            <ul class="clearfix pc_nav">
+                <li><a href="/english.php">首  页</a></li>
+                <li <eq name="nid" value="2">class="on" </eq> ><a href="{:U('Intro/index')}">公司简介</a></li>
+                <li><a href="{:U('News/index')}">新闻动态</a></li>
+                <li><a href="{:U('Product/index')}">产品展示</a></li>
+                <li><a href="{:U('Visualize/index')}">公司形象</a></li>
+                <li><a href="{:U('Net/index')}">营销网络</a></li>
+                <li><a href="{:U('Download/index')}">文件下载</a></li>
+                <li><a href="{:U('Contact/index')}">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

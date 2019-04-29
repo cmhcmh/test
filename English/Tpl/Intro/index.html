@@ -1,0 +1,39 @@
+﻿<include file='Public:pageHeader'/>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="/">首页</a> > <a href="{:U('Intro/index')}">公司简介</a> > <a href="{:U('Intro/index',array('cat_id'=>$cat_info['cat_id']))}">{$cat_info.cat_name}</a></div>
+			<ul class="clearfix">
+				<volist name="all_cat" id="cat">
+				<li><a href="{:U('Intro/index',array('cat_id'=>$cat['cat_id']))}">{$cat.cat_name}</a></li>
+				</volist>
+				<!-- <li><a href="#">发展历程</a></li>
+				<li><a href="#">企业文化</a></li>
+				<li><a href="#">荣誉资质</a></li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="about">
+				<p class="about_tit">
+					{$cat_info.cat_name}
+				</p>
+				<div class="active">
+				{$about.content}
+				<!-- 	<img src="__IMG__/img_7.jpg" alt="">
+					<p>
+						　　广东佳明机器有限公司是国内专业生产注塑机的大型企业之一，公司在佛山三水拥有现代化园林式的工厂，厂房占地面积达三十万平方米。<br>
+						　　佳明公司在三水工厂建设有单件铸件生产能力达50T、月产量达3000T的精密球铁铸造厂。配置日本MITSUBISHI加工中心为主体的大型机件加工车间，（可以加工重达50T长宽达5米的单件机件）以及起吊能力达100T的重型注塑机安装车间。<br>
+						　　佳明公司是一家高新技术企业，专注于注塑机研究、设计、开发、生产。集生产、销售于一体，为客户提供“一条龙”的服务。通过引进、借鉴欧美、日本等国家最先进的注塑机技术，结合中国的实际情况，经过多年的努力，成功研制出多项注塑机应用方面的国家专利，并已应用于所生产的注塑机上。近年公司成功地开发了KSS系列双色机、大型KS系列两版直压机以及PD3500T的大型注塑机，更推出了全电动高精密注塑机。<br>
+						　　现佳明公司生产的KX系列注塑机，锁模力从60T到3500T，注射量从40g到50000g，年生产能力达8000台。<br>
+						　　佳明公司于2000年通过ISO9001质量认证；2001年通过国家注塑机质量体系认证，2004年通过国家AAA质量诚信体系认证，多年来一直被国家质协授予“全国注塑机质量过硬放心品牌企业”；2005年通过CE认证，2008年获得“广东省名牌产品”称号；获得国家高新技术企业；获得广东省著名商标等。<br>
+						　　佳明公司坚持良好的商业荣誉，建立优质快速的售后服务体系，并在全国各地设有售后服务中心，才采用国际名牌的零配件，使佳明公司在国内外市场竞争中，取得了优秀的业绩，佳明注塑机销往俄罗斯、马来西亚、巴西、意大利、印度、巴基斯坦、印尼、泰国、叙利亚、越南、土耳其等多个国家。
+					</p> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

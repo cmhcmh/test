@@ -1,0 +1,95 @@
+<include file="Index:pageHeader" />
+<script type="text/javascript">
+function delAds(id,prefix) {
+	$.dialog.confirm('你确定要删除吗？', function(){
+		window.location.href="{:U('Company/del')}/c_id/"+id+"/prefix/"+prefix;
+	}, function(){
+		//$.dialog.tips('执行取消操作');
+	});
+}
+</script>
+    <div class="column_Box mainAutoHeight">
+        <div class="tab">
+            <ul>
+                <li class="current"><a href="javascript:">分公司列表</a></li>
+            </ul>
+        </div>
+        <div class="wrapBox mainAutoHeight">
+		
+			
+            <!--广告图列表-->
+            <div class="body User">
+                <div class="item">
+                   <a href="javascript:void(0);" class="dot_Item"><span class="Icon_item icon_xingjian"></span><i><input type="button" value="新建公司" class="submitNoBg" onclick="window.location.href='{:U('Company/add',array('prefix'=>$prefix,'a_id'=>$filter['a_id']))}'"/></i></a>&nbsp;
+
+                     <a href="javascript:void(0);" class="dot_Item"><span class="Icon_item icon_xingjian"></span><i><input type="button" value="返回列表" class="submitNoBg" onclick="window.location.href='{:U('Company/index',array('prefix'=>$prefix))}'"/></i></a>
+                    <div class="searchBar">
+						<form action="{:U('Company/company')}">
+							<include file='District:company'/>&nbsp;
+							
+							公司名称 ：
+							<input type="text" class="txt" name="c_name" value="{$filter.c_name}"/>&nbsp;&nbsp;
+							<input type="hidden" class="txt" name="a_id" value="{$filter.a_id}"/>
+							<input type="hidden" name="prefix" value="{$prefix}"/><input type="submit" class="submit btn_search" value="搜索" />
+						</form>
+                    </div>
+                </div>
+				
+				<form method="POST" action="{:U('Basics/batch')}" name="listForm">
+					<table border="0" cellpadding="0" cellspacing="0" class="center">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>公司名称</th>
+								<th>公司电话</th>
+								<th>公司地址</th>
+								<th>二级域名</th>
+								<th>排序</th>
+								<th>所属地区</th>
+								<th>站点状态</th>
+								<th>是否免审核</th>
+								<!--<th>NDA条形</th>-->
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<foreach name="list" item="vo">
+							<tr>
+								<td>{$vo.c_id}</td>
+								<td><font color='red'>{$vo.c_name}</font></td>
+								<td>{$vo.c_mobile}</td>
+								<td>{$vo.c_address}</td>
+								<td>{$vo.c_domain}</td>
+								<td>{$vo.c_sort}</td>
+								<td>{$vo.area_name}</td>
+								<td>	
+								<if condition="$vo['c_start']==1">开启<else/>关闭</if>
+								</td>
+								<td>	
+								<if condition="$vo['c_status']==1">否<else/>是</if>
+								</td>
+							
+							   <!-- <td><if condition="$vo['y_img']!=''"><img src="__ROOT__/{$vo.y_img}" style='max-width:300px; max-height:200px;'/><else/>暂时无图片</if></td>-->
+
+								<td>
+									<span>
+								        <a title="编辑" href="{:U('Dotinfo/index',array('c_id'=>$vo['c_id'],'prefix'=>$prefix))}">基本配置</a>&nbsp;
+										<a title="编辑" href="{:U('Company/edit',array('id'=>$vo['c_id'],'prefix'=>$prefix))}">编辑</a>&nbsp;
+										<a title="移除" onclick="delAds('{$vo.c_id}','{$prefix}')" href="javascript:;">删除</a>
+									</span>
+								</td>
+							</tr>
+							</foreach>
+						</tbody>
+					</table>
+						<div class="f_r">
+							<div class="pagination">{$page}</div>
+						</div>
+					
+					<div class="lineHeight" style="border-bottom:1px dashed #cccccc;"></div>
+				</form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

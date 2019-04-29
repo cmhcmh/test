@@ -1,0 +1,68 @@
+<include file="Index:pageHeader" />
+	<script src="__PUBLIC__/Admin/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+$(function(){
+	autoHeight(jQuery('.autoHeight'));
+	jQuery(".column_Box").each(function () {
+		var t = jQuery(this);
+		if (t.length < 1) return;
+		Tab_click(t.find('.tab ul li'), t.find(".wrapBox .body"));
+	});
+});
+
+KindEditor.ready(function(K) {
+	K.create('#content', {
+		allowFileManager : false,
+		pasteType : 2,
+		newlineTag : 'p',
+		urlType : 'domain'
+	});
+});
+</script>
+
+<div class="column_Box mainAutoHeight">
+	<div class="tab">
+		<ul>
+			<li class="current"><a href="javascript:">查看推广区分</a></li>
+			
+		</ul>
+	</div>
+	<div class="column_Box mainAutoHeight wrapBox">
+		
+		<a href="javascript:void(0);" class="dot_Item"><span class="Icon_item icon_xingjian"></span><i><input type="button" value="添加区分" class="submitNoBg" onclick="window.location.href='{:U('Qufen/addkf',array('c_id'=>$c_id,'prefix'=>$prefix))}'"/></i></a>
+		
+        <div class="body">
+			<table border="0" cellpadding="0" cellspacing="0" class="center">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>识别参数</th>
+						<th>电话</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="qufen" item="vo">
+					<tr>
+						<td>{$vo.id}</td>
+						<td>{$vo.shibie}</td>
+						<td>{$vo.tel}</td>
+						<td>
+							<span>
+								
+								<a title="编辑" href="{:U('Qufen/edit',array('id'=>$vo['id']))}"><img width="16" height="16" border="0" src="__PUBLIC__/Admin/Img/icon_edit.gif"></a>&nbsp;
+								<a title="删除" href="{:U('Qufen/del',array('id'=>$vo['id']))}"><img width="16" height="16" border="0" src="__PUBLIC__/Admin/Img/icon_drop.gif"></a>
+							</span>
+						</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			<div class="f_r">
+				<div class="pagination">{$page}</div>
+			</div>
+        </div>
+    </div>
+</div>
+</body>
+</htm

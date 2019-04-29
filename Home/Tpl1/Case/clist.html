@@ -1,0 +1,55 @@
+<include file='Public:pageHeader'/>
+<!--main start-->
+<div class="main">
+    <include file='Public:castleft'/>
+    <div class="case_main bg_f4f4f4">
+        <div class="baseWidth">
+            <ul class="case_list clearfix">
+            <foreach name="all_less_cat" item="list">
+                <li <if condition="($list['cat_id'] eq $arr['cat_id'])">class="on"</if>><a href="/Case/clist/pid/{$list.parent_id}/cat_id/{$list.cat_id}">{$list.cat_name}</a></li>
+             </foreach>
+            </ul>
+            <div id="freewall">
+             <foreach name="article_list" item="list" key="k" >
+             <if condition="($list.title neq '')">
+           
+                <if condition="($k eq o) OR ($k eq 7) OR ($k eq 11)">
+                <div class="m_list1 item">
+                    <div class="img"><a href="/Case/detail/id/{$list.article_id}"><img src="/{$list.original_img}"></a></div>
+                    <div class="con"><a href="/Case/detail//id/{$list.article_id}">
+                        <p class="p1 txt_overflow">{$list.title}</span></p>
+                        <p class="p2">{$list.add_time|date="Y-m-d",###}</p></a>
+                    </div>
+                </div>
+                <else />                 
+                <div class="m_list2 item">
+                    <div class="img"><a href="/Case/detail/id/{$list.article_id}"><img src="/{$list.original_img}"></a></div>
+                    <div class="con"><a href="/Case/detail/id/{$list.article_id}">
+                        <p class="p1 txt_overflow">{$list.title}</span></p>
+                        <p class="p2">{$list.add_time|date="Y-m-d",###}</p></a>
+                    </div>
+                </div>
+                </if>
+                </if>
+            </foreach>
+      
+            </div>
+            <div class="pages tc">
+               {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!--main end-->
+<include file='Public:pageFooter'/>
+ </body>
+<script>
+    $(function(){
+        $('.case_list li:last-child').css("margin-right","0");
+
+        var wall = new freewall("#freewall");
+        wall.fitWidth();
+    });
+</script>
+
+  </html>

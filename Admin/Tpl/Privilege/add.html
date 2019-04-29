@@ -1,0 +1,138 @@
+<include file="Index:pageHeader" />
+
+<div class="column_Box mainAutoHeight">
+	<div class="tab">
+		<ul>
+			<li class="current"><a href="javascript:">管理员信息</a></li>
+		</ul>
+	</div>
+	<div class="column_Box mainAutoHeight wrapBox">
+        <div class="body">
+			<form method="post" action="{:U('Privilege/insert')}" id="submitForm" name="submitForm">
+				<table width="100%">
+				  <tbody><tr>
+					<td class="label">用户名</td>
+					<td>
+					  <input type="text" size="34" value="{$user.user_name}" maxlength="20" name="user_name"><span class="require-field">*</span></td>
+				  </tr>
+				  <!--
+				  <tr>
+					<td class="label">Email地址</td>
+					<td>
+					  <input type="text" size="34" value="{$user.email}" name="email"><span class="require-field">*</span></td>
+				  </tr>-->
+				  <tr>
+					<td class="label">新密码</td>
+					<td>
+					  <input type="password" size="34" maxlength="32" name="new_password"><span class="require-field">*</span></td>
+				  </tr>
+				  <tr>
+					<td class="label">确认密码</td>
+					<td>
+					  <input type="password" size="34" value="" name="pwd_confirm"><span class="require-field">*</span></td>
+				  </tr>
+				  <tr>
+				   <td class="label">角色选择</td>
+				  					<td>
+				  					  <select name="select_role">
+				  						<option value="">请选择...</option>
+				  							<volist id="vo" name="select_role">
+				  							<option value="{$vo.role_id}"<if condition="$vo.role_id==$user.role_id">selected</if>>{$vo.role_name} </option>
+				  							</volist>
+				  					    </select>
+				  					</td>
+				  </tr>
+				   <tr>
+				   <td class="label">分站权限</td>
+				  		<td>
+				  				 省份：
+				  				 <select name="province_id" id="province_id" style="width:150px;">
+											<option>请选择</option>
+	        								<volist name="province_list" id="province">
+	        								   <option  value="{$province.a_id}">{$province.area_name}</option>
+	        								</volist>                                                  
+	   							</select>&nbsp;
+	   							 城市：
+		 						<select name="city_id"  id="city_id" style="width:150px;" >
+			 						<option>请选择</option>
+									 <volist name="city_list" id="city">
+			 							<option value="{$city.a_id}" >{$city.area_name}</option>
+			 						</volist>                                                  
+		 						 </select>&nbsp;
+		 						  公司：
+		  						<select name="company_id"  id="company_id" style="width:150px;" >
+			 						 <option value="0">请选择</option>
+			 						 <volist name="company_list" id="company">
+			  								 <option value="{$company.c_id}" >{$company.c_name}</option>
+			  						</volist>                                              
+		   						</select> &nbsp; 
+				  					   
+				  					   &nbsp;注意：分站权限仅对普通管理员生效
+				  	</td>
+				  </tr>
+				  <tr>
+					<td align="center" colspan="2">
+					  <input type="submit" class="button" value=" 确定 ">&nbsp;&nbsp;&nbsp;
+					  <input type="reset" class="button" value=" 重置 ">
+					  <input type="hidden" value="update" name="act"></td>
+				  </tr>
+				</tbody></table>
+			</form>
+        </div>
+    </div>
+</div>
+<script>
+	$("#province_id").change(function(){
+	var province_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_citys',
+		Type:"POST",
+		data:"province_id="+province_id,
+		dataType:"json",
+		success:function(data){
+			var city = data.city;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			var option1=$("<option></option>");
+			$(option1).val("0");
+			$(option1).html("请选择");
+			$("#city_id").html(option);
+			$("#company_id").html(option1);
+			for(var i in city){
+				var option=$("<option></option>");
+				$(option).val(city[i]['a_id']);
+				$(option).html(city[i]['area_name']);
+				$("#city_id").append(option);
+			}
+		}
+		
+	});
+});
+</script>
+<script>
+$("#city_id").change(function(){
+	var city_id=$(this).val();
+	$.ajax({
+		url:'/system.php/Areacompany/get_company',
+		Type:"POST",
+		data:"city_id="+city_id,
+		dataType:"json",
+		success:function(data){
+			var district = data.company;
+			var option=$("<option></option>");
+			$(option).val("0");
+			$(option).html("请选择");
+			$("#company_id").html(option);
+			for(var i in district){
+				var option=$("<option></option>");
+				$(option).val(district[i]['c_id']);
+				$(option).html(district[i]['c_name']);
+				$("#company_id").append(option);
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+	<include file='Public:pagesHeader'/>
+    <style>
+    body {background: #fff;}
+    </style>
+	   <div class="content">
+        <div class="dot">
+            <div class="ad" style="background:url(/{$banner}) center no-repeat;background-size: contain;">
+            </div>
+            <form>
+                <div class="box">
+                    <select name="province_id" class="flex1" id="province_id">
+                        <option value="0">省/市</option>
+                          <foreach name="provincelist" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$province_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                    <select name="city_id" class="flex1" id="city_id">
+                    <option value="0" data-index="0">市/区</option>
+                        <foreach name="city_list" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$city_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                    <select name="c_id" class="flex1" id="c_id">
+                    <option value="0" data-index="0">公司名称</option>
+                       <foreach name="company_list" item="list" key='k'>
+                                <option value="{$list.c_id}" <if condition="$c_id==$list['c_id']">selected = "selected"</if>>{$list.c_name}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </form>
+              <script type="text/javascript">
+                $(document).ready(function(){
+
+                  //选择公司
+                $('#c_id').change(function(){  
+                //alert($(this).children('option:selected').val());  
+                //alert($('#myYear').children('option:selected').val());
+                var p1 =$('#province_id').children('option:selected').val();
+                var p2 =$('#city_id').children('option:selected').val();
+                var p3=$(this).children('option:selected').val();//这就是selected的值
+                if(p1==0){
+                    layer.open({
+                         content: '请选择省份'
+                         ,time: 2
+                          });
+                   return false;
+                }  
+                if(p2==0){
+                    layer.open({
+                         content: '请选择城市'
+                         ,time: 2
+                          });
+                   return false;
+                }
+                //var p2=$('#param2').val();//获取本页面其他标签的值  
+                window.location.href="/mobile.php/Dot/index/province_id/"+p1+"/city_id/"+p2+"/c_id/"+p3+"";//页面跳转并传参     
+                });
+
+                //选择城市 
+                $('#city_id').change(function(){  
+                //alert($(this).children('option:selected').val());  
+                //alert($('#myYear').children('option:selected').val());
+                var p1 =$('#province_id').children('option:selected').val();
+                var p2=$(this).children('option:selected').val();//这就是selected的值
+                var p3 =0;
+                if(p1==0){
+                    layer.open({
+                         content: '请选择省份'
+                         ,time: 2
+                          });
+                   return false;
+                }  
+                //var p2=$('#param2').val();//获取本页面其他标签的值  
+                window.location.href="/mobile.php/Dot/index/province_id/"+p1+"/city_id/"+p2+"/c_id/"+p3+"";//页面跳转并传参      
+                });
+
+                //选择省份
+                $('#province_id').change(function(){  
+                //alert($(this).children('option:selected').val());  
+                //alert($('#myYear').children('option:selected').val());
+                var p1=$(this).children('option:selected').val();//这就是selected的值
+                var p2 =0;
+                var p3 =0;
+                if(p1==0){
+                    layer.open({
+                         content: '请选择省份'
+                         ,time: 2
+                          });
+                   return false;
+                }  
+                //var p2=$('#param2').val();//获取本页面其他标签的值  
+                window.location.href="/mobile.php/Dot/index/province_id/"+p1+"/city_id/"+p2+"/c_id/"+p3+"";//页面跳转并传参  
+                });
+                })  
+
+                </script>
+            <div class="dots">
+                <ul class="dot_list">
+                    <foreach name="dotlist" item="list" key='k'>
+                    <li class="clearfixs">
+                        <h2>{$list.c_name}</h2>
+                        <p>电话：{$list.c_mobile}</p>
+                        <p>传真：{$list.c_fx}</p>
+                        <p>地 址：{$list.c_address}</p>
+                         <if condition="($list['c_domain'])">
+                        <a href="http://{$list.c_domain}.{$host_domain}">立即进入</a>
+                        </if>
+                    </li>
+                    </foreach>
+                </ul>
+                <div class="adm tc">
+                    <p class="more">加载更多</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    $(function(){
+
+        //var cat_id ={$cat_id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+             var province_id ={$province_id};
+        var city_id={$city_id};
+        var c_id={$c_id};
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Dot/load",
+                //提交的数据
+                data:{pages:num,province_id:province_id,city_id:city_id,c_id:c_id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.dot_list').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多了"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            /*
+            var html = "";
+            html += '<div class="item" style="display:none;"><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="__IMG__/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="__IMG__/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li></div>';
+            $('.ser_list ul').append(html);
+            $('.ser_list ul .item:last-child').fadeIn('400',function(){
+                $('.ser_list .item li').unwrap();
+            });*/
+        });
+    });
+</script>
+<script>
+    //单独页面上的js
+    $(function(){
+        var focusSwiper = new Swiper('.yuy',{
+                loop: true,
+                 direction: 'vertical',
+                autoplay: 5000,
+                autoHeight: true,
+            })
+    })
+</script>

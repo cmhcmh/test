@@ -1,0 +1,518 @@
+﻿
+<include file='Public:pageHeader'/>
+<div class="main">
+ 		 <div class="swiper-container focus-list">
+            <div class="swiper-wrapper">
+			
+             
+            <foreach name="banner_list" item="list">
+                <div class="swiper-slide"><a href="{$list.link}"><img src="/{$list.original_img}" alt="{$list.title}"></a></div>
+            </foreach>
+			<foreach name="banner_public_list" item="list">
+                <div class="swiper-slide"><a href="{$list.link}"><img src="/{$list.original_img}" alt="{$list.title}"></a></div>
+            </foreach>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="pai bgc clearfix" >
+        	<a <if condition="($all_cats[1]['cat_link']=='')">href="<if condition="$company_id==0">/ppsl/wap/<else/>{:U('Page/index',array('cat_id'=>35))}</if>"<else/>href="{$all_cats[1]['cat_link']}"</if>><img src="__IMG__/pinpai.png"><p>品牌实力</p></a>
+        	<if condition="$company_id==0"><a class="a2" href="http://www.hxdec.com/gy/wap/"><img src="__IMG__/ditu.png"><p>精湛工艺</p></a><else/><a class="a2" onclick="show()";><img src="__IMG__/p2.png"><p>全国网点</p></a></if>
+        	<a href="/clzt/wap"><img src="__IMG__/fuwu.png"><p>环保材料</p></a>
+        </div>
+        <div class="bgc point">
+        	<ul class="clearfix">
+        		<li>
+        			<a href="{:U('Case/index')}">
+	        			<img src="/{$all_cats[2]['cat_img']}">
+	        			<h2>{$all_cats[2]['cat_name']}</h2>
+        			</a>
+        		</li>
+        		<li>
+        			<a href="{:U('Activi/index')}">
+	        			<img src="/{$all_cats[4]['cat_img']}">
+	        			<h2>{$all_cats[4]['cat_name']}</h2>
+        			</a>
+        		</li>
+        		<li>
+        			<a href="{:U('Design/index')}">
+	        			<img src="/{$all_cats[3]['sub_cat'][23]['cat_img']}">
+	        			<h2>{$all_cats[3]['sub_cat'][23]['cat_name']}</h2>
+        			</a>
+        		</li>
+        		<li>
+        			<a <if condition="($cookie_search_city==0)">href="/mobile.php?get_city_action=1"<else/>onclick="show();"</if>>
+	        			<img src="__IMG__/a4.png">
+	        			<h2>附近华浔</h2>
+        			</a>
+        		</li>
+
+        		<li>
+        			<a href="{:U('Hourse/index')}">
+	        			<img src="/{$all_cats[2]['sub_cat'][19]['cat_img']}">
+	        			<h2>{$all_cats[2]['sub_cat'][19]['cat_name']}</h2>
+        			</a>
+        		</li>
+        		<li>
+        			<a href="{:U('News/index',array('cat_id'=>36))}">
+	        			<img src="/{$all_cats[36]['cat_img']}">
+	        			<h2>{$all_cats[36]['cat_name']}</h2>
+        			</a>
+        		</li>
+        		<li>
+        			<a href="{:U('Contact/index',array('type'=>1))}">
+	        			<img src="__IMG__/a7.png">
+	        			<h2>免费报价</h2>
+        			</a>
+        		</li>
+        		<li>
+        			<a href="{:U('Gallery/index')}">
+	        			<img src="/{$all_cats[2]['sub_cat'][17]['cat_img']}">
+	        			<h2>{$all_cats[2]['sub_cat'][17]['cat_name']}</h2>
+        			</a>
+        		</li>
+        	</ul>
+        </div>
+        <div class="ting bgc clearfix">
+        	<em class="fl"></em>
+        	<div class="swiper-container ting_t fl">
+			    <div class="swiper-wrapper swiper-no-swiping">
+			    <foreach name="top" item="list">
+			        <div class="swiper-slide"><a <if condition='$list["link"]'>href="{$list['link']}"<else/>href="{:U('Publicnew/index',array('id'=>$list['article_id']))}"</if>>{$list.title}</a></div>
+			    </foreach>
+			    </div>
+			 </div>
+        </div>
+        <div class="main1 bgc">
+        	<div class="bt clearfix"> <span class="fl clearfix"><i class="fl"></i> <em class="fl">{$all_cats[2]['cat_name']}</em>  </span> <a class="fr clearfix" href="{:U('Case/index')}"><i class="fl">更多</i> <em class="fr"></em></a> </div>
+        	<div class="anli">
+        		<div class="swiper-container anli_list">
+		            <div class="swiper-wrapper">
+		            	<foreach name="case" item="list">
+		                <div class="swiper-slide">
+		                	<ul class="anli_box clearfix">
+		                        <foreach name="list" item="lists">
+		                		<li>
+		                			<a href="{:U('Case/index',array('style_id'=>$lists['com_id']))}">
+		                				<img src="/{$lists.com_img}">
+		                				<div class="xd">
+		                					<h2><a href="{:U('Case/index',array('style_id'=>$lists['com_id']))}">{$lists.com_name|mb_substr=0,4,'utf-8'}</a></h2>
+		                				</div>
+		                			</a>
+		                		</li>
+		                	     </foreach>
+		                	</ul>
+		                </div>
+		                </foreach>
+		            
+		            </div>
+		            <div class="swiper-pagination"></div>
+		        </div>
+        	</div>
+        </div>
+        <div class="main2 bgc">
+        	<div class="bt clearfix"> <span class="fl clearfix"><i class="fl"></i> <em class="fl">装修图库</em>  </span> <a class="fr clearfix" href="{:U('Gallery/index')}"><i class="fl">更多</i> <em class="fr"></em></a> </div>
+        	<div class="kt">
+        		<ul class="kt_list clearfix">
+        		<foreach name="space" item="list" key='k'>
+        			<li  <if condition="($k eq 0 OR $k eq 4)">class="first"<else/></if>>
+        				<a href="{:U('Gallery/index',array('space_id'=>$list['com_id']))}">
+        					<img src="/{$list.com_img}">
+        					<h2>{$list.com_name}</h2>
+        				</a>
+        			</li>
+        		</foreach>
+        			
+        		</ul>
+        	</div>
+        </div>
+        <div class="main3 bgc">
+        	<div class="bt clearfix"> 
+	        	<span class="fl clearfix"><i class="fl"></i> <em class="fl">在线预约</em>  </span> 
+	        	<font class="fr">{$message_num}名业主进行了预约</font>
+        	</div>
+        	
+        	<form  id="form1" method="post">
+				<input type="text" placeholder="请输入您的名字" name="name" id="name">
+				<input type="text" placeholder="请输入手机号码" name="mobile" id="mobile">
+				<input type="text" placeholder="请输入您的楼盘名称" name="hourse" id="hourse" >
+				<input type="text" placeholder="请输入您的面积" name="mianji" id="mianji" >
+				<input type="hidden"  name="type" value="1">
+				<input type="hidden"  name="company_id" value="{$company_id}">
+				 <input type="hidden"  name="is_equ" value="2">
+				
+				<p><font color='red' size='-1' id='cmresult'></font></p>
+				<input type="button" class="sub_btn" value="立即预约" onclick="mySubmit('form1','{:U('/Contact/message')}','cmresult')" >
+				<input id="fasong" type="hidden" value="0">
+			</form>
+
+			   <script type="text/javascript">
+                /****提交表单************/
+			    function mySubmit(theForm,url,result){
+			        var name=$('#name').val();
+			        var mobile=$('#mobile').val();
+			        var hourse=$('#hourse').val();
+			        var mianji=$('#mianji').val();
+                   
+
+			          if(hourse==''){
+			            layer.open({
+                                        content: "请填写楼盘"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			            if(name==''){
+			            layer.open({
+                                        content: "请填写姓名"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			            if(mobile==''){
+			            layer.open({
+                                        content: "请填写手机"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+					   if(mianji==''){
+			            layer.open({
+                                        content: "请填写面积"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			       
+		
+			        //$('#form').submit();
+			        function default_callback(res){
+			            
+			            if(res.status=='1'){
+			                //document.getElementById(theForm).reset();
+			                  layer.open({
+                                        content: "留言提交成功"
+                                        ,time: 2
+                                    });
+			                location.reload();
+			                document.getElementById(theForm).reset();
+
+
+			            }else{
+			                //result.html(res.info);
+			                  layer.closeAll('loading');
+			                layer.open({
+                                        content: res.info
+                                        ,time: 2
+                                    });
+
+			                return false;
+			            }
+			        }
+
+			        var callback = arguments[3] || default_callback;
+
+			        var result = $('#'+result);
+			      //  result.html('loading...');
+			        layer.open({type: 2});
+			        var data = $('#'+theForm).serialize();//2014/10/07更新
+
+			        $.post(url,data,callback,'json');
+			        return false;
+			    }
+
+			</script>
+
+			<script>
+				$("#province_id").change(function(){
+				var province_id=$(this).val();
+				$.ajax({
+					url:'/mobile.php/Areacompany/get_citys',
+					Type:"POST",
+					data:"province_id="+province_id,
+					dataType:"json",
+					success:function(data){
+						var city = data.city;
+						var option=$("<option></option>");
+						$(option).val("0");
+						$(option).html("请选择");
+						var option1=$("<option></option>");
+						$(option1).val("0");
+						$(option1).html("请选择");
+						$("#city_id").html(option);
+						//$("#company_id").html(option1);
+						for(var i in city){
+							var option=$("<option></option>");
+							$(option).val(city[i]['a_id']);
+							$(option).html(city[i]['area_name']);
+							$("#city_id").append(option);
+						}
+					}
+					
+				});
+			});
+			</script>
+
+
+			<p class="baom">我们承诺：您所填写的信息将被严格保密，请放心填写!</p>
+
+        </div>
+        <if condition="$company_id==0">
+         <div class="main4 bgc">
+        	<div class="bt clearfix"> <span class="fl clearfix"><i class="fl"></i> <em class="fl">VR实景</em>  </span> <!--<a class="fr clearfix" href="{:U('Vr/index')}"><i class="fl">更多</i> <em class="fr"></em></a>--> </div>
+        	
+			<div class="container">
+			    <div id="slide" class="slide" class="index-slide" alt="star">
+			     <foreach name="vr" item="list" key='k'>
+			        <div class="img">
+			            <a href="{$list.link}">
+						<img src="/{$list.original_img}" alt="">
+						<div class="vr"> 
+							<em class="vr_play"></em>
+							<p>{$list.short}</p>
+						</div>
+						<p class="dz">{$list.title}</p>
+						<div class="mark"></div>
+						</a>
+			        </div>
+			         </foreach>
+			      
+			        <!-- <div class="slide-bt"></div> -->
+			    </div>
+			    <button class="sleft" onclick="left()">上一页</button>
+			    <button class="sright" onclick="right()">下一页</button>
+			</div>
+			 <div class="clearfix "></div> 
+        <else/>
+          <div class="main7 bgc">
+        	<div class="bt clearfix">
+	        	<span class="fl clearfix"><i class="fl"></i> <em class="fl">设计团队</em></span>
+	        	<ul class="fl clearfix team">
+	        	   <li class="on">全部</li>
+	        	<foreach name="grade" item="list" key='k'>
+	        		<li <if condition="$k==0"></if>>{$list.com_name}</li>
+	        	</foreach>
+	        	</ul>
+	        	<a class="fr clearfix" href="{:U('Design/index')}"><i class="fl">更多</i> <em class="fr"></em></a>
+        	</div>
+        	<div class="team_wrap">
+        	    <div class="team_con on"> 
+        			<ul class="team_list clearfix">
+        			<foreach name="designs_all" item="lists" key='ks'>
+	        			<li>
+	        				<a href="{:U('Design/detail',array('id'=>$lists['article_id']))}">
+	        					<img src="{$lists.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/detail.png'">
+	        					<p>{$lists.title}</p>
+	        				</a>
+	        			</li>
+	        		</foreach>
+	        			
+        			</ul>
+        		</div>
+        	<foreach name="designs" item="list" key='k'>
+        		<div class="team_con"> 
+        			<ul class="team_list clearfix">
+        			<foreach name="list" item="lists" key='ks'>
+	        			<li>
+	        				<a href="{:U('Design/detail',array('id'=>$lists['article_id']))}">
+	        					<img src="{$lists.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/detail.png'">
+	        					<p>{$lists.title}</p>
+	        				</a>
+	        			</li>
+	        		</foreach>
+	        			
+        			</ul>
+        		</div>
+        	</foreach>
+        		
+        	</div>
+        </div>
+        </if>
+      
+        <div class="main6 bgc">
+        	<div class="bt clearfix"> <span class="fl clearfix"><i class="fl"></i> <em class="fl">最新动态</em>  </span> <a class="fr clearfix" href="{:U('News/index')}"><i class="fl">更多</i> <em class="fr"></em></a> </div>
+        	<div class="dongt">
+        		<ul class="dongs clearfix">
+					<li class="on">
+						{$all_cats[1]['sub_cat'][11]['cat_name']}
+						<em></em>
+					</li>
+					<li>
+						{$all_cats[36]['cat_name']}
+						<em></em>
+					</li>
+					<li>
+						{$all_cats[6]['sub_cat'][34]['cat_name']}
+						<em></em>
+					</li>
+				</ul>
+        	</div>
+        	<div class="dongt_wrap">
+        		<div class="dongt_con on">
+        			<ul class="zx_list">
+        			<foreach name="information" item="list" key='k'>
+        				<li class="clearfix">
+        				<a href="{:U('News/detail',array('id'=>$list['article_id']))}">
+        					<div class="fl"><img src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/detail.png'"></div>
+        					
+        					<div class="zx_t fr">
+        						<h2>{$list.title}  </h2>
+        						<p>{$list.short}</p>
+        						<div class="clearfix"><span class="fr">{$list.add_time|date='Y/m/d',###}</span></div>
+        					</div>
+        					</a>
+        				</li>
+        			</foreach>
+        			</ul>
+        		</div>
+        		<div class="dongt_con">
+
+        		<ul class="zx_list">
+        			<foreach name="guide" item="list" key='k'>
+        				<li class="clearfix">
+        				<a href="{:U('News/detail',array('id'=>$list['article_id']))}">
+        					<div class="fl"><img src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/detail.png'"></div>
+        					<div class="zx_t fr">
+        						<h2>{$list.title}  </h2>
+        						<p>{$list.short}</p>
+        						<div class="clearfix"><span class="fr">{$list.add_time|date='Y/m/d',###}</span></div>
+        					</div>
+        				</a>
+        				</li>
+        			</foreach>
+        			</ul>
+        		</div>
+
+        		<div class="dongt_con">
+        			
+        			<ul class="zx_list">
+        			<foreach name="Story" item="list" key='k'>
+        				<li class="clearfix">
+        				<a href="{:U('News/detail',array('id'=>$list['article_id']))}">
+        					<div class="fl"><img src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/detail.png'"></div>
+        					<div class="zx_t fr">
+        						<h2>{$list.title}  </h2>
+        						<p>{$list.short}</p>
+        						<div class="clearfix"><span class="fr">{$list.add_time|date='Y/m/d',###}</span></div>
+        					</div>
+        				</a>
+        				</li>
+        			</foreach>
+        			</ul>
+        		</div>
+        	</div>
+        </div>
+ 	</div>
+<include file='Public:pageFooter'/>
+<if condition="$company_id==0">
+<script>
+	//单独页面上的js
+	$(function(){
+		  var focusSwiper = new Swiper('.focus-list',{
+                loop: true,
+                pagination: '.swiper-pagination',
+                paginationClickable :true,
+                // autoplay: 5000,
+                autoHeight: true,
+            })
+		   var focusSwiper2 = new Swiper('.ting_t',{
+                loop: true,
+                 direction: 'vertical',
+                autoplay: 6000,
+                autoHeight: true,
+                noSwiping:true,
+            })
+		    var focusSwiper2 = new Swiper('.yuy',{
+                loop: true,
+                 direction: 'vertical',
+                autoplay: 5000,
+                autoHeight: true,
+                noSwiping:true,
+            })
+		    var focusSwiper = new Swiper('.anli_list',{
+                loop: true,
+                pagination: '.swiper-pagination',
+                paginationClickable :true,
+                // autoplay: 3000,
+                autoHeight: true,
+            })
+             var mySwiper = new Swiper ('.fd', {
+			    loop: true,
+			    nextButton: '.swiper-button-next',
+			    prevButton: '.swiper-button-prev',
+			    slidesPerView: 3,
+			    // centeredSlides : true,
+
+  			})  
+             $('.vid .v_paly').click(function(){
+            	document.getElementById("vid").play();
+             	$('.v_paly').hide()
+             })
+             $('.dongs li').click(function(){
+				var num=$(this).index();
+				$(this).siblings().removeClass('on')
+				$(this).addClass('on');
+				$('.dongt_wrap .dongt_con').removeClass('on');
+				$('.dongt_wrap .dongt_con').eq(num).addClass('on');
+			})
+	})
+</script>
+</if>
+<if condition="$company_id!=0">
+<script>
+	//单独页面上的js
+	$(function(){
+		  var focusSwiper = new Swiper('.focus-list',{
+                loop: true,
+                pagination: '.swiper-pagination',
+                paginationClickable :true,
+                // autoplay: 5000,
+                autoHeight: true,
+            })
+		   var focusSwiper2 = new Swiper('.ting_t',{
+                loop: true,
+                 direction: 'vertical',
+                autoplay: 6000,
+                autoHeight: true,
+                noSwiping:true,
+            })
+		    var focusSwiper2 = new Swiper('.yuy',{
+                loop: true,
+                 direction: 'vertical',
+                autoplay: 5000,
+                autoHeight: true,
+                noSwiping:true,
+            })
+		    var focusSwiper = new Swiper('.anli_list',{
+                loop: true,
+                pagination: '.swiper-pagination',
+                paginationClickable :true,
+                // autoplay: 3000,
+                autoHeight: true,
+            })
+             var mySwiper = new Swiper ('.fd', {
+			    loop: true,
+			    nextButton: '.swiper-button-next',
+			    prevButton: '.swiper-button-prev',
+			    slidesPerView: 3,
+			    // centeredSlides : true,
+
+  			})  
+             $('.vid .v_paly').click(function(){
+            	document.getElementById("vid").play();
+             	$('.v_paly').hide()
+             })
+             $('.dongs li').click(function(){
+				var num=$(this).index();
+				$(this).siblings().removeClass('on')
+				$(this).addClass('on');
+				$('.dongt_wrap .dongt_con').removeClass('on');
+				$('.dongt_wrap .dongt_con').eq(num).addClass('on');
+			})
+	})
+</script>
+</if>
+

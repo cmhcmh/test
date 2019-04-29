@@ -1,0 +1,99 @@
+	<include file='Public:pageHeader'/>
+	<script type="text/javascript" src="__JS__/jquery.grid-a-licious.min.js"></script>
+<div class="inbanner"  style="background-image: url(/{$banner.original_img});"></div>
+	<div class="main layout">
+		<div class="loca"><p>当前位置：<a href="#">首页</a><em>&gt;</em><a href="#">装修案例</a><em>&gt;</em><a href="#">案例图库</a></p></div>
+		<div class="gd_box clearfix">
+			<div class="pich"><img title="{$list.title }"alt="{$list.title }" src="/{$article_detail.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+			<div class="mid">
+				<h3>{$article_detail.title}</h3>
+				
+				<p>户型：{$layout[$article_detail['layout']]['com_name']}&nbsp;&nbsp;面积：{$acreage[$article_detail['acreage']]['com_name']}&nbsp;&nbsp;设计风格：{$style[$article_detail['style']]['com_name']}  </p>
+				<p>施工单位：{$article_detail['construct']}&nbsp;&nbsp;设计师：{$design_info.title}&nbsp;&nbsp;楼盘：{$hourse_info.title}</p>
+			</div>
+			<a href="javascript:order_show('{$hourse_info.title}');" class="more">预约参观工地</a>
+		</div>
+		<div class="title title2">装修阶段</div>
+		<ul class="liucheng clearfix">
+			 <foreach name="work" item="list_w">
+              <if condition="in_array($list_w['com_id'],$article_detail['construct_data'])">
+                   <li>{$list_w.com_name}</li>
+              </if>
+
+            </foreach>
+
+		</ul>
+		<!--/*1019*/-->
+		<div class="do_box">
+			<div class="list">
+				<div class="yuandian"></div>
+				<ul>
+					<foreach name="work" item="list_w">
+				   <if condition="$pace_img[$list_w['com_id']]['data']!=''">
+					<li class="clearfix">
+						<span>{$list_w.com_name}</span>
+						<dl class="clearfix device">
+						<foreach name="pace_img[$list_w['com_id']]['data']" item="lists">
+							<dd class="item"><img title="{$list.title }"alt="{$list.title }" src="/{$lists.p_path}"/></dd>
+						</foreach>
+						</dl>
+					</li>
+					</if>
+					</foreach>
+					
+					
+				</ul>
+				<div class="pohot">
+					<div class="p-bg"></div>
+					<i></i>
+					<div class="nmian">
+						<font></font>
+						<span>
+							<img title="{$list.title }"alt="{$list.title }" src="#"/>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<script type="text/javascript">
+		makeboxes = function() {
+			var boxes = new Array;   
+			var amount = Math.floor(Math.random()*10); 
+			for(i=1;i<amount;i++){
+				num = Math.floor(Math.random()*randTxt.length); 
+				div = $('<div></div>').addClass('item'); 
+				content = "<img src='images/"+i+".jpg'/>";
+				div.append(content);
+				boxes.push(div);
+			}
+			return boxes;
+		}
+		//滚动条事件
+		$(document).ready(function () {         
+			$(window).scroll(function () {
+				if(($(window).scrollTop() + $(window).height()) == $(document).height())
+				{
+					$(".device").gridalicious('append', makeboxes());
+				}
+		});
+		//主要部分
+		$(".device").gridalicious({
+			gutter: 20,
+//			width: 243,
+			animate: true,
+			animationOptions: {
+					speed: 100,
+					duration: 400,
+					complete:function(data){
+						console.log("");	
+					}
+			},
+		});
+	});
+	</script>
+	<!--/*1019*/-->
+	<include file='Public:pageFooter'/>
+</body>
+</html>

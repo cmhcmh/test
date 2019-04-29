@@ -1,0 +1,496 @@
+<krpano version="1.19" title="南宁华浔品味装饰【国宾壹号】实景VR赏析">
+	<include url="skin/vtourskin.xml" />
+	
+	<skin_settings maps="false"
+	               maps_type="bing"
+	               maps_bing_api_key=""
+	               maps_zoombuttons="false"
+	               gyro="true"
+	               webvr="true"
+	               littleplanetintro="true"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="100" thumbs_height="100" thumbs_padding="10" thumbs_crop="0|0|500|500"
+	               thumbs_opened="false"
+	               thumbs_text="true"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="true"
+	               thumbs_scrollindicator="true"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext="加载中"
+	               layout_width="100%"
+	               layout_maxwidth=""
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:微软雅黑;"
+	               design_text_shadow="1"
+	               />
+	<include url="skin/vtourskin_design.xml"  />
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+				if(device.mobile,
+		for(set(i,0),i LT hotspot.count,inc(i), 
+		    txtadd(spotname,'hotspot',get(hotspot[get(i)].id));  
+		    set(hotspot[get(spotname)].scale, 0.35); 
+		););
+	</action>
+	<autorotate enabled="true" waittime="5" speed="3" accel="1"/>
+	<plugin name="soundinterface" url.flash="%SWFPATH%/plugins/soundinterface.swf" url.html5="%SWFPATH%/plugins/soundinterface.js" rootpath="" preload="true" keep="true"/>
+	<style name="textfield" url="%SWFPATH%/plugins/textfield.swf" background="false" css="font-size:14px; color:#FFFFFF;font-family:微软雅黑, Arial, Helvetica, sans-serif;"/>
+
+	<layer name="author" keep="true" align="lefttop" style="textfield" x="25" y="20" html="" css="font-size:20px; color:#FFFFFF; font-family:微软雅黑;" onloaded="calc(show_fsbutton,device.mobile == true);if(show_fsbutton,set(layer[author].css,font-size:15px; color:#FFFFFF;  font-family:微软雅黑;);set(layer[author].x,10);set(layer[author].y,10););" />
+	
+	<action name="swapmaps">
+	set(nowopen,get(layer['mapsonoff'].onoroff)); if(nowopen EQ 1, set(layer['mapsonoff'].onoroff,0); set(offset,0);sub(offset,get(layer[mapcontainer].width)); tween(layer[mapcontainer].x,get(offset)); copy(layer['mapsonoff'].url,layer['mapsonoff'].picoff); , set(layer['mapsonoff'].onoroff,1); tween(layer[mapcontainer].x,0); copy(layer['mapsonoff'].url,layer['mapsonoff'].picon); );
+	</action>
+	<action name="resizemap">
+	calc(show_fsbutton,device.mobile == true);
+	if(show_fsbutton,
+		set(layer[mapcontainer].width,0);
+		set(layer[mapcontainer].height,0);
+		set(layer[sandbox].width,-4);
+		set(layer[sandbox].height,-4);
+		set(layer[mapsonoff].x,0);
+	);
+
+	</action>
+	<layer name="mapcontainer" keep="true" type="container" bgcolor="0x000000" bgalpha="0.3" align="righttop" x="0" y="0" width="8" height="8" onloaded="resizemap();">
+		<layer name="mapsonoff" visible="True" keep="true" align="righttop" width="24" height="79" url="skin/r.png" x="8" y="0" picon="skin/r.png" picoff="skin/l.png" onoroff="1" onclick="swapmaps();"/>
+        <layer name="sandbox" width="" height="" url="" align="center" handcursor="false" scalechildren="true">
+            <layer name="radarmask" type="container" align="lefttop" width="100%" height="100%" maskchildren="true">
+                <layer name="radar" visible="false"
+                	   url="%SWFPATH%/plugins/radar.swf" alturl="%SWFPATH%/plugins/radar.js"
+				       align="lefttop" edge="center" zorder="0"
+				       scale="0.5"
+				       fillcolor="0xFFFFFF" fillalpha="0.8"
+				       linecolor="0xFF0000" linewidth="0" linealpha="0.5"
+				       headingoffset="0"
+				       />
+                                <layer name="activespot" url="skin/vtourskin_mapspotactive.png" scale="0.4" oy="-17" align="lefttop" edge="center" zorder="3" visible="false" />
+            </layer>
+        </layer>
+    </layer>
+    <style name="spot" url="skin/vtourskin_mapspot.png" scale="0.4" oy="-17" align="lefttop" edge="center" zorder="2" onclick="set(spotid,get(id));txtadd(scenename,'scene_',get(spotid)); loadscene(get(scenename),null,MERGE,BLEND(0.8)); activatespot(90,get(name));" />  
+    <action name="activatespot">
+    	for(set(i,0),i LT scene.count,inc(i), 
+		    txtadd(spotname,'sandspot',get(scene[get(i)].id));  
+		    set(layer[get(spotname)].visible, true);  
+		    );  
+
+	    def(spotidnow,string,%2); 
+	    copy(layer[radar].x, layer[get(spotidnow)].x);  
+	    copy(layer[radar].y, layer[get(spotidnow)].y);
+	    set(layer[get(spotidnow)].visible, false);
+	    copy(layer[activespot].x, layer[get(spotidnow)].x);  
+	    copy(layer[activespot].y, layer[get(spotidnow)].y);  
+	    set(layer[activespot].visible, true); 
+    </action>
+	<action name="do_crop_animation">
+	registerattribute(xframes, calc((imagewidth / %1) BOR 0)); registerattribute(yframes, calc((imageheight / %2) BOR 0)); registerattribute(frames, calc(xframes * yframes)); registerattribute(frame, 0); set(crop, '0|0|%1|%2'); setinterval(calc('crop_anim_' + name), calc(1.0 / %3), if(loaded, inc(frame); if(frame GE frames, if(onlastframe !== null, onlastframe() ); set(frame,0); ); mod(xpos, frame, xframes); div(ypos, frame, xframes); Math.floor(ypos); mul(xpos, %1); mul(ypos, %2); calc(crop, xpos + '|' + ypos + '|%1|%2'); , clearinterval(calc('crop_anim_' + name)); ); );
+	</action>
+
+	<textstyle name="STYLE12" font="微软雅黑" fontsize.no-mobile="18" fontsize.mobile="18" bold="false" background="true" backgroundcolor="0x333333" backgroundalpha="0.8" border="false" textcolor="0xFFFFFF"  padding="6 12" roundedge="5" origin="cursor" edge="bottom" textalign="none" xoffset="0" yoffset.no-touch="-5" yoffset.touch="-40"/>
+
+	<scene name="scene_2074632" title="玄关" id="2074632" thumburl="../20171202113639_5a221fc771e88.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074632)" >
+		<hotspot name="hotspot1548032" id="1548032" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="8.10322" ath="-83.3636" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548032"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="8.10322"  align="bottom" edge="bottom"  ath="-83.3636" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548032].padding,'2 5');set(hotspot[hotspotname1548032].atv,'5.10322');set(hotspot[hotspotname1548032].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1548036" id="1548036" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="20.6464" ath="-95.8863" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548036"  style="textfield" css="color:#dddddd; font-size:14px; " html="客厅" atv="20.6464"  align="bottom" edge="bottom"  ath="-95.8863" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548036].padding,'2 5');set(hotspot[hotspotname1548036].atv,'17.6464');set(hotspot[hotspotname1548036].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1548040" id="1548040" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="18.8385" ath="-68.4348" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073875,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548040"  style="textfield" css="color:#dddddd; font-size:14px; " html="餐厅" atv="18.8385"  align="bottom" edge="bottom"  ath="-68.4348" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073875,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548040].padding,'2 5');set(hotspot[hotspotname1548040].atv,'15.8385');set(hotspot[hotspotname1548040].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1548950" id="1548950" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="51.002" ath="-177.265" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074580,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548950"  style="textfield" css="color:#dddddd; font-size:14px; " html="琴房" atv="51.002"  align="bottom" edge="bottom"  ath="-177.265" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074580,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548950].padding,'2 5');set(hotspot[hotspotname1548950].atv,'48.002');set(hotspot[hotspotname1548950].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-90.925382253455" vlookat="0.096938208155111" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202113639_5a221fc771e88.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202113639_5a221fc771e88.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202113639_5a221fc771e88.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202113639_5a221fc771e88.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202113639_5a221fc771e88.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074580" title="琴房" id="2074580" thumburl="../20171202113311_5a221ef812c65.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074580)" >
+		<hotspot name="hotspot1548914" id="1548914" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="36.3595" ath="-100.803" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074632,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548914"  style="textfield" css="color:#dddddd; font-size:14px; " html="玄关" atv="36.3595"  align="bottom" edge="bottom"  ath="-100.803" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074632,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548914].padding,'2 5');set(hotspot[hotspotname1548914].atv,'33.3595');set(hotspot[hotspotname1548914].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="174.53453219704" vlookat="1.8327198858789" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202113311_5a221ef812c65.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202113311_5a221ef812c65.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202113311_5a221ef812c65.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202113311_5a221ef812c65.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202113311_5a221ef812c65.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074439" title="客厅" id="2074439" thumburl="../20171202112338_5a221cba44617.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074439)" >
+		<hotspot name="hotspot1548052" id="1548052" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="32.5395" ath="135.038" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074352,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548052"  style="textfield" css="color:#dddddd; font-size:14px; " html="景观阳台" atv="32.5395"  align="bottom" edge="bottom"  ath="135.038" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074352,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548052].padding,'2 5');set(hotspot[hotspotname1548052].atv,'29.5395');set(hotspot[hotspotname1548052].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1548966" id="1548966" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="11.3915" ath="-49.1228" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073875,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548966"  style="textfield" css="color:#dddddd; font-size:14px; " html="餐厅" atv="11.3915"  align="bottom" edge="bottom"  ath="-49.1228" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073875,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548966].padding,'2 5');set(hotspot[hotspotname1548966].atv,'8.3915');set(hotspot[hotspotname1548966].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1548974" id="1548974" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="23.5185" ath="-58.3848" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548974"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="23.5185"  align="bottom" edge="bottom"  ath="-58.3848" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548974].padding,'2 5');set(hotspot[hotspotname1548974].atv,'20.5185');set(hotspot[hotspotname1548974].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1548980" id="1548980" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="21.0971" ath="-26.7092" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074632,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548980"  style="textfield" css="color:#dddddd; font-size:14px; " html="玄关" atv="21.0971"  align="bottom" edge="bottom"  ath="-26.7092" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074632,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548980].padding,'2 5');set(hotspot[hotspotname1548980].atv,'18.0971');set(hotspot[hotspotname1548980].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-141.65576298197" vlookat="-0.66505551506804" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202112338_5a221cba44617.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202112338_5a221cba44617.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202112338_5a221cba44617.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202112338_5a221cba44617.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202112338_5a221cba44617.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073875" title="餐厅" id="2073875" thumburl="../20171202103929_5a2212616c58d.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073875)" >
+		<hotspot name="hotspot1549221" id="1549221" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="26.046" ath="70.4503" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549221"  style="textfield" css="color:#dddddd; font-size:14px; " html="客厅" atv="26.046"  align="bottom" edge="bottom"  ath="70.4503" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549221].padding,'2 5');set(hotspot[hotspotname1549221].atv,'23.046');set(hotspot[hotspotname1549221].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549230" id="1549230" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="30.9553" ath="38.7237" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074632,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549230"  style="textfield" css="color:#dddddd; font-size:14px; " html="玄关" atv="30.9553"  align="bottom" edge="bottom"  ath="38.7237" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074632,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549230].padding,'2 5');set(hotspot[hotspotname1549230].atv,'27.9553');set(hotspot[hotspotname1549230].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549241" id="1549241" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="29.6925" ath="120.998" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549241"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="29.6925"  align="bottom" edge="bottom"  ath="120.998" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549241].padding,'2 5');set(hotspot[hotspotname1549241].atv,'26.6925');set(hotspot[hotspotname1549241].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549245" id="1549245" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="17.7582" ath="-95.4211" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073876,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549245"  style="textfield" css="color:#dddddd; font-size:14px; " html="厨房" atv="17.7582"  align="bottom" edge="bottom"  ath="-95.4211" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073876,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549245].padding,'2 5');set(hotspot[hotspotname1549245].atv,'14.7582');set(hotspot[hotspotname1549245].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-123.67574555311" vlookat="7.7815342776477" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202103929_5a2212616c58d.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202103929_5a2212616c58d.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202103929_5a2212616c58d.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202103929_5a2212616c58d.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202103929_5a2212616c58d.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073876" title="厨房" id="2073876" thumburl="../20171202103944_5a221270b8ee4.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073876)" >
+		<hotspot name="hotspot1549252" id="1549252" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="0.555837" ath="100.736" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073875,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549252"  style="textfield" css="color:#dddddd; font-size:14px; " html="餐厅" atv="0.555837"  align="bottom" edge="bottom"  ath="100.736" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073875,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549252].padding,'2 5');set(hotspot[hotspotname1549252].atv,'-2.444163');set(hotspot[hotspotname1549252].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="5.9031810067548" vlookat="0.0000015918099685042" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202103944_5a221270b8ee4.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202103944_5a221270b8ee4.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202103944_5a221270b8ee4.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202103944_5a221270b8ee4.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202103944_5a221270b8ee4.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074352" title="景观阳台" id="2074352" thumburl="../20171202111815_5a221b77b726a.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074352)" >
+		<hotspot name="hotspot1548986" id="1548986" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="38.2453" ath="168.574" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548986"  style="textfield" css="color:#dddddd; font-size:14px; " html="客厅" atv="38.2453"  align="bottom" edge="bottom"  ath="168.574" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548986].padding,'2 5');set(hotspot[hotspotname1548986].atv,'35.2453');set(hotspot[hotspotname1548986].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1548993" id="1548993" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="32.8025" ath="92.2726" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074611,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1548993"  style="textfield" css="color:#dddddd; font-size:14px; " html="生活阳台" atv="32.8025"  align="bottom" edge="bottom"  ath="92.2726" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074611,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1548993].padding,'2 5');set(hotspot[hotspotname1548993].atv,'29.8025');set(hotspot[hotspotname1548993].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-100.88485134139" vlookat="3.5453806779768" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202111815_5a221b77b726a.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202111815_5a221b77b726a.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202111815_5a221b77b726a.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202111815_5a221b77b726a.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202111815_5a221b77b726a.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073881" title="公卫" id="2073881" thumburl="../20171202104113_5a2212c97971d.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073881)" >
+		<hotspot name="hotspot1549106" id="1549106" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="33.8552" ath="100.234" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073882,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549106"  style="textfield" css="color:#dddddd; font-size:14px; " html="公卫干间" atv="33.8552"  align="bottom" edge="bottom"  ath="100.234" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073882,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549106].padding,'2 5');set(hotspot[hotspotname1549106].atv,'30.8552');set(hotspot[hotspotname1549106].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="0" vlookat="0" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202104113_5a2212c97971d.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202104113_5a2212c97971d.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202104113_5a2212c97971d.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202104113_5a2212c97971d.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202104113_5a2212c97971d.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073882" title="公卫干间" id="2073882" thumburl="../20171202104138_5a2212e2a392a.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073882)" >
+		<hotspot name="hotspot1549093" id="1549093" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="34.0591" ath="41.3863" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073881,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549093"  style="textfield" css="color:#dddddd; font-size:14px; " html="公卫" atv="34.0591"  align="bottom" edge="bottom"  ath="41.3863" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073881,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549093].padding,'2 5');set(hotspot[hotspotname1549093].atv,'31.0591');set(hotspot[hotspotname1549093].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549124" id="1549124" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="13.7427" ath="-133.482" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549124"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="13.7427"  align="bottom" edge="bottom"  ath="-133.482" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549124].padding,'2 5');set(hotspot[hotspotname1549124].atv,'10.7427');set(hotspot[hotspotname1549124].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="0" vlookat="0" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202104138_5a2212e2a392a.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202104138_5a2212e2a392a.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202104138_5a2212e2a392a.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202104138_5a2212e2a392a.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202104138_5a2212e2a392a.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074611" title="生活阳台" id="2074611" thumburl="../20171202113456_5a221f6106114.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074611)" >
+		<hotspot name="hotspot1549026" id="1549026" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="39.865" ath="-131.833" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073878,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549026"  style="textfield" css="color:#dddddd; font-size:14px; " html="儿童房1" atv="39.865"  align="bottom" edge="bottom"  ath="-131.833" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073878,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549026].padding,'2 5');set(hotspot[hotspotname1549026].atv,'36.865');set(hotspot[hotspotname1549026].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549036" id="1549036" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="32.4677" ath="-13.565" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074352,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549036"  style="textfield" css="color:#dddddd; font-size:14px; " html="景观阳台" atv="32.4677"  align="bottom" edge="bottom"  ath="-13.565" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074352,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549036].padding,'2 5');set(hotspot[hotspotname1549036].atv,'29.4677');set(hotspot[hotspotname1549036].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="136.31517418413" vlookat="2.6219879683985" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202113456_5a221f6106114.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202113456_5a221f6106114.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202113456_5a221f6106114.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202113456_5a221f6106114.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202113456_5a221f6106114.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073883" title="过道" id="2073883" thumburl="../20171202104200_5a2212f8d9725.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073883)" >
+		<hotspot name="hotspot1549056" id="1549056" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="40.5436" ath="-23.0006" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074747,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549056"  style="textfield" css="color:#dddddd; font-size:14px; " html="主卧" atv="40.5436"  align="bottom" edge="bottom"  ath="-23.0006" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074747,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549056].padding,'2 5');set(hotspot[hotspotname1549056].atv,'37.5436');set(hotspot[hotspotname1549056].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549065" id="1549065" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="44.3426" ath="24.5009" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074659,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549065"  style="textfield" css="color:#dddddd; font-size:14px; " html="长辈房" atv="44.3426"  align="bottom" edge="bottom"  ath="24.5009" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074659,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549065].padding,'2 5');set(hotspot[hotspotname1549065].atv,'41.3426');set(hotspot[hotspotname1549065].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549084" id="1549084" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="26.3531" ath="150.436" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073882,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549084"  style="textfield" css="color:#dddddd; font-size:14px; " html="公卫干间" atv="26.3531"  align="bottom" edge="bottom"  ath="150.436" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073882,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549084].padding,'2 5');set(hotspot[hotspotname1549084].atv,'23.3531');set(hotspot[hotspotname1549084].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549140" id="1549140" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="8.96498" ath="171.288" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073880,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549140"  style="textfield" css="color:#dddddd; font-size:14px; " html="儿童房2过道" atv="8.96498"  align="bottom" edge="bottom"  ath="171.288" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073880,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549140].padding,'2 5');set(hotspot[hotspotname1549140].atv,'5.96498');set(hotspot[hotspotname1549140].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549173" id="1549173" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="12.9395" ath="-158.461" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073878,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549173"  style="textfield" css="color:#dddddd; font-size:14px; " html="儿童房1" atv="12.9395"  align="bottom" edge="bottom"  ath="-158.461" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073878,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549173].padding,'2 5');set(hotspot[hotspotname1549173].atv,'9.9395');set(hotspot[hotspotname1549173].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549202" id="1549202" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="6.34069" ath="-170.843" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549202"  style="textfield" css="color:#dddddd; font-size:14px; " html="客厅" atv="6.34069"  align="bottom" edge="bottom"  ath="-170.843" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074439,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549202].padding,'2 5');set(hotspot[hotspotname1549202].atv,'3.34069');set(hotspot[hotspotname1549202].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="8.5631261933796" vlookat="3.3909129102798" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202104200_5a2212f8d9725.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202104200_5a2212f8d9725.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202104200_5a2212f8d9725.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202104200_5a2212f8d9725.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202104200_5a2212f8d9725.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073880" title="儿童房2过道" id="2073880" thumburl="../20171202104048_5a2212b09b88b.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073880)" >
+		<hotspot name="hotspot1549164" id="1549164" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="10.6742" ath="22.5449" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549164"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="10.6742"  align="bottom" edge="bottom"  ath="22.5449" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549164].padding,'2 5');set(hotspot[hotspotname1549164].atv,'7.6742');set(hotspot[hotspotname1549164].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="261.33987829711" vlookat="1.5700671503588" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202104048_5a2212b09b88b.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202104048_5a2212b09b88b.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202104048_5a2212b09b88b.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202104048_5a2212b09b88b.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202104048_5a2212b09b88b.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073878" title="儿童房1" id="2073878" thumburl="../20171202104011_5a22128b38c29.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073878)" >
+		<hotspot name="hotspot1549045" id="1549045" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="18.7641" ath="-41.4749" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549045"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="18.7641"  align="bottom" edge="bottom"  ath="-41.4749" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549045].padding,'2 5');set(hotspot[hotspotname1549045].atv,'15.7641');set(hotspot[hotspotname1549045].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549187" id="1549187" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="12.8518" ath="159.813" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074611,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549187"  style="textfield" css="color:#dddddd; font-size:14px; " html="生活阳台" atv="12.8518"  align="bottom" edge="bottom"  ath="159.813" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074611,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549187].padding,'2 5');set(hotspot[hotspotname1549187].atv,'9.8518');set(hotspot[hotspotname1549187].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-133.4518351328" vlookat="12.61173759217" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202104011_5a22128b38c29.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202104011_5a22128b38c29.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202104011_5a22128b38c29.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202104011_5a22128b38c29.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202104011_5a22128b38c29.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2073877" title="次卫" id="2073877" thumburl="../20171202103958_5a22127e8daff.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2073877)" >
+		
+		<view hlookat="-94.652703389178" vlookat="6.9908289264886" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202103958_5a22127e8daff.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202103958_5a22127e8daff.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202103958_5a22127e8daff.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202103958_5a22127e8daff.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202103958_5a22127e8daff.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074675" title="长辈房过道" id="2074675" thumburl="../20171202113934_5a222076bc3e7.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074675)" >
+		<hotspot name="hotspot1549294" id="1549294" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="13.8511" ath="91.6267" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549294"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="13.8511"  align="bottom" edge="bottom"  ath="91.6267" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549294].padding,'2 5');set(hotspot[hotspotname1549294].atv,'10.8511');set(hotspot[hotspotname1549294].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-269.38311769833" vlookat="12.023972909968" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202113934_5a222076bc3e7.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202113934_5a222076bc3e7.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202113934_5a222076bc3e7.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202113934_5a222076bc3e7.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202113934_5a222076bc3e7.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074659" title="长辈房" id="2074659" thumburl="../20171202113813_5a222025eb811.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074659)" >
+		<hotspot name="hotspot1549286" id="1549286" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="11.7452" ath="152.637" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074675,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549286"  style="textfield" css="color:#dddddd; font-size:14px; " html="长辈房过道" atv="11.7452"  align="bottom" edge="bottom"  ath="152.637" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074675,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549286].padding,'2 5');set(hotspot[hotspotname1549286].atv,'8.7452');set(hotspot[hotspotname1549286].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="228.60212789874" vlookat="16.212543962338" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202113813_5a222025eb811.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202113813_5a222025eb811.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202113813_5a222025eb811.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202113813_5a222025eb811.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202113813_5a222025eb811.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074747" title="主卧" id="2074747" thumburl="../20171202114251_5a22213b3302d.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074747)" >
+		<hotspot name="hotspot1549265" id="1549265" url="http://res1.justeasy.cn/vr/hotspot/spot1_gif.png" atv="19.6308" ath="44.1859" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549265"  style="textfield" css="color:#dddddd; font-size:14px; " html="过道" atv="19.6308"  align="bottom" edge="bottom"  ath="44.1859" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2073883,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549265].padding,'2 5');set(hotspot[hotspotname1549265].atv,'16.6308');set(hotspot[hotspotname1549265].css,color:#dddddd; font-size:12px; ); );" />
+		<hotspot name="hotspot1549274" id="1549274" url="http://res1.justeasy.cn/vr/hotspot/spot2_gif.png" atv="10.645" ath="8.04525" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074716,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549274"  style="textfield" css="color:#dddddd; font-size:14px; " html="主卫" atv="10.645"  align="bottom" edge="bottom"  ath="8.04525" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074716,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549274].padding,'2 5');set(hotspot[hotspotname1549274].atv,'7.645');set(hotspot[hotspotname1549274].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-139.33206267447" vlookat="15.266147656172" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202114251_5a22213b3302d.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202114251_5a22213b3302d.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202114251_5a22213b3302d.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202114251_5a22213b3302d.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202114251_5a22213b3302d.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene><scene name="scene_2074716" title="主卫" id="2074716" thumburl="../20171202114114_5a2220da20a88.tiles/thumb.jpg" lat="" lng="" heading="" onstart="activatespot(90,sandspot2074716)" >
+		<hotspot name="hotspot1549277" id="1549277" url="http://res1.justeasy.cn/vr/hotspot/spot3_gif.png" atv="12.2015" ath="123.096" onloaded="do_crop_animation(128,128, 40);" scale="0.5" onclick="loadscene(scene_2074747,null,MERGE,BLEND(0.8))" />
+		<hotspot name="hotspotname1549277"  style="textfield" css="color:#dddddd; font-size:14px; " html="主卧" atv="12.2015"  align="bottom" edge="bottom"  ath="123.096" background="true" backgroundcolor="0x333333" backgroundalpha="0.7" padding="5 8" roundedge="5" onclick="loadscene(scene_2074747,null,MERGE,BLEND(0.8))" onloaded="if(device.mobile, set(hotspot[hotspotname1549277].padding,'2 5');set(hotspot[hotspotname1549277].atv,'9.2015');set(hotspot[hotspotname1549277].css,color:#dddddd; font-size:12px; ); );" />
+		
+		<view hlookat="-82.477105599743" vlookat="3.3779082320343" fovtype="MFOV" fov="100" maxpixelzoom="2.0" fovmin="60" fovmax="120" limitview="auto" />
+		<preview url="../20171202114114_5a2220da20a88.tiles/preview.jpg" />
+		<image type="CUBE" multires="true" tilesize="1024"  if="!webvr.isenabled">
+						<level tiledimagewidth="4352" tiledimageheight="4352">
+				<cube url="../20171202114114_5a2220da20a88.tiles/%s/l3_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="2176" tiledimageheight="2176">
+				<cube url="../20171202114114_5a2220da20a88.tiles/%s/l2_%s_%v_%h.jpg" />
+								
+			</level><level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="../20171202114114_5a2220da20a88.tiles/%s/l1_%s_%v_%h.jpg" />
+								
+			</level>		</image>
+		<image if="webvr.isenabled">
+			<cube url="../20171202114114_5a2220da20a88.tiles/vr/pano_%s.jpg" />
+		</image>
+	</scene>
+</krpano>

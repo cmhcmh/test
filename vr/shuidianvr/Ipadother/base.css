@@ -1,0 +1,29 @@
+@-ms-viewport{width:device-width;}
+@media only screen and (min-device-width:820px){
+html{overflow:hidden;height:100%;}
+}
+body{height:100%; overflow:hidden; margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#FFFFFF; background-color:#000000;}a:link{text-decoration: none;color: #FFF;}
+a:visited{text-decoration: none;color: #FFF;}
+a:hover{text-decoration: none;color: #FFF;}
+ul{margin: 0px;padding: 0px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;border-top-style: none;border-right-style: none;border-bottom-style: none;border-left-style: none;list-style-type: none;}
+#box{overflow: visible;position: absolute;z-index: 99;right: 10px;top: 50px;}
+#box ul li{height:38px;width:80px;margin-top: 5px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;color: #FFF;background-image: url(bg.png);line-height: 38px;text-align: center;font-size: 12px;font-weight: bold;padding-right: 8px;padding-left: 8px;overflow: hidden;}
+#box ul a .huang{color: #FF0;}
+#box ul a .ipad{background-image: none;margin-top: 10px;}
+#jx_box{display:none;position: absolute;z-index: 999;width:840px;height:500px;top:50%;left:45%;margin-left:-400px;color: #000;-moz-border-radius: 8px;-webkit-border-radius: 8px;-moz-box-shadow: 0px 0px 10px #000;-webkit-box-shadow: 0px 0px 10px #000;box-shadow: 0px 0px 10px #000;/* For IE 8 */ -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')"; /* For IE 5.5 - 7 */ filter:
+progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');margin-top: -280px;background: #fff;}
+#jx_box_content{margin-top: 10px;margin-right: 20px;margin-bottom: 10px;margin-left: 20px;}
+#jx_box_close{background-image:url(close.png);background-size:53px 53px;position: absolute;right:0px;height:53px;width:53px;cursor:pointer;top: 0px;z-index: 9999;}
+#wrapper{position:relative;z-index:9999;overflow:auto;height: 480px;margin-top: 10px;width: 100%;}
+#productCenter{position:fixed; left:0px; bottom:120px; height:30px; width:50px; color:#fff; font-size:12px; text-align:center; line-height:42px; padding-top:12px; background-position:center top; box-shadow:rgba(0,0,0,0.60) 1px 1px 6px 0px; background-image:url(productIcon.png); background-repeat:no-repeat; background-size:45px; background-position:1px -7px; background-color:rgba(0,0,0,0.80); transition:all 0.3s; -webkit-transition:all 0.3s; z-index: 9999999999999999999999;}
+
+/* 产品菜单样式*/
+.top_bar{position: fixed; z-index: 900; bottom: 0; left: 0; right: 0; margin: auto; font-family: Helvetica, Tahoma, Arial, Microsoft YaHei, sans-serif;}
+.top_menu{display:-webkit-box; cursor:pointer;border-top: 1px solid #3D3D46;display: block;width: 100%;background: rgba(255, 255, 255, 0.7);height: 40px;display: -webkit-box;display: box;margin:0;padding:0;-webkit-box-orient: horizontal;background: -webkit-gradient(linear, 0 0, 0 100%, from(#697077), to(#3F434E), color-stop(60%, #464A53));box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;}
+.top_bar .top_menu>li{-webkit-box-flex:1; background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.1)), color-stop(50%, rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.5))), -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0.1)), color-stop(50%, rgba(255, 255, 255, 0.15)), to(rgba(255, 255, 255, 0.15))); ; -webkit-background-size:1px 100%, 1px 100%; background-size:1px 100%, 1px 100%; background-position: 1px center, 2px center; background-repeat: no-repeat; position:relative; text-align:center; width:33%;}
+.top_menu>li:first-child{background:none;}
+.top_bar .top_menu>li>a{line-height:40px; display:block; text-align:center; color:#d5d5d5; text-decoration:none; text-shadow: 0 1px rgba(0, 0, 0, 0.6); -webkit-box-flex:1;}
+.top_bar .top_menu li a label{padding:0; font-size:14px; overflow:hidden;}
+.top_bar .top_menu>li>a img{display: inline-block; margin-top:-2px; color: #fff; line-height: 40px; vertical-align:middle;}
+.top_bar li:first-child a{display: block;}
+.top_bar .top_menu>li>a:hover, .top_bar .top_menu>li>a:active{background-color:#333;}

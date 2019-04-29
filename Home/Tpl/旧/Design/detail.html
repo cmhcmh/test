@@ -1,0 +1,59 @@
+<include file='Public:pageHeader'/>
+<style>
+.work_list .pich
+{
+    height: 192px;
+}
+</style>
+   <div class="vipbox">
+        <div class="pic"><img src="{$article_detail.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+        <h3>{$article_detail.title}</h3>
+        <p><em>{$grade[$article_detail['grade']]['com_name']}</em></p>
+        <a href="javascript:design_order('{$article_detail.title}');">预约TA</a>
+    </div>
+    <div class="main layout clearfix">
+        <div class="leftall">
+           <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_less_info.cat_name}</a><em>&gt;</em><san>{$article_detail.title}</san></p></div>
+            <div class="des_box clearfix">
+                <div class="pic"><img style="width: 100%" src="{$article_detail.original_img|returnhead1=###}"  onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                <div class="word">
+                    <h3>{$article_detail.title}<em>预约咨询：{$article_detail.com_number}人</em></h3>
+                    <h4>{$grade[$article_detail['grade']]['com_name']}</h4>
+                    <p>{$article_detail.short}</p>
+                    <dl class="clearfix">
+                        <dt><span><em>所属公司：</em>{$article_detail['c_name']}</span></dt>
+                        <dt><span><em>从业经验：</em>{$obtain[$article_detail['obtain']]['com_name']}</span></dt>
+                        <dt><span><em>擅长风格：</em><foreach name="one_special_style_data" item="list">{$list.com_name}&nbsp;</foreach></span></dt>
+                        <dt><span><em>案例作品：</em>{$count}套 </span></dt>
+                    </dl>
+                    <span>
+                        <em>荣誉奖项：</em> {$article_detail.content}
+                    </span>
+                </div>
+            </div>
+            <div class="title">代表作品</div>
+            <ul class="work_list clearfix">
+                <foreach name="case" item="list">
+                <li>
+                    <div class="pich"style="height:162px;"><a href="{:U('Case/detail',array('id'=>$list['article_id']))}"><img src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+                    <div class="box">
+                        <h3>{$list.title}</h3>
+                        <p>{$layout[$list['layout']]['com_name']}{$acreage[$list['acreage']]['com_name']}{$style[$list['style']]['com_name']}</p>
+                        <a href="{:U('Case/detail',array('id'=>$list['article_id']))}" class="more">详情</a>
+                    </div>
+                </li>
+                  </foreach>
+               
+            </ul>
+            <div class="page page2">
+                <div class="dis">
+                   {$page}
+                </div>
+            </div>
+            
+        </div>
+         <include file="Public:pcright" thumb_width='54' thumb_height='41'/>
+    </div>
+<include file='Public:pageFooter'/>
+</body>
+</html>

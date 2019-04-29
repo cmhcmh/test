@@ -1,0 +1,180 @@
+<include file='Public:pageHeader'/>
+    <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main layout">
+       <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Design/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Design/index')}">{$cat_less_info.cat_name}</a></p></div>
+        <div class="choose_box">
+            <dl class="clearfix">
+                <dt>擅长风格</dt>
+                <dd class="clearfix">
+                    <a  href="{:U('Design/index',array('special_style_id'=>0,'grade_id'=>$grade_id,'obtain_id'=>$obtain_id))}" <if condition="$special_style_id==0">class="on"</if>>全部</a>
+                    <foreach name="special_style" item="list">
+                    <a href="{:U('Design/index',array('special_style_id'=>$list['com_id'],'grade_id'=>$grade_id,'obtain_id'=>$obtain_id))}" <if condition="$special_style_id==$list['com_id']">class="on"</if>>{$list.com_name}</a>
+                     </foreach>
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>设计级别</dt>
+                <dd class="clearfix">
+                    <a  href="{:U('Design/index',array('special_style_id'=>$special_style_id,'grade_id'=>0,'obtain_id'=>$obtain_id))}" <if condition="$grade_id==0">class="on"</if>>全部</a>
+                    <foreach name="grade" item="list">
+                        <a href="{:U('Design/index',array('grade_id'=>$list['com_id'],'special_style_id'=>$special_style_id,'obtain_id'=>$obtain_id))}" <if condition="$grade_id==$list['com_id']">class="on"</if>>{$list.com_name}</a>
+                     </foreach>
+                </dd>
+            </dl>
+
+              <dl class="clearfix">
+                <dt>从业经验</dt>
+                <dd class="clearfix">
+                    <a  href="{:U('Design/index',array('special_style_id'=>$special_style_id,'obtain_id'=>0,'grade_id'=>$grade_id))}" <if condition="$obtain_id==0">class="on"</if>>全部</a>
+                    <foreach name="obtain" item="list">
+                        <a href="{:U('Design/index',array('obtain_id'=>$list['com_id'],'special_style_id'=>$special_style_id,'grade_id'=>$grade_id))}" <if condition="$obtain_id==$list['com_id']">class="on"</if>>{$list.com_name}</a>
+                     </foreach>
+                </dd>
+            </dl>
+
+        </div>
+        <if condition="$company_id==0">
+        <form class="ssgg clearfix"  action="{:U('Design/index')}" method="POST">
+            <span>所属公司：</span>
+            <div data-toggle="distpicker" class="ld">
+                <select class="form-control"  data-province="" id="province_design" name="province_design">
+                    <option value="">省/市</option>
+                                  <foreach name="provincelist" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$province_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                </select>
+                <select class="form-control"  id="city_design" name="city_design">
+                 <option value="0" data-index="0">市/区</option>
+                        <foreach name="city_list" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$city_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                         </select>
+               
+                <select class="form-control"  id="company_design" name="company_design">
+                    
+                    <option value="0" data-index="0">选择分公司</option>
+                           <foreach name="company_list" item="list" key='k'>
+                                <option value="{$list.c_id}" <if condition="$c_id==$list['c_id']">selected = "selected"</if>>{$list.c_name}</option>
+                        </foreach>
+                </select>
+            </div>
+            <input type="submit" style="font-size:0px" class="button" />
+        </form>
+        </if>
+        <script>
+                $("#province_design").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_design").html(option);
+                        $("#company_design").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_design").append(option);
+                        }
+                    }
+                    
+                });
+            });
+                 $("#city_design").change(function(){
+                var city_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_company',
+                    Type:"POST",
+                    data:"city_id="+city_id,
+                    dataType:"json",
+                    success:function(data){
+                        var company = data.company;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        //$("#company_design").html(option);
+                       // $("#company_design").html(option1);
+                        for(var i in company){
+                            var option=$("<option></option>");
+                            $(option).val(company[i]['c_id']);
+                            $(option).html(company[i]['c_name']);
+                            $("#company_design").append(option);
+                        }
+                    }
+                    
+                });
+            });
+            </script>
+        <ul class="deser clearfix">
+        <if condition="$company_id==0">
+		<foreach name="design2" item="list" key='k'>
+            <li <if condition="$k%4 eq 3">class="nomar"</if>>
+                <div class="pic"><img src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                <div class="box">
+                    <h3>{$list.title}<em>{$grade[$list['grade']]['com_name']}</em></h3>
+                    <h4><em>从业经验:<b>{:str_replace('以上', '', $obtain[$list['obtain']]['com_name'])}</b></em>所属公司:<b>{$list.c_name}</b></h4>
+                    <p>{$list.short}</p>
+                </div>
+                <div class="out">
+                    <div class="sbody clearfix">
+                        <div class="spic"><img src="{$list.original_img|returnhead1=###}" style="width: 105px;" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                        <h3><em>{$list.title}</em>{$grade[$list['grade']]['com_name']}</h3>
+                    </div>
+                    <if condition="$list['case_detail']['article_id']!=''">
+                    <div class="opic"><a href="{:U('Case/detail',array('id'=>$list['case_detail']['article_id']))}"><img src="{$list['case_detail']['original_img']|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"><!--<p>{$style[$list['case_detail']['style']]['com_name']}{$layout[$list['case_detail']['layout']]['com_name']}{$acreage[$list['case_detail']['acreage']]['com_name']}</p>-->
+                    <p>{$list['case_detail']['title']}</p>
+                    </a></div>
+                    </if>
+                    <a href="{:U('Design/detail',array('id'=>$list['article_id']))}" class="look">查看详情</a>
+                </div>
+            </li>
+        </foreach>
+		<else/>
+		 <foreach name="design" item="list" key='k'>
+            <li <if condition="$k%4 eq 3">class="nomar"</if>>
+                <div class="pic"><img src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                <div class="box">
+                    <h3>{$list.title}<em>{$grade[$list['grade']]['com_name']}</em></h3>
+                    <h4><em>从业经验:<b>{:str_replace('以上', '', $obtain[$list['obtain']]['com_name'])}</b></em>所属公司:<b>{$list.c_name}</b></h4>
+                    <p>{$list.short}</p>
+                </div>
+                <div class="out">
+                    <div class="sbody clearfix">
+                        <div class="spic"><img src="{$list.original_img|returnhead1=###}" style="width: 105px;" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                        <h3><em>{$list.title}</em>{$grade[$list['grade']]['com_name']}</h3>
+                    </div>
+					<if condition="$company_id!=0">
+                    <if condition="$list['case_detail']['article_id']!=''">
+                    <div class="opic"><a href="{:U('Case/detail',array('id'=>$list['case_detail']['article_id']))}"><img src="{$list['case_detail']['original_img']|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"><!--<p>{$style[$list['case_detail']['style']]['com_name']}{$layout[$list['case_detail']['layout']]['com_name']}{$acreage[$list['case_detail']['acreage']]['com_name']}</p>-->
+                    <p>{$list['case_detail']['title']}</p>
+                    </a></div>
+                    </if>
+					</if>
+                    <a href="{:U('Design/detail',array('id'=>$list['article_id']))}" class="look">查看详情</a>
+                </div>
+            </li>
+        </foreach>
+        </if>
+        </ul>
+        <div class="page">
+            <div class="dis">
+              {$page}
+            </div>
+        </div>
+        
+    </div>
+<include file='Public:pageFooter'/>
+</body>
+</html>

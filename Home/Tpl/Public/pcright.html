@@ -1,0 +1,309 @@
+ <div class="rightall rightall2">
+            <div class="bookbox">
+                <div class="hd">
+                    <ul class="clearfix">
+                        <li>免费报价服务</li>
+                        <li <if condition="$type==2">class="on"</if>>在线预约</li>
+                    </ul>
+                </div>
+                 <div class="bd">
+                        <form id="form1" method="post">
+                            <div data-toggle="distpicker" class="target clearfix">
+                                <select class="form-control fl" id="province"  name="province_id">
+                                <option value="">省/市</option>
+                                <foreach name="provincelist" item="list" key='k'>
+                                    <option value="{$list.a_id}">{$list.area_name}</option>
+                                </foreach>
+                                </select>
+                                <select class="form-control fr" id="city" name="city_id">
+                                    <option value="0" data-index="0">市/区</option>
+                                </select>
+                            </div>
+                            <input type="text" class="text" name="hourse" id="hourse" placeholder="请输入您的楼盘名称"  <if condition="$hourse!=''"> disabled="true" value="{$hourse}" style="color: #999;"</if>/>
+                            <if condition="$hourse!=''">        <input type="hidden"  name="hourse_new" value="{$hourse}"></if>
+                            <input type="hidden"  name="company_id" value="{$company_id}">
+                             <input type="hidden"  name="is_equ" value="1">
+                            <input type="hidden"  name="type" value="1">
+                            <input type="text" class="text" placeholder="请输入您的名字"  name="name" id="name"/>
+                            <input type="text" class="text" placeholder="请输入手机号码"   name="mobile" id="mobile"/>
+                            <div class="clearfix">
+                                <input type="text" class="text text2" placeholder="验证码"   name="verify" id="verify" />
+                                <div class="yzm"><img src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="imgverify"></div>
+                                <span><a href="javascript:void(0);" onclick="document.getElementById('imgverify').src+='?rand='+Math.random();">看不清，换一张</a></span>
+                            </div>
+                            <p><font color='red' size='-1' id='cmresult'></font></p>
+                            <input type="button" class="button" value="立即申请"  onclick="mySubmit('form1','{:U('/Contact/message')}','cmresult')"/>
+                            <!--<p>我们承诺：您所填写的信息将被严格保密，请放心填写!</p>-->
+                            <p>承诺：你所填写的信息被严格保密，请放心填写!</p>
+                        </form>
+
+                        <form id="form2" method="post">
+                            <div data-toggle="distpicker" class="target clearfix">
+                                <select class="form-control fl" id="province_2" name="province_id">
+                                    <option>省/市</option>
+                                <foreach name="provincelist" item="list" key='k'>
+                                    <option value="{$list.a_id}">{$list.area_name}</option>
+                                </foreach>
+                                </select>
+                                <select class="form-control fr" id="city_2" name="city_id">
+                                    <option value="0" data-index="0">市/区</option>
+                                </select>
+                            </div>
+                            <input type="text" class="text" placeholder="请输入设计师名称" name="design_name" id="design_name"  <if condition="$design_name!=''"> value="{$design_name}" style="color: #999;" disabled="true"</if> />
+                               <if condition="$design_name!=''">        <input type="hidden"  name="design_new" value="{$design_name}"></if>
+                             <input type="hidden"  name="company_id" value="{$company_id}">
+                              <input type="hidden"  name="is_equ" value="1">
+                            <input type="hidden"  name="type" value="2">
+                            <input type="text" class="text" placeholder="请输入您的楼盘名称"  name="hourse" id="s_hourse"/>
+                            <input type="text" class="text" placeholder="请输入您的名字" name="name" id="s_name" />
+                            <input type="text" class="text" placeholder="请输入手机号码" name="mobile" id="s_mobile" />
+                            <div class="clearfix">
+                                <input type="text" class="text text2" placeholder="验证码" name="verify" id="s_verify" />
+                                <div class="yzm"><img src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="s_imgverify"></div>
+                                <span><a href="javascript:void(0);" onclick="document.getElementById('s_imgverify').src+='?rand='+Math.random();">看不清，换一张</a></span>
+                            </div>
+                            <p><font color='red' size='-1' id='s_cmresult'></font></p>
+                            <input type="button" class="button" value="立即申请"  onclick="s_mySubmit('form2','{:U('/Contact/message')}','s_cmresult')"/>
+                            <p>承诺：你所填写的信息被严格保密，请放心填写!</p>
+                        </form>
+                        <script type="text/javascript">
+                /****提交表单************/
+                function mySubmit(theForm,url,result){
+                    var province_id=$('#province').val();
+                    var city_id=$('#city').val();
+                    var name=$('#name').val();
+                    var mobile=$('#mobile').val();
+                    var verify=$('#verify').val();
+                    var hourse=$('#hourse').val();
+
+                    if(province_id==''){
+
+                         layer.msg('请选择省份');
+                        return false;
+                    }
+                     if(city_id==0){
+
+                        layer.msg('请选择城市');
+                        return false;
+                    }
+                      if(hourse==''){
+
+                        layer.msg('请填写楼盘');
+                        return false;
+                    }
+                        if(name==''){
+                         layer.msg('请填写姓名');
+                        return false;
+                    }
+                        if(mobile==''){
+                         layer.msg('请填写手机');
+                        return false;
+                    }
+                   
+                       if(verify==''){
+
+                        layer.msg('请填写验证码');
+                        return false;
+                    }
+        
+                    //$('#form').submit();
+                    function default_callback(res){
+                        
+                        if(res.status=='1'){
+                            //document.getElementById(theForm).reset();
+
+                        layer.msg('留言提交成功');
+                            location.reload();
+                            document.getElementById(theForm).reset();
+
+
+                        }else{
+                            result.html(res.info);
+                        }
+                    }
+
+                    var callback = arguments[3] || default_callback;
+
+                    var result = $('#'+result);
+                    result.html('loading...');
+                    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+                    $.post(url,data,callback,'json');
+                    return false;
+                }
+
+            </script>
+
+            <script>
+                $("#province").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city").append(option);
+                        }
+                    }
+                    
+                });
+            });
+            </script>
+                        <script type="text/javascript">
+                /****提交表单2************/
+                function s_mySubmit(theForm,url,result){
+                    var province_id=$('#province_2').val();
+                    var city_id=$('#city_2').val();
+                    var name=$('#s_name').val();
+                    var mobile=$('#s_mobile').val();
+                    var verify=$('#s_verify').val();
+                    var hourse=$('#s_hourse').val();
+                    var design=$('#design_name').val();
+
+                    if(province_id==''){
+
+                         layer.msg('请选择省份');
+                        return false;
+                    }
+                     if(city_id==0){
+
+                        layer.msg('请选择城市');
+                        return false;
+                    }
+                        if(design==''){
+
+                        layer.msg('请填写设计师名称');
+                        return false;
+                    }
+                      if(hourse==''){
+
+                        layer.msg('请填写楼盘');
+                        return false;
+                    }
+                        if(name==''){
+                         layer.msg('请填写姓名');
+                        return false;
+                    }
+                        if(mobile==''){
+                         layer.msg('请填写手机');
+                        return false;
+                    }
+                   
+                       if(verify==''){
+
+                        layer.msg('请填写验证码');
+                        return false;
+                    }
+        
+                    //$('#form').submit();
+                    function default_callback(res){
+                        
+                        if(res.status=='1'){
+                            //document.getElementById(theForm).reset();
+
+                        layer.msg('留言提交成功');
+                            location.reload();
+                            document.getElementById(theForm).reset();
+
+
+                        }else{
+                            result.html(res.info);
+                        }
+                    }
+
+                    var callback = arguments[3] || default_callback;
+
+                    var result = $('#'+result);
+                    result.html('loading...');
+                    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+                    $.post(url,data,callback,'json');
+                    return false;
+                }
+
+            </script>
+
+            <script>
+                $("#province_2").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_2").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_2").append(option);
+                        }
+                    }
+                    
+                });
+            });
+            </script>
+                    </div>
+            </div>
+            <div class="hotcase">
+                <div class="hottit">热门案例</div>
+                <ul>
+                 <foreach name="rightcase" item="list" key='k'>
+                    <li><a href="{:U('Case/detail',array('id'=>$list['article_id']))}" class="clearfix">
+                        <div class="num num2">{$k+1}</div>
+                        <p>{$list.title}</p>
+                    </a></li>
+                 </foreach>
+                    
+                </ul>
+            </div>
+            <!-- <div class="ggpic pich"><a href="{$tuijian[1]['link']}"><img src="/{$tuijian[1]['original_img']}"></a></div> -->
+            <div class="ggpic pich"><img src="/{$tuijian[1]['original_img']}"></div>
+            <div class="hotlable">
+                <div class="hottit">热搜标签</div>
+                <ul class="clearfix">
+                 <foreach name="search_info" item="list" key='k'>
+                    <li><a href="javascript:void(0)" onclick="test('{$list}');">{$list}</a></li>
+                </foreach>
+                    <!--<li><a href="{:U('Index/search',array('keywords'=>$list))}">{$list}</a></li>-->
+                </ul>
+            </div>
+        </div>
+ <script>
+
+function test(key)
+{
+     $("#biaokeywords").val(key);    
+    document.getElementById("biaomyform").submit();
+   
+}
+</script>
+<form  name="biaomyform" id="biaomyform" method="post" action="{:U('Index/search')}">
+<input type="hidden" name="keywords" value="" id="biaokeywords"/>
+
+</form>
+
+

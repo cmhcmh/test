@@ -1,0 +1,64 @@
+<div class="Container_Left autoHeight current_click">
+	<ul class="c">
+		<li class="show_a"><a href="{:U('Articlecat/index')}" target="main">栏目分类</a></li>
+
+		<li class="show_d" style="display:none;"><a href="{:U('Articlecat/index2')}" target="main">内容管理</a></li>
+		<if condition="($admin_info['action_list']=='all') OR ($admin_info['company_id']!='')">
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>2))}" target="main">移动首页banner</a></li>
+		</if>
+		<if condition="$admin_info['action_list']=='all'">
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>3))}" target="main">移动二级banner</a></li>
+		</if>
+			<if condition="($admin_info['action_list']=='all') OR ($admin_info['company_id']!='')">
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>4))}" target="main">pc首页banner</a></li>
+		</if>
+		<if condition="$admin_info['action_list']=='all'">
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>5))}" target="main">pc二级banner</a></li>
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>10))}" target="main">pc分设计推荐</a></li>
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>6))}" target="main">pc单图推荐</a></li>
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>8))}" target="main">首页图标</a></li>
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>9))}" target="main">栏目小标语</a></li>
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>7))}" target="main">底部图标</a></li>
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>11))}" target="main">logo及其他图片</a></li>
+		<li class="show_d" style="display:none;"><a href="{:U('Ads/index',array('cat_id'=>12))}" target="main">首页设计团队</a></li>
+		</if>
+        <if condition="admin_priv2('Message_1')">
+		<li class="show_h" style="display:none;"><a href="{:U('Message/index',array('type'=>1))}" target="main">在线下单</a></li>
+		</if>
+		 <if condition="admin_priv2('Message_2')">
+		<li class="show_h" style="display:none;"><a href="{:U('Message/index',array('type'=>2))}" target="main">预约装修</a></li>
+		</if>
+		 <if condition="admin_priv2('Message_3')">
+		<li class="show_h" style="display:none;"><a href="{:U('Message/index',array('type'=>3))}" target="main">投诉建议</a></li>
+		</if>
+		
+		<!--<li class="show_y " style="display:none;"><a href="{:U('Webinfo/enindex',array('prefix'=>'en_'))}" target="main">en站点配置</a></li>-->
+		<!-- <li class="show_y" style="display:none;"><a href="{:U('Webinfo/setEmailConfig')}" target="main">邮件服务器</a></li> -->
+        <if condition="admin_priv2('Columns_1')">
+		<li class="show_z"><a href="{:U('Privilege/index')}" target="main">管理员列表</a></li>
+		</if>
+		<if condition="admin_priv2('Columns_2')">
+		<li class="show_z"><a href="{:U('Role/index')}" target="main">角色管理</a></li> 
+		</if>
+
+       <if condition="admin_priv2('Systems_1')">
+		<li class="show_y" style="display:none;"><a href="{:U('Dotinfo/index')}" target="main">站点配置</a></li>
+		</if>
+		<if condition="$admin_info['action_list']!='all'">
+		  <li class="show_y" style="display:none;"><a href="{:U('Privilege/edit',array('id'=>$admin_info['user_id']))}" target="main">密码修改</a></li>
+		</if>
+        <if condition="admin_priv2('Systems_2')">
+		<li class="show_y" style="display:none;"><a href="{:U('Database/index')}" target="main">数据库管理</a></li>
+		</if>
+		<if condition="admin_priv2('Systems_3')">
+		<li class="show_y" style="display:none;"><a href="{:U('Area/index')}" target="main">地区管理</a></li>
+		</if>
+		<if condition="admin_priv2('Systems_4')">
+        <li class="show_y" style="display:none;"><a href="{:U('Company/company')}" target="main">分公司管理</a></li>
+        </if>
+		<if condition="admin_priv2('Systems_5')">
+        <li class="show_y" style="display:none;"><a href="{:U('Qufen/index',array('c_id'=>$new_company_id,'prefix'=>$prefix))}" target="main">推广区分</a></li>
+        </if>
+
+	</ul>
+</div>

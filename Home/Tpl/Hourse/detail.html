@@ -1,0 +1,65 @@
+<include file='Public:pageHeader'/>
+    <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main clearfix layout">
+        <div class="leftall">
+            <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Hourse/index')}">{$cat_less_info.cat_name}</a><em>&gt;</em><san>{$article_detail.title}</san></p></div>
+            <div class="lp_box clearfix">
+                <div class="pich"><img title="{$list.title }"alt="{$list.title }"src="/{$article_detail.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                <div class="word">
+                    <div class="box clearfix">
+                        <div class="fl">
+                            <h3>{$article_detail.title}</h3>
+                            <div class="p1"><em>建筑时间：</em>{$article_detail.add_time|date="Y",###}年</div>
+                            <div class="p1"><em>小区地址：</em>{$article_detail.address}</div>
+                        </div>
+                        <a href="javascript:void(0)" class="more" onclick="order_show('{$article_detail.title}');">工地预约</a>
+                    </div>
+                    <div class="p1"><em>小区概述：</em>{$article_detail.short}<a href="javascript:void(0);">[展开]</a></div>
+                    <div class="p2">咨询户数：{$article_detail.com_number}户<em>开工户数：{$article_detail.start_number}户</em></div>
+                </div>
+            </div>
+            <div class="title">小区案例</div>
+            <ul class="xq_cse clearfix">
+              <foreach name="case" item="list" key='k'>
+                <li><a href="{:U('Case/detail',array('id'=>$list['article_id']))}">
+                    <div class="pich"><img title="{$list.title }"alt="{$list.title }" style="height:240px;" src="/{$list.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                    <div class="box">
+                        <h3>{$list.title|mySubstr=5,'..'}</h3>
+                        <p>{$layout[$list['layout']]['com_name']}│{$acreage[$list['acreage']]['com_name']}│{$style[$list['style']]['com_name']}</p>
+                    </div>
+                    <div class="who"><img title="{$list.title }"alt="{$list.title }" src="/{$list['desgin']['original_img']}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                </a></li>
+              </foreach>
+               
+            </ul>
+            <div class="title">在建工地</div>
+            <ul class="xq_cse xq_cse2 clearfix">
+             <foreach name="startwork" item="list" key='k'>
+                <li><a href="{:U('Work/detail',array('id'=>$list['article_id']))}">
+                    <div class="pich"><img title="{$list.title }"alt="{$list.title }" width="height:130px;" src="/{$list.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></div>
+                    <div class="box">
+                        <h3>{$list.title|mySubstr=20,'..'}</h3>
+                        <p><em>{$work[$list['construct_end']]['com_name']}</em><!--别墅│450㎡│现代简约--></p>
+                    </div>
+                </a></li>
+            </foreach>
+                
+            </ul>
+            
+        </div>
+        <include file="Public:pcright" thumb_width='54' thumb_height='41'/>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".lp_box .p1 a").toggle(function () {
+                $(this).parents('.p1').find('span').show();
+                $(this).html("[收起]")
+            },function () {
+                $(this).parents('.p1').find('span').hide();
+                $(this).html("[展开]")
+            });
+        });
+    </script>
+<include file='Public:pageFooter'/>
+</body>
+</html>

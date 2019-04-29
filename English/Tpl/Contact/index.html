@@ -1,0 +1,141 @@
+﻿<include file='Public:pageHeader'/>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="/">首页</a> > <a href="#">联系我们</a></div>
+			<ul class="clearfix">
+				<li><a href="#">联系我们</a></li>
+				
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="cont">
+				<p class="title">联系方式</p>
+				<div class="cont_add clearfix">
+					<div class="act">
+					  {$contact.content}
+					<!-- 	<p class="tit">广东佳明机器有限公司</p>
+						<ul>
+							<li>地址：香港九龙观塘巧明街106号冠力工业大厦2楼2室</li>
+							<li>公司总机：020-1234567</li>
+							<li>传真：020 - 1345678</li>
+							<li>邮箱：123456@one-link.cn</li>
+						</ul> -->
+					</div>
+					<div class="add">
+					<iframe src="/baiduMap.html" style="width:520px;height:261px;" ></iframe>
+					<!-- <img src="__IMG__/img_23.jpg" alt=""> -->
+					</div>
+				</div>
+				<div class="contact_form">
+					<p class="title">在线留言</p>
+					<form id="form"  method="post">
+					<div class="on-line">
+					   
+						<span>
+							<select class="sel" name="user">
+							     <option value="0">请选择用户类型</option>
+								<foreach name="user" item="list">
+								<option value="{$list['article_id']}">{$list.title}</option>
+								</foreach>
+								
+							</select>
+						</span>
+						<span>
+							<label>姓名：</label><input class="username" name="username"  type="text" placeholder="*必填">
+						</span>
+						<span>
+							<label>手机：</label><input class="tel"  name="tel" type="text" placeholder="*必填">
+						</span>
+					</div>
+					<div class="text">
+						<p class="tit">您要咨询的内容：</p>
+						<textarea name="content" id="content"></textarea>
+						验证码：<input name="verify" type="text" id="verify" maxlength="8" style="width:80px;padding: 10px;box-sizing: border-box;height: 35px;line-height: 35px;border: 1px solid #dadada;background-color: #ccc;" class="text"/>
+						<img src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" title="看不清？单击此处刷新" onclick="this.src+='?rand='+Math.random();"  style="cursor: pointer; vertical-align: middle;margin-top:-5px;" align="absmiddle"/><br />
+						<input type="button" value="提交留言" onclick="mySubmit('form','{:U('Contact/message')}','cmresult')">&nbsp;&nbsp;&nbsp;&nbsp;<font color='red' size='-1' id='cmresult'></font>
+					</div>
+                     
+					</form>
+				
+
+<script type="text/javascript">
+
+function mySubmit(theForm,url,result){
+							var user=$('.sel').val();
+                       		var username=$('.username').val();
+                       		var tel=$('.tel').val();	
+                       		var re = /^1\d{10}$/;
+                       		var verify=$('#verify').val();
+                       		var content=$('#content').val();
+                       		if(user==0){
+                       			layer.msg('请选择用户类型');
+                       			return false;
+                       		}
+                       		if(username.length==0){
+                       			layer.msg('请填写姓名');
+                       			return false;
+
+                       		}
+                            
+                          	if(tel.length<11){
+
+                          		layer.msg('手机号码为11位哦');
+                          		return false;
+                          	}  
+                          	if(!re.test(tel)){
+
+                          		layer.msg('手机号码格式不正确');
+                          		return false;
+                          	}
+                            if(content.length<6){
+                            	layer.msg('留言太短');
+                            	return false;
+                            }
+                          	if(verify.length==0){
+                          		layer.msg('请填写验证码');
+                          		return false;
+                          	}
+                          	$('#form').submit();
+    function default_callback(res){
+        result.html(res.info);
+        if(res.status=='1'){
+            //document.getElementById(theForm).reset();
+            if(res.url!=''){
+                location.href = res.url;
+            }else{
+                window.setTimeout(function(){
+                    result.html('');
+                },2000);
+            }
+        }
+    }
+
+    var callback = arguments[3] || default_callback;
+    
+    var result = $('#'+result);
+    result.html('loading...');
+    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+    $.post(url,data,callback,'json');
+    return false;
+}
+
+
+
+
+				</script>
+
+
+
+
+				</div>
+			</div>
+			<div class="h10"></div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

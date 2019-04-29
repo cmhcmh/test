@@ -1,0 +1,114 @@
+<include file='Public:pagesHeader'/>
+    <div class="content">
+        <div class="exa">
+            <div class="ad">
+                <h2>{$article_detail.title}</h2>
+                <div><span>户型：{$layout[$article_detail['layout']]['com_name']}</span> <span>面积：{$acreage[$article_detail['acreage']]['com_name']}</span></div>
+                <div><span>风格：{$style[$article_detail['style']]['com_name']}</span> <!--<span>城市：广州</span>--></div>
+            </div>
+            <div class="exa1 clearfix bgc">
+                <div class="fl rw"><img src="/{$design.original_img}"></div>
+                <div class="fl">
+                    <h2>{$design.title} </h2>
+                    <p>{$grade[$design['grade']]['com_name']}</p>
+                </div>
+                <a class="fr" href="{:U('Contact/index',array('type'=>2,'design_id'=>$article_detail['be_design']))}">预约TA</a>
+            </div>
+            <div class="exa2 bgc">
+                <div class="sming">
+                    <h2>设计说明：</h2>
+                    <p>{$article_detail.short}</p>
+                    <!--<em></em>-->
+                </div>
+                <div class="exa2_list">
+                 <foreach name="picimg" item="list">
+                    <div class="item clearfixs">
+                        <a href="">
+                            <div class="pic lazy">
+                                <img data-original="/{$list.p_path}" class="lazy_img">
+                            </div>
+                        </a>
+                        <h2>{$space[$list['p_comid']]['com_name']}</h2>
+                    </div>
+                 </foreach>
+                </div>
+                <div class="adm tc">
+                    <p class="more">加载更多</p>
+            </div>
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    $(function(){
+        var id ={$id};
+
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Case/loadpic",
+                //提交的数据
+                data:{pages:num,id:id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.exa2_list').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多了"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            /*
+            var html = "";
+            html += '<div class="item" style="display:none;"><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li></div>';
+            $('.ser_list ul').append(html);
+            $('.ser_list ul .item:last-child').fadeIn('400',function(){
+                $('.ser_list .item li').unwrap();
+            });*/
+        });
+    });
+</script>
+<script>
+    //单独页面上的js
+    $(function(){
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+    })
+</script>

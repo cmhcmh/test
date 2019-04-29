@@ -1,0 +1,45 @@
+﻿<include file='Public:pageHeader'/>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="/">首页</a> > <a href="#">网络营销</a></div>
+			<ul class="clearfix">
+				<li><a href="#">营销网络</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="add_slider single-item">
+                <volist name="net" id="list">
+				<div>
+					<div class="t_box">
+						<p class="tn">{$list.title}</p>
+						<p class="cn">
+							{$list.short}
+						</p>
+					</div>
+					<div class="img">{$list.content}</div>
+				</div>
+				</volist>
+		<!-- 		<div>
+					<div class="t_box">
+						<p class="tn">佳明在中国</p>
+						<p class="cn">
+							佳明公司在国外市场竞争中，取得了优秀的业绩，佳明注塑机销往东北  湖南  广西  河北  重庆  上海   山东等多个省份
+						</p>
+					</div>
+					<div class="img"><img src="__IMG__/pic_18.png" alt=""></div>
+				</div>
+				-->
+			</div> 
+			<script type="text/javascript">
+				$(function(){
+					$('.single-item').slick({autoplay:false,fade:true});
+				})
+			</script>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

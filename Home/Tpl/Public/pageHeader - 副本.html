@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<link href="__CSS__/swiper-3.4.1.min.css" type="text/css" rel="stylesheet" />
+	<link href="__CSS__/style.css" type="text/css" rel="stylesheet" />
+    <title>{$site_title}</title>
+    <script src="__JS__/jquery.js"></script>
+     <script src="__JS__/layer_mobile/layer.js"></script>
+</head>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=38z4vZlVWK6oAdbrNuXnq1mB"></script>
+ <if condition="$cookie_search_city==0">
+<script type="text/javascript">  
+
+var geolocation = new BMap.Geolocation();    
+var gc = new BMap.Geocoder();     
+  
+geolocation.getCurrentPosition( function(r) {   //定位结果对象会传递给r变量  
+  
+        if(this.getStatus() == BMAP_STATUS_SUCCESS)  
+        {  //通过Geolocation类的getStatus()可以判断是否成功定位。  
+            var pt = r.point;    
+            gc.getLocation(pt, function(rs){    
+                var addComp = rs.addressComponents;    
+                //alert(addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber); 
+               //$('#mapaddress').html(addComp.city+' '+addComp.district+' '+addComp.street); 
+                //$('#location').val(addComp.city+' '+addComp.district+' '+addComp.street); 
+                window.location.href="{$REQUEST_URI}?ipcity="+addComp.city+'&search_city=1';
+                return false;
+            });  
+        }  
+        else   
+        {  
+            //关于状态码    
+            //BMAP_STATUS_SUCCESS   检索成功。对应数值“0”。    
+            //BMAP_STATUS_CITY_LIST 城市列表。对应数值“1”。    
+            //BMAP_STATUS_UNKNOWN_LOCATION  位置结果未知。对应数值“2”。    
+            //BMAP_STATUS_UNKNOWN_ROUTE 导航结果未知。对应数值“3”。    
+            //BMAP_STATUS_INVALID_KEY   非法密钥。对应数值“4”。    
+            //BMAP_STATUS_INVALID_REQUEST   非法请求。对应数值“5”。    
+            //BMAP_STATUS_PERMISSION_DENIED 没有权限。对应数值“6”。(自 1.1 新增)    
+            //BMAP_STATUS_SERVICE_UNAVAILABLE   服务不可用。对应数值“7”。(自 1.1 新增)    
+            //BMAP_STATUS_TIMEOUT   超时。对应数值“8”。(自 1.1 新增)    
+            switch( this.getStatus() )  
+            {  
+                case 2:  
+                    alert( '位置结果未知 获取位置失败.' );  
+                break;  
+                case 3:  
+                    alert( '导航结果未知 获取位置失败..' );  
+                break;  
+                case 4:  
+                    alert( '非法密钥 获取位置失败.' );  
+                break;  
+                case 5:  alert( '对不起,非法请求位置  获取位置失败.' );  
+                break;  
+                case 6:  
+                    alert( '对不起,当前 没有权限 获取位置失败.' );  
+                break;  
+                case 7:  
+                    alert( '对不起,服务不可用 获取位置失败.' );  
+                break;  
+                case 8:  
+                    alert( '对不起,请求超时 获取位置失败.' );  
+                break;  
+                  
+            }  
+        }          
+  
+    },  
+    {enableHighAccuracy: true}  
+)  
+
+</script> 
+</if>
+<body data-psd-width="750">
+	<div class="header">
+		<div class="loca clearfix">
+		  	<em class="fl"></em><span class="fl"><if condition="$company_id==0">全国<else/>{$ipcity.area_name}</if></span>	
+		</div>
+		<h2>{$site_info.name}</h2>
+		<a class="search" href="{:U('Index/search')}"></a>
+		<em class="menu">
+	        <i></i>
+	        <i></i>
+	        <i></i>
+	    </em>
+	</div>
+	<div class="menu_detail">
+		<div class="menu_detail_box clearfix tc">
+			<a href="/">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/at.png" class="icon">
+				<span class="txt_overflow">首页</span>
+			</a>
+			<a href="{:U('Case/index')}">
+				<img title="{$list.title }"alt="{$list.title }" src="/{$all_cats[2]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[2]['cat_name']}</span>
+			</a>
+			<a href="{:U('Activi/index')}">
+				<img title="{$list.title }"alt="{$list.title }" src="/{$all_cats[4]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[4]['cat_name']}</span>
+			</a>
+			<a href="{:U('Design/index')}">
+				<img title="{$list.title }"alt="{$list.title }" src="/{$all_cats[3]['sub_cat'][23]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[3]['sub_cat'][23]['cat_name']}</span>
+			</a>
+			<a href="{:U('Dot/index')}">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a4.png" class="icon">
+				<span class="txt_overflow">门店介绍</span>
+			</a>
+			<a href="{:U('Hourse/index')}">
+				<img title="{$list.title }"alt="{$list.title }" src="/{$all_cats[2]['sub_cat'][19]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[2]['sub_cat'][19]['cat_name']}</span>
+			</a>
+			<a href="{:U('News/index',array('cat_id'=>36))}">
+				<img title="{$list.title }"alt="{$list.title }" src="/{$all_cats[36]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[36]['cat_name']}</span>
+			</a>
+			<a href="{:U('Contact/index',array('type'=>1))}">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a7.png" class="icon">
+				<span class="txt_overflow">免费报价</span>
+			</a>
+			<a href="{:U('Gallery/index')}">
+				<img title="{$list.title }"alt="{$list.title }" src="/{$all_cats[2]['sub_cat'][17]['cat_img']}" class="icon">
+				<span class="txt_overflow">{$all_cats[2]['sub_cat'][17]['cat_name']}</span>
+			</a>
+		</div>
+	</div>
+	<div class="location_detail fadeInUp" <if condition="($company_id==0) AND ($quan!=1)">style="display:block"</if>>
+		<form class="bgc">
+			<div class="box">
+				<select name="" class="flex1" id="ip_province">
+				<option value="" data-index="0">省份</option>
+				<option value="-1" data-index="0">全国</option>
+					<foreach name="provincelist" item="list" key='k'>
+								<option value="{$list.a_id}">{$list.area_name}</option>
+						</foreach>
+				</select>
+				<i style="display: block;width: 0.19rem;"></i>
+				<select name="" class="flex1" id="ip_city">
+				<option value="0" data-index="0">市/区</option>
+				</select>
+				</div>
+		</form>
+			<script>
+				$("#ip_province").change(function(){
+				var province_id=$(this).val();
+				if(province_id==-1)
+				{
+					window.location.href="/index.php/Index/index/company_id/-1";   
+					return false;
+				}
+				$.ajax({
+					url:'/index.php/Areacompany/get_citys',
+					Type:"POST",
+					data:"province_id="+province_id,
+					dataType:"json",
+					success:function(data){
+						var city = data.city;
+						var option=$("<option></option>");
+						$(option).val("0");
+						$(option).html("请选择");
+						var option1=$("<option></option>");
+						$(option1).val("0");
+						$(option1).html("请选择");
+						$("#ip_city").html(option);
+						//$("#company_id").html(option1);
+						for(var i in city){
+							var option=$("<option></option>");
+							$(option).val(city[i]['a_id']);
+							$(option).html(city[i]['area_name']);
+							$("#ip_city").append(option);
+						}
+					}
+					
+				});
+			});
+			</script>
+				<script>
+				$("#ip_city").change(function(){
+				var city_id=$(this).val();
+				$('#ul_ou li').remove();
+				$.ajax({
+					url:'/index.php/Areacompany/get_company',
+					Type:"POST",
+					data:"city_id="+city_id,
+					dataType:"json",
+					success:function(data){
+                       
+						var company =data.company;
+						var content='地区有以下'+data.company.length+'家华浔';
+						for(var i in company){
+                            var html = '<li><div><a href="/index.php/Index/index/company_id/'+company[i]['c_id']+'">'+company[i]['c_name']+'</a></div></li>';
+							$("#ul_ou").append(html);
+						}
+						$(".tit").html(content);
+					}
+					
+				});
+			});
+			</script>
+		<div class="geo_title">
+			<i class="geo_close"></i>
+			<h1 class="ellipsis">附近华浔</h1>
+		</div>
+		<div class="geo bg_white">
+			<div class="geoResult">
+				<p class="current tc">
+					当前定位：<span class="fc_e60012">{$ipcity.area_name}</span>
+				</p>
+				<p class="tit tc">{$ipcity.area_name}有以下{$companynum}家华浔</p>
+				<div class="fendian">
+				</div>
+			</div>
+			<ul id="ul_ou">
+             <foreach name="companydata" item="list" key='k'>
+			  <li><div><a href="{:U('Index/index',array('company_id'=>$list['c_id']))}">{$list.c_name}</a></div></li>
+			 </foreach>
+
+			</ul>
+		</div>
+	</div>

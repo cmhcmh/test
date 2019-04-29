@@ -1,0 +1,39 @@
+<include file='Public:pagesHeader'/>
+    <div class="content">
+        <div class="rez">
+            <div class="rez_top clearfix">
+                <div class="lazy fl"><img data-original="/{$article_detail.original_img}" class="lazy_img"></div>
+                <div class="fr rez_r">
+                    <h2 class="txt_overflow">{$article_detail.title}</h2>
+                    <p><span>施工单位:</span>{$article_detail.add_time|date="Y",###}年</p>
+                    <p><span>所属的楼盘：</span>{$hourse_info.title}</p>
+                    <div class="num"><span>价格：{$article_detail.com_number}户</span> </div>
+                <!-- <a href="{:U('Contact/index',array('type'=>1,'hourse_id'=>$article_detail['article_id']))}">工地预约</a>-->
+                </div>
+            </div>
+            <div class="rez_q">
+                <div class="rez_t">
+                    <h2>施工图片</h2>
+                    <em></em>
+                </div>
+                 <div class="exa2_list">
+                   <div class="article demo-gallery" id="demo-test-gallery">
+                     <foreach name="work" item="list_w" key='k'>
+                     <a class="lazy clearfixs" data-size="750x400" data-med="/{$list_w.p_path}" data-med-size="750x400">
+                        <img src="/{$list_w.p_path}" class="lazy_img"/>
+                            <p>  <h2>{$list_w.com_name}</h2></p> 
+                    </a>
+                    </foreach>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    //单独页面上的js
+    $(function(){
+            $(".lazy_img").lazyload({ effect: "fadeIn" });
+    })
+</script>

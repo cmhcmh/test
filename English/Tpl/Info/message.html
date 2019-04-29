@@ -1,0 +1,36 @@
+<style type="text/css">#cmForm input,#cmForm textarea{border: solid 1px #E7E7E7; line-height: 24px; text-indent: 4px;}</style>
+<form id='cmForm'>
+    <table cellpadding="4" cellspacing="10">
+        <tr>
+            <td>姓名<font color='red'>*</font></td>
+            <td><input type="text" name='name' value="" size="30" /></td>
+        </tr>
+        <tr>
+            <td>邮箱<font color='red'>*</font></td>
+            <td><input type="text" name='email' value="" size="30" /></td>
+        </tr>
+        <tr>
+            <td>手机<font color='red'>*</font></td>
+            <td><input type="text" name='phone' value="" size="30" /></td>
+        </tr>
+        <tr>
+            <td>留言<font color='red'>*</font></td>
+            <td><textarea name='content' style="width: 450px; height: 187px;"></textarea></a></td>
+        </tr>
+        <tr>
+            <td>验证码<font color='red'>*</font></td>
+            <td>
+                <input name="verify" type="text" id="verify" maxlength="8" size="30" class="text"/>
+                <img src="__ROOT__/Base/verify_code/w/50/h/25.html" title="看不清？单击此处刷新" onclick="this.src+='?rand='+Math.random();"  style="cursor: pointer; vertical-align: middle;margin-top:-5px;" align="absmiddle"/>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td align='left'>  
+                <input type="button" value="Send" onclick="mySubmit('cmForm','{:U('Info/addMessage')}','cmresult')" style='padding:2px 10px; margin-right:5px;'/>
+                <input type='reset' value='Reset' style='padding:2px 10px;'/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<font color='red' size='-1' id='cmresult'></font>
+            </td>
+        </tr>
+    </table>
+</form>

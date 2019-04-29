@@ -1,0 +1,123 @@
+<include file="Index:pageHeader" />
+	<script src="__PUBLIC__/Admin/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+$(function(){
+	autoHeight(jQuery('.autoHeight'));
+	jQuery(".column_Box").each(function () {
+		var t = jQuery(this);
+		if (t.length < 1) return;
+		Tab_click(t.find('.tab ul li'), t.find(".wrapBox .body"));
+	});
+});
+
+KindEditor.ready(function(K) {
+	K.create('#content', {
+		allowFileManager : false,
+		pasteType : 2,
+		newlineTag : 'p',
+		urlType : 'domain'
+	});
+});
+</script>
+
+<div class="column_Box mainAutoHeight">
+	<div class="tab">
+		<ul>
+			<li class="current"><a href="javascript:">公司详情</a></li>
+		</ul>
+	</div>
+	<div class="column_Box mainAutoHeight wrapBox">
+        <div class="body">
+			<form method="post" action="{:U('Company/insert')}" id="submitForm" name="submitForm" enctype="multipart/form-data">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+					   <tr>
+							<td style="text-align:right;">公司名称：</td>
+								<td style="text-align:left;"><input type="text" name="c_name" value="" size="35" /><em>*</em></td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">公司电话：</td>
+							<td style="text-align:left;"><input type="text" name="c_mobile" value="" size="35" /><em>*</em></td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">公司传真：</td>
+							<td style="text-align:left;"><input type="text" name="c_fx" value="" size="35" /><em>*</em></td>
+						</tr>
+
+					    <tr>
+							<td style="text-align:right;">公司地址：</td>
+							<td style="text-align:left;"><input type="text" name="c_address" value="" size="35" /><em>*</em></td>
+						</tr>
+						<tr>
+							<td style="text-align:right;">公司图片(pc)：</td>
+							<td style="text-align:left;">
+		
+									<input type="file" name="c_img" size="35" /><br/>
+							 		 <font color="#ff0000">
+										公司图片尺寸：209px * 156px;<br/>
+								   </font>
+
+							</td>
+						</tr>
+							<tr>
+							<td style="text-align:right;">二级域名：</td>
+								<td style="text-align:left;"><input type="text" name="c_domain" value="{$info.c_domain}" size="35" /><em>注意：填写域名的前缀即可，如域名为guangzhou.huaxun.com 填写guangzhou即可</em></td>
+						</tr>
+					    <tr>
+							<td style="text-align:right;">排序：</td>
+							<td style="text-align:left;"><input type="text" class="txt" value="50" name="c_sort"  /><em>*</em> </td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">站点状态：</td>
+							<td style="text-align:left;">
+							<input checked="true" type="radio" name="c_start" value="1" />开启&nbsp;
+							<input  type="radio" name="c_start" value="2" />关闭 
+							</td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">是否免审核：</td>
+							<td style="text-align:left;">
+							<input checked="true" type="radio" name="c_status" value="1" />否&nbsp;
+							<input type="radio" name="c_status" value="2" />是
+							</td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">所属地区：</td>
+							<td style="text-align:left;">
+							<include file='District:index' province_id="{$userInfo.province}" city_id="{$userInfo.city}" district_id="{$userInfo.district}" is_district="0"/>
+							</td>
+						</tr>
+			
+						
+
+	
+                       <!--
+						<tr>
+							<td style="text-align:right;">图片尺寸：</td>
+							<td style="text-align:left;"><input type="text" name="img_size" style='color:red;' /></td>
+						</tr>-->
+						
+						<tr>
+							<td>&nbsp;</td>
+							<td style="text-align:left;">
+								<input type="hidden" name="a_id" value="{$a_id}"/>
+								<input type="hidden" name="a_parentid" value="{$p_id}"/>
+								<input type="hidden" name="prefix" value="{$prefix}"/>
+								<input type="submit" value="提交"/>
+							</td>
+						</tr>
+						<tr><tr>
+					</tbody>
+				</table>
+
+			</form>
+        </div>
+    </div>
+</div>
+</body>
+</htm

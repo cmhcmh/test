@@ -1,0 +1,203 @@
+<include file='Public:pagesHeader'/>
+<link rel="stylesheet" href="__CSS__/photoswipe.css">
+<link rel="stylesheet" href="__CSS__/default-skin.css">
+
+<div class="content">
+		<div class="gal">
+			<div class="catTab pr">
+		        <ul class="box">
+		            <li class="flex1">
+		                <span>空间</span><i></i>
+		            </li>
+		            <li class="flex1">
+		                <span>风格</span><i></i>
+		            </li>
+		        </ul>
+		        <div class="tabLayer">
+		            <div>
+		                 <a href="{:U('Gallery/index',array('space_id'=>0,'style_id'=>$style_id))}" <if condition="$space_id==0">class="active"</if>>全部</a>
+                        <foreach name="space" item="list">
+                             <a href="{:U('Gallery/index',array('space_id'=>$list['com_id'],'style_id'=>$style_id))}" <if condition="$space_id==$list['com_id']">class="active"</if>>{$list.com_name}</a>
+                        </foreach>
+		            </div>
+		            <div>
+		                    <a href="{:U('Gallery/index',array('style_id'=>0,'space_id'=>$space_id))}"  <if condition="$style_id==0">class="active"</if>>全部</a>
+                       <foreach name="style" item="list">
+                             <a href="{:U('Gallery/index',array('style_id'=>$list['com_id'],'space_id'=>$space_id))}"<if condition="$style_id==$list['com_id']">class="active"</if>>{$list.com_name}</a>
+                        </foreach>
+		            
+		            </div>
+		        </div>
+		    </div>
+		    <div class="article demo-gallery" id="demo-test-gallery">
+		         <foreach name="gallery" item="list" key='k'>
+	             <a class="lazy clearfixs" data-size="750x400" data-med="/{$list.p_path}" data-med-size="750x400">
+	                <img src="/{$list.p_path}" class="lazy_img"/>
+				        <p>{$space[$list['p_comid']]['com_name']}-{$style[$list['style']]['com_name']}-{$list.title}
+				        </p>
+				        
+	            </a>
+	            </foreach>
+	        </div>
+
+		      <div class="adm tc">
+                    <p class="more">加载更多</p>
+            </div>
+		</div>
+	</div>
+		<div class="share_body change_fixed">
+		<div class="socials icon_h5 share-component social-share">
+			<a class="social-share-icon icon-weibo" href=""></a>
+			<a class="social-share-icon icon-qq" href=""></a>
+			<a class="social-share-icon icon-qzone" href=""></a>
+		</div>
+	</div>
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+	    <div class="pswp__bg"></div>
+	    <div class="pswp__scroll-wrap">
+	        <div class="pswp__container">
+	            <div class="pswp__item"></div>
+	            <div class="pswp__item"></div>
+	            <div class="pswp__item"></div>
+	        </div>
+	        <div class="pswp__ui pswp__ui--hidden">
+	            <div class="pswp__top-bar">
+	                <div class="pswp__counter"></div>
+	                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+	                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+	                <div class="pswp__preloader">
+	                    <div class="pswp__preloader__icn">
+	                      <div class="pswp__preloader__cut">
+	                        <div class="pswp__preloader__donut"></div>
+	                      </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+	                <div class="pswp__share-tooltip"></div> 
+	            </div>
+	            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+	            </button>
+	            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+	            </button>
+	            <div class="pswp__caption">
+	                <div class="pswp__caption__center"></div>
+	                 <div class="pswp__caption__center"></div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script src="__JS__/photoswipe.min.js"></script>
+<script src="__JS__/photoswipe-ui-default.min.js"></script>
+<script src="__JS__/photoswipe.js"></script>
+<script>
+	//单独页面上的js
+	$(function(){
+			$('.catTab li').click(function() {
+		        if($(this).hasClass('on')){
+		            $(this).removeClass('on');
+		            $('.tabLayer > div').slideUp(300);
+		            $('.tabLayer').hide();
+		            return false;
+		        }
+		        $('.catTab li').removeClass('on');
+		        $(this).addClass('on');
+		        var eq = $(this).index();
+		        $('.tabLayer > div').hide();
+		        $('.tabLayer').show();
+		        $('.tabLayer > div').eq(eq).slideDown(300);
+		    });
+		    $('.catTab .tabLayer>div a').click(function() {
+		        $(this).parent('div').find('a').removeClass('active');
+		        $(this).addClass('active');
+		    });
+		    $(window).scroll(function() {
+		        var scrollTop = $(window).scrollTop();
+		        if(scrollTop >= $('.catTab').offset().top){
+		            $('.catTab li').removeClass('on');
+		            $('.tabLayer > div').slideUp(300);
+		            $('.tabLayer').hide();
+		        }
+		    });
+
+		    $('.share').click(function() {
+				$('.share_body').show();
+			});
+			$('.social-share').click(function(e) {
+				e.stopPropagation();
+			})
+			$('.share_body').click(function() {
+				$(this).hide();
+			})
+			$(".lazy_img").lazyload({ effect: "fadeIn" });
+	})
+</script>
+<script>
+    $(function(){
+        var keywords ='{$keywords}';
+        var space_id ={$space_id};
+        var style_id={$style_id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Gallery/load",
+                //提交的数据
+                data:{pages:num,keywords:keywords,style_id:style_id,space_id:space_id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('#demo-test-gallery').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多案例"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            /*
+            var html = "";
+            html += '<div class="item" style="display:none;"><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li></div>';
+            $('.ser_list ul').append(html);
+            $('.ser_list ul .item:last-child').fadeIn('400',function(){
+                $('.ser_list .item li').unwrap();
+            });*/
+        });
+    });
+</script>

@@ -1,0 +1,41 @@
+<include file='Public:pageHeader'/>
+ <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+	<div class="main layout">
+		<div class="loca loca2"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Gallery/index')}">{$cat_less_info.cat_name}</a></p></div>
+		<div class="case_det clearfix">
+			<div class="left">
+				<div class="pic">
+					<img src="/{$gallery.p_path}">
+					<div class="btn">
+						<a href="{:U('Gallery/detail',array('id'=>$pre['p_id'],'space_id'=>$space_id,'style_id'=>$style_id))}" class="prev"></a>
+						<a href="{:U('Gallery/detail',array('id'=>$back['p_id'],'space_id'=>$space_id,'style_id'=>$style_id))}" class="next"></a>
+					</div>
+				</div>
+				<div class="word">
+					<div class="tit">{$gallery.title}</div>
+					<p><a href="#">{$space[$gallery['p_comid']]['com_name']}{$style[$gallery['style']]['com_name']}</a></p>
+				</div>
+			</div>
+			<div class="right">
+				<dl>
+					<dt><p>空间图库</p></dt>
+					<dd>
+					<foreach name="space" item="list">
+						<h3><a href="{:U('Gallery/detail',array('space_id'=>$list['com_id']))}">{$list.com_name}效果图（<i>{$list.num}</i>）张</a></h3>
+					</foreach>
+					</dd>
+				</dl>
+				<dl>
+					<dt><p>风格图库</p></dt>
+					<dd>
+						<foreach name="style" item="list">
+						<h3><a href="{:U('Gallery/detail',array('style_id'=>$list['com_id']))}">{$list.com_name}效果图（<i>{$list.num}</i>）张</a></h3>
+					</foreach>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+<include file='Public:pageFooter'/>
+</body>
+</html>

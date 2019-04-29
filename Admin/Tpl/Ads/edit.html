@@ -1,0 +1,164 @@
+<include file="Index:pageHeader" />
+	<script src="__PUBLIC__/Admin/kindeditor/kindeditor.js"></script>
+		<script src="__PUBLIC__/Admin/Js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+$(function(){
+	autoHeight(jQuery('.autoHeight'));
+	jQuery(".column_Box").each(function () {
+		var t = jQuery(this);
+		if (t.length < 1) return;
+		Tab_click(t.find('.tab ul li'), t.find(".wrapBox .body"));
+	});
+});
+
+KindEditor.ready(function(K) {
+	K.create('#content', {
+		allowFileManager : false,
+		pasteType : 2,
+		newlineTag : 'p',
+		urlType : 'domain'
+	});
+});
+</script>
+
+<div class="column_Box mainAutoHeight">
+	<div class="tab">
+		<ul>
+			<li class="current"><a href="javascript:">广告图属性</a></li>
+		</ul>
+	</div>
+	<div class="column_Box mainAutoHeight wrapBox">
+        <div class="body">
+			<form method="post" action="{:U('Ads/update')}" id="submitForm" name="submitForm" enctype="multipart/form-data">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<td style="text-align:right;">外部链接：</td>
+							<td style="text-align:left;"><input type="text" name="link" value="{$info['link']}" size="35" /></td>
+						</tr>
+						<tr>
+							<td style="text-align:right;">图片预览：</td>
+							<td style="text-align:left;"><img src="__ROOT__/{$info['original_img']}" style='max-width:500px; max-height:200px;'/></td>
+						</tr>
+						
+						<tr>
+							<td style="text-align:right;">图片/图标：</td>
+							<td style="text-align:left;"><input type="file" name="ads_img" size="35" /><em>*</em></td>
+						</tr>
+						
+						<tr>
+							<td style="text-align:right;">名称：</td>
+							<td style="text-align:left;"><input type="text" name="title" size="100" value="{$info['title']}"/></td>
+						</tr>
+						<if condition="$cat_id==9">
+						 <tr>
+							<td style="text-align:right;">英文：</td>
+							<td style="text-align:left;"><input type="text" name="title_en" size="100" value="{$info['title_en']}"/></td>
+						</tr>
+						</if>
+						<if condition="$cat_id==12">
+						 <tr>
+							<td style="text-align:right;">团队描述</td>
+							<td style="text-align:left;"><textarea rows="5" cols="30" name="tddescription"> {$info['tddescription']}</textarea></td>
+						</tr>
+						</if>
+						<if condition="($cat_id==8) OR ($cat_id==10) OR ($cat_id==9)">
+						<tr>
+							<td style="text-align:right;">简述：</td>
+							<td style="text-align:left;">
+								<textarea cols="30" rows="5" name="description">{$info['description']}</textarea>
+							</td>
+						</tr>
+                         </if>
+						 <tr>
+							<td style="text-align:right;">数字：</td>
+							<td style="text-align:left;"><input type="text" name="nums" size="100" value="{$info['num']}"/></td>
+						</tr>
+						 <if condition="$admin_info['action_list']=='all'">
+						<tr>
+							<td style="text-align:right;">是否全国显示：</td>
+							<td style="text-align:left;"><input type="radio" name="is_whole" value="1" <if condition="$info['is_whole'] eq 1"> checked="true" </if>/>是 <input type="radio" name="is_whole" value="0" <if condition="$info['is_whole'] eq 0"> checked="true" </if>/>否</td>
+						</tr>
+						</if>
+						<if condition="($cat_id eq 2) OR ($cat_id eq 3) OR  ($cat_id eq 4) OR ($cat_id eq 5)">
+						<tr>
+							<td style="text-align:right;">上架时间：</td>
+							<td style="text-align:left;">
+								<input type="text" name='up_time' onclick="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d %H:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'});" <if condition="$info['up_time'] neq ''">value="{$info.up_time|date='Y-m-d H:i:s',###}"</if>>&nbsp;<font color='red'></font>
+							</td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">下架时间：</td>
+							<td style="text-align:left;">
+								<input type="text" name='down_time' onclick="WdatePicker({skin:'whyGreen',startDate:'%y-%M-%d %H:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'});" <if condition="$info['down_time'] GT 0">value="{$info.down_time|date='Y-m-d H:i:s',###}"</if>>&nbsp;<font color='red'></font>
+							</td>
+						</tr>
+						</if>
+
+
+						<!-- <tr>
+						<tr>
+							<td style="text-align:right;">文章简述：</td>
+							<td style="text-align:left;"><textarea style="width:500px;height:300px;" name="description" id="content" >{$info['description']}</textarea></td>
+						</tr> -->
+
+                        <!--
+						<tr>
+							<td style="text-align:right;">广告图简述：</td>
+							<td style="text-align:left;">
+								<eq name='Think.get.cat_id' value='1'>
+								<textarea cols="30" rows="5" name="description">{$info['description']}</textarea>
+								<else/>
+								<input type="text" name="description" size="60" value="{$info['description']}"/>
+								</eq>
+							</td>
+						</tr>-->
+						
+						<tr>
+							<td style="text-align:right;">排序：</td>
+							<td style="text-align:left;"><input type="text" class="txt" value="{$info['sort_order']}" name="sort_order" size="5"  /><em>*</em> </td>
+						</tr>
+						
+						<!-- <tr>
+							<td style="text-align:right;">是否开启：</td>
+							<td style="text-align:left;"><input type="radio" name="is_open" value="1" <if condition="$info['is_open'] eq 1"> checked="true" </if>/>是 <input type="radio" name="is_open" value="0" <if condition="$info['is_open'] eq 0"> checked="true" </if>/>否</td>
+						</tr> -->
+
+						<tr>
+							<td style="text-align:right;">图片尺寸：</td>
+							<td style="text-align:left;"><input type="text" name="img_size" value='{$info.img_size}' style='color:red;' /><br/>
+							<font color="#ff0000">
+
+								移动首页尺寸：750px * 371px;<br/>
+								移动二级尺寸：750px * 260px;<br/>
+								<!--移动二级尺寸：750px * 371px;<br/>-->
+								pc首页尺寸：1920 * 580px;<br/>
+								<!--pc二级尺寸:1920 X 326;-->
+										
+							</font>
+
+							</td>
+						</tr>
+						
+						<tr>
+							<td>&nbsp;</td>
+							<td style="text-align:left;">
+								<input type="hidden" name="ads_id" value="{$info.ads_id}"/>
+								<input type="hidden" name="cat_id" value="{$info.cat_id}"/>
+								<input type="hidden" name="prefix" value="{$prefix}"/>
+								<input type="submit" value="提交"/>
+							</td>
+						</tr>
+							   <!-------------加载分站权限模板------------------------------------------>
+						<include file="Index:pageArea" />
+  						<!-------------加载分站权限模板------------------------------------------>
+						<tr><tr>
+					</tbody>
+				</table>
+			</form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

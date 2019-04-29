@@ -1,0 +1,744 @@
+﻿<?php
+//手机版判断跳转
+$agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+if(strpos($agent,'mac os')>0||strpos($agent,'android')>0||strpos($agent,'windows phone')>0){
+	header("location:mobile");die();
+}
+header("Content-type: text/html; charset=utf-8");
+require_once('inc/config.php');
+@$id = $_GET['cid'];
+@$city = '东莞活动3.26-4.22';
+@$name = $_POST['name'];
+@$sex = $_POST['sex'];
+@$tel = $_POST['mobile'];
+@$email = $_POST['email'];
+@$lf = $_POST['lf'];
+@$lp = $_POST['hourse'];
+@$y = $_POST['y'];
+@$m = $_POST['m'];
+@$d = $_POST['d'];
+@$s = $_POST['s'];
+@$t = $_POST['t'];
+@$w = $_POST['w'];
+@$mj = $_POST['mj'];
+@$wc = $_POST['wc'];
+@$sty = $_POST['sty'];
+@$x = $_POST['x'];
+@$ys = $_POST['ys'];
+@$zt  = $_POST['zt'];
+@$pmt = $_POST['pmt'];
+@$gd = $_POST['gd'];
+@$code = $_POST['code'];
+@$content = '东莞活动3.26-4.22'.$_POST['content'];
+@$ip = $_SERVER['REMOTE_ADDR'];
+if(@$_POST['action'] == 'add47'){
+
+	if($code != $_SESSION['mcode']){
+		die("<script type=\"text/javascript\">alert('请正确的验证码');history.go(-1);</script>");
+	}
+	if(strlen($name)<2){
+		die("<script type=\"text/javascript\">alert('请输入姓名');history.go(-1);</script>");
+	}
+	if(strlen($tel)<11){
+		die("<script type=\"text/javascript\">alert('请正确输入电话');history.go(-1);</script>");
+	}
+	/*$sql = "insert into `tp_message` (city,name,sex,tel,email,lf,lp,y,m,d,s,t,w,mj,wc,sty,x,ys,pmt,content,addtime)values('$city','$name','$sex','$tel','$email','$lf','$lp','$y','$m','$d','$s','$t','$w','$mj','$wc','$sty','$x','$ys','$pmt','$content',".time().")";
+	$sql = "insert into `tp_message` (id,tpye,name,tel,content,addtime,ip,hourse,is_show,company_id,be_company_id,is_equ)values('',1,'$name','$tel','$content',".time().",'$ip','$lp','0','0','0','1')";*/
+	$sql = "INSERT INTO `tp_message`(`id`, `type`, `name`, `tel`, `content`, `add_time`, `ip`, `hourse`, `is_show`, `company_id`, `be_company_id`, `design_name`, `province_id`, `city_id`, `district_id`, `nums`, `address`, `is_equ`, `is_handle`, `qx`) VALUES ('','1','$name','$tel','$content',".time().",'$ip','$lp','0','56','0',' ','19','234','0','0',' ','1','0','0')";
+	$r = mysql_query($sql,$conn);
+	if($r){
+	echo "<script>alert('预约成功，请耐心等待客服专员与您联系！');location.href='/zszt'</script>";die();
+	}else{
+		var_dump($sql);
+		exit();
+	}
+}
+
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/animate.css">
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/index1.css"/>
+
+<script type="text/javascript" src="js/jquery.js"></script> 
+<script type="text/javascript" src="js/slick.js"></script>
+<script type="text/javascript" src="js/jquery.dotdotdot.js"></script>
+<script type="text/javascript" src="js/jquery.superslide.2.1.1.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/layer.js"></script>
+<script type="text/javascript" src="js/jquery.countup.min.js"></script>
+<script src="js/wow.min.js"></script>
+ <script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="js/autuimg.js"></script>
+<script src="js/common.js"></script>
+<script>if (false && document.documentMode === 10) document.documentElement.className += ' ie10';</script>
+<script>if (false && document.documentMode === 11) document.documentElement.className += ' ie11';</script>
+<!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <script src="js/respond.src.js"></script>
+<![endif]-->
+<script>
+    $(function () {
+        try {
+            $('.form_box').validate({
+                onFocus: function () {
+                    this.parent().addClass('active');
+                    return false;
+                },
+                onBlur: function () {
+                    var $parent = this.parent();
+                    var _status = parseInt(this.attr('data-status'));
+                    $parent.removeClass('active');
+                    if (!_status) {
+                        $parent.addClass('error');
+                    }
+                    return false;
+                },
+                onBlurpass: true
+            });
+
+            $("#city_1").citySelect({
+                url: "/js/city.min.js",
+                nodata: "none",
+                required: false
+            });
+        } catch (e) {
+            return false;
+        }
+    })
+</script>
+<title>华浔20年质造  东莞春装会</title>
+<meta name='keywords' content=""/>
+<meta name='description' content=""/>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*
+	    window.onload = function () {
+	        var hei = $(".sidel,.sider").offset().top;
+	        var foot = document.getElementById("index").scrollHeight - 46;
+	        $(window).scroll(function () {
+	            var wh = $(window).scrollTop();
+	            if (wh > hei) {
+	                $(".sidel,.sider").addClass("sidel2");
+	                $("#siderry").addClass("sidel2");
+	                
+
+	            } else {
+	                $(".sidel,.sider").removeClass("sidel2");
+
+	            }
+	            if (wh > foot) {
+	                $(".sidel,.sider").removeClass("sidel2");
+	                $(".sidel,.sider").addClass("sidel3");
+	      
+	                //$(".sidel_s").css("top",'702px');
+	            } else {
+	                $(".sidel,.sider").removeClass("sidel3");
+	            }
+	        })
+	    }*/
+	    side('.sidel li','.trun','on');
+    });
+</script>
+
+</head>
+<body style="background:#F63F3B;" >
+
+	<div class="header">
+		<div class="layout clearfix">
+			<a href="/" class="logo" style="background: url(images/1511493651.png) center no-repeat;"></a>
+			
+			<div class="fr">
+				
+				<script type="text/javascript">
+					  	      //js提交   
+        $("#jsBtn").click(function(){ 
+            var action=$("#act").val();
+            var url="/index.php/"+action+"/index";  
+
+            document.searchmyform.action= url;  
+            document.searchmyform.submit();     
+        })  
+
+			</script>
+				<ul class="menu clearfix">
+					<li>
+						<h3><a href="/">首页</a></h3>
+					</li>
+					<li>
+						<h3><a target="_blank" href="http://www.hxdec.com/ppsl/index.php">品牌实力</a></h3>
+						<dl>
+						<dd><a href="http://dg.hxdec.com//ppsl/index.php ">品牌介绍</a></dd><dd><a href="http://dg.hxdec.com/index.php/News/index/cat_id/9 ">发展历程</a></dd><dd><a href="http://dg.hxdec.com/index.php/News/index/cat_id/10 ">资质荣誉</a></dd><dd><a href="http://dg.hxdec.com/index.php/News/index/cat_id/11 ">企业动态</a></dd><dd><a href="http://dg.hxdec.com/index.php/News/index/cat_id/12 ">社会公益</a></dd><dd><a href="http://dg.hxdec.com/index.php/News/index/cat_id/13 ">品牌视频</a></dd>						</dl>
+					</li>
+					<li>
+						<h3><a href="http://dg.hxdec.com/index.php/Case/index">装修案例</a></h3>
+						<dl>
+
+							<dd><a href="http://dg.hxdec.com/jmk" target="_blank">金马克</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Case/index">精品案例</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Gallery/index">案例图库</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Vr/index">VR实景</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Hourse/index">热装楼盘</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Work/index">在建工地</a></dd>
+						</dl>
+					</li>
+					<li>
+						<h3><a href="http://dg.hxdec.com/index.php/Design/index">服务团队</a></h3>
+						<dl>
+							<dd style="display: none"><a href="#">设计研究院</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Design/index">设计团队</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Dot/index">服务门店</a></dd>
+						</dl>
+					</li>
+					<li>
+						<h3><a href="http://dg.hxdec.com/index.php/Page/index/cat_id/30">服务保障</a></h3>
+						<dl>
+							<dd><a href="http://dg.hxdec.com//index.php/Page/index/cat_id/30">服务流程</a></dd>
+							<dd><a href="#" class="boOrder">在线下单</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/Design/index"  >装修预约</a></dd>
+							<dd><a href="http://dg.hxdec.com/index.php/News/index/cat_id/34">装修故事</a></dd>
+						</dl>
+					</li>
+					
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="inbanner" >
+		<img src="images/zhongjian.png" style="width: 100%;margin: 0px auto;text-align: center;"	align="center"/>
+	</div>
+	<div class="main" style="width: 100%;margin: 0px auto;text-align: center;">
+		<a  id="nb_icon_wrap">
+		<div style="width:1202px;margin: 0px auto;text-align: right;">
+		
+			<img src="images/HZ2_03.png" style="width:90%; margin: 0px auto;text-align: center;"/>
+			
+		</div>
+		<div style="width:1201px;margin: 0px auto;text-align: center;">
+		
+			<img src="images/HZ2_07.png" style="width:100%; margin: 0px auto;text-align: center;"/>
+			
+		</div>
+		<div style="width:1201px;margin: 0px auto;text-align: center;">
+			<ul style="padding-top:2%;">
+				<li style="float:left; background:url(images/HZ2_031.png) no-repeat center top; background-size:97%; width:33%; height:410px;">
+				</li>
+				
+				<li style="float:left;background:url(images/HZ2_05.png) no-repeat center top; background-size:97%;width:33%; height:410px;">
+				</li>
+				<li style="float:left;background:url(images/HZ2_071.png) no-repeat center top; background-size:97%;width:33%; height:410px;">
+					
+				</li>
+				<div class="clear" style="margin-top:2%;"></div>
+				
+				<li style="float:left;background:url(images/HZ2_12.png) no-repeat center top; background-size:95%;width:50%; height:475px;">
+				
+				</li>
+				
+				<li style="float:left;background:url(images/HZ2_14.png) no-repeat center top; background-size:95%;width:50%; height:475px;">
+					
+				</li>
+				<div class="clear"></div>
+			</ul>
+		</div>
+		<div style="width:1200px;margin: 0px auto;text-align: center; padding:2%; ">
+			<img src="images/HZ2_19.png"/>
+		</div>
+	
+		</a>
+		<div class="Case">
+		  <div class="Shou_width">
+			<div class="Centent_df">
+			  <div class="COp_un">
+				  <div class="swiper-container">
+					<div class="swiper-wrapper">
+					  <div class="swiper-slide"> 
+					   <ul id="Tab">
+						  <li>
+							<ul id="Tab_c">
+								<li>
+									<a href="http://dg.hxdec.com/index.php/Case/detail/id/12297" target="_blank">
+									<img id="display" src="images/al/ZS-1 (4).png" style="width: 100%;height: 383px;"/>
+									<p><img src="images/al/ZS-1 (1).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-1 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-1 (3).png" style="width: 110px;height:104px;"/></p>
+									<div class="clear"></div>
+									<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">新中式风格</div>
+									</a>
+								</li>
+								<li>
+									<a href="http://dg.hxdec.com/index.php/Case/detail/id/3682" target="_blank">
+									<img id="display" src="images/al/ZS-2 (1).png" style="width: 100%;height: 383px;"/>
+									<p><img src="images/al/ZS-2 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-2 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-2 (4).png" style="width: 110px;height:104px;"/></p>
+									<div class="clear"></div>
+									<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">美式风格</div>
+									</a>
+								</li>
+								<li>
+									<a href="http://dg.hxdec.com/index.php/Case/detail/id/3883" target="_blank">
+									<img id="display" src="images/al/ZS-3 (1).png" style="width: 100%;height: 383px;"/>
+									<p><img src="images/al/ZS-3 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-3 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-3 (4).png" style="width: 110px;height:104px;"/></p>
+									<div class="clear"></div>
+									<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">现代简约</div>
+									</a>
+								</li>
+							</ul>
+						   </li>
+							</ul>
+							</div>
+							<div class="swiper-slide">  
+							<ul id="Tab">
+							  <li>
+								<ul id="Tab_c">
+									<li>
+										<a href="http://dg.hxdec.com/index.php/Case/detail/id/3783" target="_blank">
+										<img id="display" src="images/al/ZS-4 (1).png" style="width: 100%;height: 383px;"/>
+										<p><img src="images/al/ZS-4 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-4 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-4 (4).png" style="width: 110px;height:104px;"/></p>
+										<div class="clear"></div>
+										<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">欧式风格</div>
+										</a>
+									</li>
+									<li>
+										<a href="http://dg.hxdec.com/index.php/Case/detail/id/4608" target="_blank">
+										<img id="display" src="images/al/ZS-5 (1).png" style="width: 100%;height: 383px;"/>
+										<p><img src="images/al/ZS-5 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-5 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-5 (4).png" style="width: 110px;height:104px;"/></p>
+										<div class="clear"></div>
+										<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">北欧风格</div>
+										</a>
+									</li>
+									<li>
+										<a href="http://dg.hxdec.com/index.php/Case/detail/id/3207" target="_blank">
+										<img id="display" src="images/al/ZS-6 (1).png" style="width: 100%;height: 383px;"/>
+										<p><img src="images/al/ZS-6 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-6 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-6 (4).png" style="width: 110px;height:104px;"/></p>
+										<div class="clear"></div>
+										<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">中式风格</div>
+										</a>
+									</li>
+								</ul>
+							  </li>
+							</ul>
+							</div>
+							<div class="swiper-slide">  
+							<ul id="Tab">
+							  <li>
+								<ul id="Tab_c">
+									<li>
+										<a href="http://dg.hxdec.com/index.php/Case/detail/id/4837" target="_blank">
+										<img id="display" src="images/al/ZS-4 (1).png" style="width: 100%;height: 383px;"/>
+										<p><img src="images/al/ZS-4 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-4 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-4 (4).png" style="width: 110px;height:104px;"/></p>
+										<div class="clear"></div>
+										<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">新古典风格</div>
+										</a>
+									</li>
+									<li>
+										<a href="http://dg.hxdec.com/index.php/Case/detail/id/3689" target="_blank">
+										<img id="display" src="images/al/ZS-5 (1).png" style="width: 100%;height: 383px;"/>
+										<p><img src="images/al/ZS-5 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-5 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-5 (4).png" style="width: 110px;height:104px;"/></p>
+										<div class="clear"></div>
+										<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">地中海风格</div>
+										</a>
+									</li>
+									<li>
+										<a href="http://dg.hxdec.com/index.php/Case/detail/id/3643" target="_blank">
+										<img id="display" src="images/al/ZS-6 (1).png" style="width: 100%;height: 383px;"/>
+										<p><img src="images/al/ZS-6 (2).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-6 (3).png" style="width: 110px;height:104px;"/></p>
+									<p><img src="images/al/ZS-6 (4).png" style="width: 110px;height:104px;"/></p>
+										<div class="clear"></div>
+										<div style="background:#fdac83;padding:2%;margin-top:4%;text-align:center;font-size:18px; color:#fff;">欧式经典</div>
+										</a>
+									</li>
+								</ul>
+							  </li>
+							</ul>
+							</div>
+							<div class="clear"></div>
+						</div>
+		<!-- Add Pagination -->
+		<div class="swiper-pagination"></div>
+		<!-- Add Arrows -->
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+		</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div class="clear"></div>
+		<script type="text/javascript">
+		$('#Tab_c li a p>img').hover(function () {
+			$(this).parent().siblings('img').attr('src',$(this).attr('src'));
+		})
+		  var swiper = new Swiper('.swiper-container', {
+		  slidesPerView: 1,
+		  spaceBetween: 30,
+		  loop: true,
+		  pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+		  },
+		  navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		  },
+		});
+		var Tab_se=document.getElementsByClassName("Tab_se")
+		for (var i=0;i<Tab_d.children.length;i++){
+		  Tab_d.children[i].index=i
+		  Tab_d.children[i].onclick=function  () {
+			for (var i=0;i<Tab_d.children.length;i++){
+			  Tab_d.children[i].style.backgroundColor="#faa332"
+			  Tab_se[i].style.display="none"
+			  
+			}
+			this.style.background="#e6002d"
+			Tab_se[this.index].style.display="block"
+		  }
+		}
+		</script>
+		
+		<div style="background:url(images/HZ2_055553.png) no-repeat center top; margin:0px auto; width:1201px; height:528px; margin-top:74px;margin-bottom:314px;position:relative; z-index:9;">
+			<div class="left"style="margin-top: 2%; margin-left: 2%;width:800px;float:left;">
+				<ul >
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/HZ2_17.png"/></li></a>
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/HZ2_15.png"/></li></a>
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/HZ2_1443.png"/></li></a>
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/HZ2_1431.png"/></li></a>
+					<div class="clear"></div>
+				</ul>
+				<ul style="margin-top:20px;">
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/ZS_207.png"/></li></a>
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/ZS_209.png"/></li></a>
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/ZS_213.png"/></li></a>
+					<a target="_blank" href=""><li style="float:left;margin-right:2%;"><img src="images/ZS_217.png"/></li></a>
+					<div class="clear"></div>
+				</ul>
+			</div>
+			<div class="right" style="float:left; margin-top: 2%;width:350px;height:480px;background:#FA8246;">
+				<div style="font-size:16px;color:#fff; line-height:35px; border-bottom:1px #fff solid; width:80%; margin:0px auto; padding:2%;margin-top:7%;">
+					<span style="font-size:33px;">预约设计师</span> designer
+				</div>
+				<p style="font-size:16px;color:#fff;line-height:35px;text-align:left; margin-top:15%;  margin-left: 12%; font-weight:bold;"><font color="#f63e39">空间布局</font>如何正确利用？<br/>
+					<font color="#f63e39">软装</font>如何布置？<br/>
+					求<font color="#f63e39">新中式风格</font>设计？</p>
+					<div>
+					<input type="button" value="立即预约"href="#" class="boOrder"style="width:240px; height:40px; color:red; background:#fff;border-radius:10px;font-size:20px; margin-top:10%;font-weight:bold;" />
+					</div>
+			</div>
+		</div>
+			
+		</div>
+	
+	<div style="position:absolute; bottom:400px;z-index:4;text-align:center; margin:0px auto;width: 100%;"><p style="margin:0px auto;text-align:center;margin: 0 auto;width: 1200px;font-size:20px;">本次活动最终解释权归 广东华浔品味装饰集团东莞公司 所有</p></div>
+	<div style="position:absolute; bottom:1800px;z-index:3;"><img src="images/HZ2_0333.png" style="width:100%;"/></div>
+	<div style="position:absolute; bottom:345px;z-index:3;"><img src="images/HZ2_02.png" style="width:100%;"/></div>
+<div class="foot">
+		<div class="layout">
+			<div class="ftop clearfix">
+				<dl class="clearfix">
+					<dt><h3>品牌实力</h3></dt>
+						<dd><a href="http://dg.hxdec.com//index.php/News/index/cat_id/35" target="_blank">品牌介绍</a></dd><dd><a href="http://dg.hxdec.com//index.php/News/index/cat_id/9" target="_blank">发展历程</a></dd><dd><a href="http://dg.hxdec.com//index.php/News/index/cat_id/10" target="_blank">资质荣誉</a></dd><dd><a href="http://dg.hxdec.com//index.php/News/index/cat_id/11" target="_blank">企业动态</a></dd><dd><a href="http://dg.hxdec.com//index.php/News/index/cat_id/12" target="_blank">社会公益</a></dd><dd><a href="http://dg.hxdec.com//index.php/News/index/cat_id/13" target="_blank">品牌视频</a></dd>				</dl>
+				<dl class="clearfix">
+					<dt><h3>装修案例</h3></dt>
+							<dd><a href="http://dg.hxdec.com//index.php/Case/index"  target="_blank">金马克</a></dd>
+							<dd><a href="http://dg.hxdec.com//index.php/Case/index"  target="_blank">精品案例</a></dd>
+							<dd><a href="http://dg.hxdec.com//index.php/Gallery/index"  target="_blank">案例图库</a></dd>
+							<dd><a href="http://dg.hxdec.com//index.php/Vr/index"  target="_blank">VR实景</a></dd>
+							<dd><a href="http://dg.hxdec.com//index.php/Hourse/index"  target="_blank">热装楼盘</a></dd>
+							<dd><a href="http://dg.hxdec.com//index.php/Work/index"  target="_blank">在建工地</a></dd>
+				</dl>
+
+				<dl class="clearfix">
+					<dt><h3>服务团队</h3></dt>
+						<dd><a href="http://dg.hxdec.com//index.php/Design/index"  target="_blank">设计团队</a></dd>
+						<dd><a href="http://dg.hxdec.com//index.php/Dot/index"  target="_blank">服务门店</a></dd>
+				</dl>
+				<dl class="clearfix">
+					<dt><h3>营销活动</h3></dt>
+					<dd><a href="http://dg.hxdec.com//index.php/Activi/index/cat_id/25"  target="_blank">全国活动</a></dd>
+					<dd><a href="http://dg.hxdec.com//index.php/Activi/index/cat_id/26"  target="_blank">分公司活动</a></dd>
+				</dl>
+
+				<div class="box">
+					<h3>为您推荐</h3>
+					<div class="pich"><a target="_blank" href="http://www.hxdec.com/ppsl/index.php"><img src="picture/1510647366.jpg"></a></div> 
+				</div>
+				<form id="form3" method="post">
+					<h3>在线下单尊享贵宾体验</h3>
+					<input type="text" class="text" placeholder="联系人" name="name" id="name" />
+					<input type="text" class="text" placeholder="联系电话"  name="mobile" id="mobile"/>
+					<input type="hidden"  name="action" value="add47">
+					  <div class="clearfix">
+                                <input type="text" class="text text2" placeholder="验证码"   name="code" id="verify" style="margin-right: 15px;width: 101px;float:left;" />
+                                <div class="yzm"><img src="code.php" onclick="this.src+='?rand='+Math.random();" id="imgverify" style="width: 81px;"></div>
+                                <span><a href="javascript:void(0);" onclick="document.getElementById('imgverify').src+='?rand='+Math.random();">看不清，换一张</a></span>
+                       </div>
+					 <input type="hidden"  name="company_id" value="0">
+					     <input type="hidden"  name="is_equ" value="1">
+                     <input type="hidden"  name="type" value="1">
+					<p><font color='red' size='-1' id='s_cmresult_3'></font></p>
+					<input type="submit" class="button" value="提交" onclick="s_mySubmit_3('form3','/index.php/Contact/message','s_cmresult_3')" />
+				</form>
+				<script type="text/javascript">
+                /****提交表单************/
+                function s_mySubmit_3(theForm,url,result){
+                    var province_id=$('#province').val();
+                    var city_id=$('#city').val();
+                    var name=$('#name').val();
+                    var mobile=$('#mobile').val();
+                    var verify=$('#verify').val();
+                    var hourse=$('#hourse').val();
+
+              
+                    if(name==''){
+                         layer.msg('请填写姓名');
+                        return false;
+                    }
+                        if(mobile==''){
+                         layer.msg('请填写手机');
+                        return false;
+                    }
+
+                          if(verify==''){
+
+                        layer.msg('请填写验证码');
+                        return false;
+                    }
+
+        
+                    //$('#form').submit();
+                    function default_callback(res){
+                        
+                        if(res.status=='1'){
+                            //document.getElementById(theForm).reset();
+
+                        layer.msg('留言提交成功');
+                            location.reload();
+                            document.getElementById(theForm).reset();
+
+
+                        }else{
+                            result.html(res.info);
+                        }
+                    }
+
+                    var callback = arguments[3] || default_callback;
+
+                    var result = $('#'+result);
+                    result.html('loading...');
+                    var data = $('#'+theForm).serialize();//2014/10/07更新
+
+                    $.post(url,data,callback,'json');
+                    return false;
+                }
+
+            </script>
+                 <div class="ewm">
+					<span style="font-size:16px; text-align:left;">亲！关注我们</span>
+					<div class="pic"><img src="picture/1511494024.jpg"></div>
+					<p>周一到周日 9：00-18：00<em>400-040-2005</em></p>
+				</div>
+			</div>
+			<dl class="link clearfix">
+				<dt>友情链接</dt>
+				<dd>
+					<div class="link_line">		
+						<div>
+						<a target="_blank" href="http://www.totojia.com ">房子装修效果图</a><a target="_blank" href="http://zh.landizs.com">珠海装修公司</a><a href="http://www.hxdec.com/">装修公司</a><a href="http://www.hxdec.com/">装饰公司</a><a href="http://www.hxdec.com/">别墅装修公司</a>
+						</div>
+						<div>
+						<a href="http://www.hxdec.com/">广州装修公司</a>	
+						</div>		
+					</div>
+				</dd>
+			</dl>
+			<div class="copyright">版权信息：1998-2017 广东华浔品味装饰集团       ICP备案号:<a href="http://www.miitbeian.gov.cn/">粤ICP备15089103号</a></div>
+			
+		</div>
+	</div>
+	
+	<div class="bo_fide"></div>
+	
+	<div class="item1 bo_Box">
+		<div class="bo_title">预约下单</div>
+		<div class="bo_form">
+			<form id="form_tan" method="post">
+				<div class="mx">
+					<label><i>* </i>楼盘名字：</label>
+					<input type="text" name="hourse"  id="hourse_tan">
+				</div>
+				<div class="mx">
+					<label><i>* </i>您的名字：</label>
+					<input type="tel" name="name" id="name_tan">
+				</div>
+				<div class="mx">
+					<label><i>* </i>联系电话：</label>
+					<input type="tel" name="mobile" id="mobile_tan">
+				</div>
+				 <div class="mx" style="padding-left: 187px;">
+				 <label style="float: left;"><i>* </i>验 证 码：</label>
+				
+				<input type="text" class="text text2" placeholder="验证码" name="code" id="verify_tan" style="width:50px;float: left;" />
+				<div class="yzm"><img style="float: left;margin: 5px;" src="code.php" onclick="this.src+='?rand='+Math.random();" id="tan_imgverify"></div>        
+                  </div>
+                     <input type="hidden"  name="company_id" value="0">
+                     <input type="hidden"  name="action" value="add47">
+                            <input type="hidden"  name="type" value="1" id="type_tan">
+                             <input type="hidden"  name="is_equ" value="1">
+                   <p class="mx"><font style="text-align: center;" color='red' size='-1' id='cmresult_tan'></font></p>
+				<input type="submit" name="submit" class="submit" value="立即提交" onclick="mySubmit_tan('form_tan','/index.php/Contact/message','cmresult_tan')">
+			</form>
+		</div>
+		<div class="close"><img src="picture/bo_close.jpg"></div>  
+	</div>
+<style>
+	#kfqq{ position:fixed; right:0px; top:10%;  }
+	#kfqq img{ width:130px; }
+</style>
+		<script type="text/javascript">
+		$(function(){
+			// 2017-10-17波
+
+			$('.close').click(function(){
+				$('.bo_Box,.bo_fide').hide()
+			})
+
+			$('.boPro').click(function(){
+				$('.item0,.bo_fide').show()
+				$('.bo_title').html('投诉建议');
+				return false
+			})
+			$('.boOrder').click(function(){
+				$('.item1,.bo_fide').show();
+				$('.bo_title').html('在线下单');
+			$('#type_tan').val(1);
+			$('#design_new').val('');
+				$('#design_name_tan').val('');
+						$('#hourse_tan').val('');
+			$('#design_div').hide();
+				return false
+			})
+
+		    })
+	</script>
+	<script type="text/javascript">
+		function design_order(design_name)
+		{
+			$('.item1,.bo_fide').show();
+			$('.bo_title').html('预约装修');
+			$('#type_tan').val(2);
+			$('#design_new').val(design_name);
+				$('#design_name_tan').val(design_name);
+			$('#design_div').show();
+		}
+
+	    function order_show(hourse_name)
+		{
+			if(hourse_name)
+			{
+				$('.item1,.bo_fide').show();
+				$('.bo_title').html('在线下单');
+				$('#type_tan').val(1);
+				$('#hourse_tan').val(hourse_name);
+
+			}else{
+
+				$('.item1,.bo_fide').show();
+				$('.bo_title').html('在线下单');
+				$('#type_tan').val(1);
+				$('#design_new').val('');
+				$('#design_name_tan').val('');
+				$('#design_div').hide();
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		selectphone('.c_select','.c_name');
+					$(".calculate .tit").click(function() {
+				$(this).parents(".calculate").find(".con").slideDown();
+			});$(".calculate .close").click(function() {
+				$(this).parents(".calculate").find(".con").slideUp();
+			});
+			if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+				new WOW().init();
+			};
+	</script>
+	<script type="text/javascript">
+		selectphone('.c_select','.c_name');
+					$(".calculate .tit2").click(function() {
+				$(this).parents(".calculate").find(".con").slideDown();
+			});$(".calculate .close").click(function() {
+				$(this).parents(".calculate").find(".con").slideUp();
+			});
+			if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+				new WOW().init();
+			};
+	</script>
+	<form action="#" method="post">
+	<div class="footer_float">
+	<div class="f_f_box">
+	<div class="f_l">
+	<img src="picture/baojiabg.png">
+	<h3>算一算装修该花多少钱?</h3>
+	
+	</div>
+	<div class="f_c">
+	<dl class="book fixed AForm form_box">
+		<dd class="m_t"><span class="error">
+			<input type="text" placeholder="您的姓名" name="name" class="txt required Aname" data-valid="isNonEmpty||EnorZh||between:2-5" data-error="姓名不能为空||姓名为中或英文||姓名为2-5位" data-status="0"></span></dd>
+
+		<dd class="m_t"><span class="in error">
+			<input type="text" placeholder="手机号" name="mobile"class="txt required Aphone" data-valid="isNonEmpty||isMobile" data-error="电话不能为空||电话格式有误" data-status="0"></span></dd>
+		<dd><span class="">
+			<input type="text" name="hourse" placeholder="楼盘名称" class="txt ALPMC"></span></dd>
+		<dd><span class="">
+			<input type="text" class="text text2" placeholder="验证码" name="code" id="verify_tan" style="width:60%;float: left;" />
+				<div class="yzm"><img style="margin: 5px;" src="code.php" onclick="this.src+='?rand='+Math.random();" id="tan_imgverify"></div>   </span></dd>
+		<dd class="last">
+		<input type="hidden"  name="action" value="add47">
+			<button type="submit" name="button" class="bon Applicationbtn1 btm" data-id="1" data-name="底部预约" data-title="预约服务" data-classid="62">获取<br>
+				报价</button>
+		</dd>
+	</dl>
+	</div>
+	<div class="f_r">
+	<h3>400-040-2005</h3>
+	<p>装修咨询热线</p>
+	</div>
+	</div>
+	<span class="togg">x</span>
+	<div class="getshow">
+	<img src="picture/11.png">
+	</div>
+	</div>
+	<script>
+	getSingleLine1Numto("SingleLine1Num2", 62, "title");
+	getSingleLine1Numto("SingleLine1Num1", 62, "title");
+	</script>
+
+    </form>
+</body>
+</html>

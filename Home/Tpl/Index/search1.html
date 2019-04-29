@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<link href="__CSS__/swiper-3.4.1.min.css" type="text/css" rel="stylesheet" />
+	<link href="__CSS__/style.css" type="text/css" rel="stylesheet" />
+    <title>搜索</title>
+</head>
+<body data-psd-width="750" style="background: #fff;">
+	<div class="header tc">
+	    <div class="fl back" onclick="history.go(-1)">
+	        <i></i>
+	    </div>
+	    <form  name="myform" id="myform" method="post" action="/index.php/Case/index">
+	    	<div class="input box">
+	            <span class="search_select"><i class="selected">案例</i><i class="icon"></i></span>
+	            <input class="word" type="text" name="keywords" id="keywords" value="" placeholder="请输入搜索关键词" class="flex1">
+	            <input type="hidden" name="act" value="Case" id="act">
+	            <a class="search2" id="jsBtn"></a>
+	        </div>
+	        <div class="select_list_body">
+	            <section class="search_select_list fadeInUp1">
+	                <span id="Case">案例</span>
+	                <span id="Design">设计师</span>
+	                <span id="Gallery">图库</span>
+	            </section>
+	            <div class="search_select_list_body fadeIn">
+	            </div>
+	        </div>
+	    </form>
+	    <em class="menu">
+		    <i></i>
+		    <i></i>
+		    <i></i>
+		</em>
+	    <div class="black_block"></div>
+	</div>
+	<div class="menu_detail">
+		<div class="menu_detail_box clearfix tc">
+			<a href="case.html">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/at.png" class="icon">
+				<span class="txt_overflow">首页</span>
+			</a>
+			<a href="case.html">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a1.png" class="icon">
+				<span class="txt_overflow">装修案例</span>
+			</a>
+			<a href="activity.html">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a2.png" class="icon">
+				<span class="txt_overflow">最新活动</span>
+			</a>
+			<a href="">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a3.png" class="icon">
+				<span class="txt_overflow">设计团队</span>
+			</a>
+			<a href="designer.html">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a4.png" class="icon">
+				<span class="txt_overflow">附近华浔</span>
+			</a>
+			<a href="live.html">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a5.png" class="icon">
+				<span class="txt_overflow">热装楼盘</span>
+			</a>
+			<a href="">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a6.png" class="icon">
+				<span class="txt_overflow">装修指南</span>
+			</a>
+			<a href="booking.html">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a7.png" class="icon">
+				<span class="txt_overflow">免费报价</span>
+			</a>
+			<a href="news.html">
+				<img title="{$list.title }"alt="{$list.title }" src="__IMG__/a8.png" class="icon">
+				<span class="txt_overflow">装修图库</span>
+			</a>
+		</div>
+	</div>
+	<div class="location_detail fadeInUp">
+		<form class="bgc">
+			<div class="box">
+				<select name="" class="flex1" id="prov">
+					<option value="">省/市</option>
+					<option value="1">北京</option><option value="2">上海</option><option value="3">天津</option><option value="4">重庆</option><option value="5">黑龙江</option><option value="6">吉林</option><option value="7">辽宁</option><option value="8">内蒙古</option><option value="9">宁夏</option><option value="10">新疆</option><option value="11">青海</option><option value="12">甘肃</option><option value="13">陕西</option><option value="14">河北</option><option value="15">河南</option><option value="16">山东</option><option value="17">山西</option><option value="18">湖北</option><option value="19">湖南</option><option value="20">安徽</option><option value="21">江苏</option><option value="22">浙江</option><option value="23">江西</option><option value="24">广东</option><option value="25">广西</option><option value="26">福建</option><option value="27">四川</option><option value="28">云南</option><option value="29">贵州</option><option value="30">西藏</option><option value="31">海南</option><option value="32">香港</option><option value="33">澳门</option><option value="34">台湾</option>
+				</select>
+				<i style="display: block;width: 0.19rem;"></i>
+				<select name="" class="flex1" id="city"><option value="" data-index="0">市/区</option></select>
+				</div>
+		</form>
+		<div class="geo_title">
+			<i class="geo_close"></i>
+			<h1 class="ellipsis">附近华浔</h1>
+		</div>
+		<div class="geo bg_white">
+			<div class="geoResult">
+				<p class="current tc">
+					当前定位：<span class="fc_e60012">广州市</span>
+				</p>
+				<p class="tit tc">广州有以下13家华浔</p>
+				<div class="fendian">
+				</div>
+			</div>
+			<ul id="ul_ou">
+				<li><div><a href="">广州公司总部</a></div></li>
+				<li><div><a href="">黄埔设计中心（整装）</a></div></li>
+				<li><div><a href="">维家思分部</a></div></li>
+				<li><div><a href="">德政北分部</a></div></li>
+				<li><div><a href="">海珠分部</a></div></li>
+				<li><div><a href="">白云公司</a></div></li>
+				<li><div><a href="">番禺公司</a></div></li>
+				<li><div><a href="">增城公司</a></div></li>
+				<li><div><a href="">新塘公司</a></div></li>
+				<li><div><a href="">花都公司</a></div></li>
+				<li><div><a href="">南沙公司</a></div></li>
+				<li><div><a href="">从化公司</a></div></li>
+
+			</ul>
+		</div>
+	</div>
+ 	<!-- <div class="footer">
+ 		<a href="">浏览电脑版</a>
+ 		<p>Copyright © 2017华浔品味装饰 版权所有（粤ICP备15089103号-1）</p>
+ 	</div> -->
+ 	<a href=""><div class="go_ask"></div></a>
+	<div class="go_top"></div>
+	<div class="footer_href box">
+		<a href="" class="flex1">
+			<i></i><span>电话预约</span>
+		</a>
+		<a href="" class="flex1">
+			<i></i><span>装修报价</span>
+		</a>
+	</div>
+	<div class="search_hot">
+	    <em><span>热门搜索</span></em>
+	    <div>
+	        <a href="javascript:void(0);" class="ellipsis">现代简约</a>
+	        <a href="javascript:void(0);" class="ellipsis">客厅</a>
+	        <a href="javascript:void(0);" class="ellipsis">汪大锋</a>
+	        <a href="javascript:void(0);" class="ellipsis">最新活动</a>
+	        <a href="javascript:void(0);" class="ellipsis">装修指南</a>
+	        <a href="javascript:void(0);" class="ellipsis">新中式</a>
+	    </div>
+	    <div class="none">
+	       
+	        <a href="javascript:void(0);" class="ellipsis">公寓设计师</a>
+	        <a href="javascript:void(0);" class="ellipsis">跃层设计师</a>
+	        <a href="javascript:void(0);" class="ellipsis">普通住宅设计师</a>
+	        <a href="javascript:void(0);" class="ellipsis">更多</a>
+	    </div>
+	    <div class="none">
+	        <a href="javascript:void(0);" class="ellipsis">客厅图片</a>
+	        <a href="javascript:void(0);" class="ellipsis">卧室图片</a>
+	        <a href="javascript:void(0);" class="ellipsis">厨房图片</a>
+	        <a href="javascript:void(0);" class="ellipsis">阳台图片</a>
+	        <a href="javascript:void(0);" class="ellipsis">书房图片</a>
+	        <a href="javascript:void(0);" class="ellipsis">更多</a>
+	    </div>
+	</div>
+</body>
+</html>
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/rem.js"></script>
+<script src="__JS__/fastclick.js"></script>
+<script src="__JS__/swiper-3.4.1.jquery.min.js"></script>
+<script src="__JS__/js.js"></script>
+<script>
+	//单独页面上的js
+	$(function(){
+		 $('.search_select').click(function() {
+		$('.select_list_body').show();
+		});
+		$('.search_select_list_body').click(function() {
+			$('.select_list_body').hide();
+		});
+		$('.search_select_list span').click(function() {
+			var eq = $('.search_select_list span').index($(this));
+			$('.selected').text($(this).text());
+			$('.select_list_body').hide();
+			$('.search_hot > div').hide();
+			$('.search_hot > div').eq(eq).slideDown();
+			var id=$(this).attr('id');
+			var actname = $("#act").val(id);
+			 var url="/index.php/"+id+"/index"; 
+			document.getElementById("myform").action=url;
+		}); 
+	})
+	      //js提交   
+        $("#jsBtn").click(function(){ 
+            var action=$("#act").val();
+            var url="/index.php/"+action+"/index";  
+
+            document.myform.action= url;  
+            document.myform.submit();     
+        })  
+
+         $(".ellipsis").click(function(){ 
+         	var keywords = $(this).html();
+         	$('#keywords').val(keywords);
+            var action=$("#act").val();
+            var url="/index.php/"+action+"/index/";  
+
+            document.myform.action= url;  
+            document.myform.submit();     
+        })  
+</script>

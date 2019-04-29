@@ -1,0 +1,20 @@
+<include file='Public:pagesHeader'/>
+<div class="content">
+		<div class="con">
+			<div class="con_t bgc">
+				<h2>{$article_detail.title}</h2>
+				<span>发布时间：{$article_detail.add_time|date='Y/m/d',###}</span>
+			</div>
+			<div class="con2 bgc">
+				{$article_detail.content}
+			</div>
+		</div>
+</div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+	//单独页面上的js
+	$(function(){
+		// $(".lazy_img").lazyload({ effect: "fadeIn" });
+	})
+</script>

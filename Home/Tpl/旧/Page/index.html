@@ -1,0 +1,26 @@
+<include file='Public:pageHeader'/>
+  <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+	<div class="layout">
+		<div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Activi/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Activi/index',array('cat_id'=>$cat_id))}">{$cat_less_info.cat_name}</a>
+		<!--<em>&gt;</em><san>{$article_detail.title}</san>--></p></div>
+		<div class="main clearfix">
+			<div class="lnav" style="display: none">
+				<ul class="navlist">
+					<li class="on"><a href="#"><i>品牌介绍</i></a></li>
+					<li><a href="#"><i>资质荣誉</i></a></li>
+					<li><a href="#"><i>企业动态</i></a></li>
+					<li><a href="#"><i>发展历程</i></a></li>
+					<li><a href="#"><i>社会公益</i></a></li>
+				</ul>
+				<div class="ggpicl pich"><a href="#"><img src="__IMG__/pic9.jpg"></a></div>
+			</div>
+
+			<div class="brands">
+				<h1 style="font-size:23px">{$article_detail.title}</h1>
+				{$article_detail.content}
+			</div>
+		</div>
+	</div>
+<include file='Public:pageFooter'/>
+</body>
+</html>

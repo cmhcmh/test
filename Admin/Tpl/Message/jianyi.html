@@ -1,0 +1,86 @@
+<include file="Index:pageHeader" />
+<script type="text/javascript">
+function delRecruitment(id,prefix) {
+	$.dialog.confirm('你确定要删除这个留言吗？', function(){
+		window.location.href="{:U('Message/del')}/id/"+id+"/prefix/"+prefix;
+		
+	}, function(){
+		//$.dialog.tips('执行取消操作');
+	});
+}
+</script>
+    <div class="column_Box mainAutoHeight">
+        <div class="tab">
+            <ul>
+                <li class="current"><a href="javascript:">留言列表</a></li>
+            </ul>
+        </div>
+        <div class="wrapBox mainAutoHeight">
+		
+			
+            <!--招聘列表-->
+            <div class="body User">
+            <div class="item">
+                    <div class="searchBar">
+						<form action="{:U('Message/index')}">
+
+						    <input name="cat_id" value="{$cat_id}" type="hidden">
+						    <input name="type" value="{$type}" type="hidden">
+							<include file='District:company'/>&nbsp;
+
+							联系电话 ：
+							<input type="text" class="txt" name="tel" value="{$filter.tel}"/>&nbsp;&nbsp;<input type="hidden" name="prefix" value="{$prefix}"/><input type="submit" class="submit btn_search" value="搜索" />
+						</form>
+                    </div>
+                </div>
+				
+				<form method="POST" action="{:U('Feedback/batch')}" name="listForm">
+					<table border="0" cellpadding="0" cellspacing="0" class="center">
+						<thead>
+							<tr>
+								<th style="width:70px;">编号</th>
+								<th>姓名</th>
+								<th>所在地区</th>
+								<th>详细地址</th>
+								<th>联系电话</th>
+								<th>来源的分公司</th>
+								<th>分派的分公司</th>
+								<th>留言时间</th>
+								<th>查看详情</th>
+							</tr>
+						</thead>
+						<tbody>
+							<foreach name="recruitmentList" item="vo">
+							<tr>
+								<td>{$vo.id}</td>
+								<td>{$vo.name}</td>
+				
+								<td>{$vo.province_name}-{$vo.city_name}</td>
+								<td>{$vo.address}</td>
+								<td>{$vo.tel}</td>
+								<td> <if condition="$vo['company_name']!=''">{$vo.company_name}<else/>集团</if></td>
+								<td>{$vo.be_company_name}</td>
+								<td>{$vo.add_time}</td>
+								<td>
+									<span>
+										<a title="查看详情" href="{:U('Message/edit',array('id'=>$vo['id'],'prefix'=>$prefix,type=>3))}"><img width="16" height="16" border="0" src="__PUBLIC__/Admin/Img/icon_edit.gif"></a>&nbsp;
+										<!--
+										<a title="移除" onclick="delRecruitment('{$vo.id}','{$prefix}')" href="javascript:;"><img width="16" height="16" border="0" src="__PUBLIC__/Admin/Img/icon_drop.gif"></a>-->
+									</span>
+								</td>
+							</tr>
+							</foreach>
+						</tbody>
+					</table>
+						<div class="f_r">
+							<div class="pagination">{$page}</div>
+						</div>
+					
+					
+					<div class="lineHeight" style="border-bottom:1px dashed #cccccc;"></div>
+				</form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

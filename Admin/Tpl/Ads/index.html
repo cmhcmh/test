@@ -1,0 +1,88 @@
+<include file="Index:pageHeader" />
+<script type="text/javascript">
+function delAds(id,prefix) {
+	$.dialog.confirm('你确定要删除这个广告图吗？', function(){
+		window.location.href="{:U('Ads/del')}/ads_id/"+id+"/prefix/"+prefix;
+	}, function(){
+		//$.dialog.tips('执行取消操作');
+	});
+}
+</script>
+    <div class="column_Box mainAutoHeight">
+        <div class="tab">
+            <ul>
+                <li class="current"><a href="javascript:">图片列表</a></li>
+            </ul>
+        </div>
+        <div class="wrapBox mainAutoHeight">
+		
+			
+            <!--广告图列表-->
+            <div class="body User">
+                <div class="item">
+                    <a href="javascript:void(0);" class="dot_Item"><span class="Icon_item icon_xingjian"></span><i><input type="button" value="添加" class="submitNoBg" onclick="window.location.href='{:U('Ads/add',array('cat_id'=>$cat_id,'prefix'=>$prefix))}'"/></i></a>
+                        <if condition="$admin_info['action_list']=='all'">
+                     <div class="searchBar">
+						<form action="{:U('Ads/index')}">
+							<include file='District:company'/>&nbsp;
+						&nbsp;<input type="hidden" name="prefix" value="{$prefix}"/>
+						<input type="hidden" name="cat_id" value="{$cat_id}"/>
+						<input type="submit" class="submit btn_search" value="搜索" />
+						</form>
+                    </div>
+                    </if>
+                </div>
+				
+				<form method="POST" action="{:U('Ads/batch')}" name="listForm">
+					<table border="0" cellpadding="0" cellspacing="0" class="center">
+						<thead>
+							<tr>
+								<th style="width:70px;">编号</th>
+								<th>名称</th>
+								<th>图片图标</th>
+								<th>链接</th>
+								<th>更新时间</th>
+								<if condition="$cat_id==8"><th>数字</th></if>
+								<th>是否全国显示</th>
+								<th>图片尺寸</th>
+								<th>所属的分公司</th>
+								<th>排序</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<foreach name="adsList" item="vo">
+							<tr>
+								<td>{$vo.ads_id}</td>
+								<td><font color='red'>{$vo.title}</font></td>
+								<td><img src="__ROOT__/{$vo.original_img}" style='max-width:300px; max-height:200px;'/></td>
+								<neq name='Think.get.cat_id' value='1'><td>{$vo.link}</td></neq>
+								<td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
+								<if condition="$cat_id==8">	<td>{$vo.nums}</td></if>
+								 <td><if condition="$vo['is_whole']==1"><img src="__PUBLIC__/Admin/Img/yes.gif"/><else/><img src="__PUBLIC__/Admin/Img/no.gif"/></if></td> 
+								<td><font color='red'>{$vo.img_size}</font></td>
+								<td>{$vo.c_name}</td>
+								<td>{$vo.sort_order}</td>
+								<td>
+									<span>
+										<a title="编辑" href="{:U('Ads/edit',array('id'=>$vo['ads_id'],'cat_id'=>$vo['cat_id'],'prefix'=>$prefix))}"><img width="16" height="16" border="0" src="__PUBLIC__/Admin/Img/icon_edit.gif"></a>&nbsp;
+										<a title="移除" onclick="delAds('{$vo.ads_id}','{$prefix}')" href="javascript:;"><img width="16" height="16" border="0" src="__PUBLIC__/Admin/Img/icon_drop.gif">
+										</a>
+									</span>
+								</td>
+							</tr>
+							</foreach>
+						</tbody>
+					</table>
+					<div class="f_r">
+							<div class="pagination">{$page}</div>
+						</div>
+					
+					
+					<div class="lineHeight" style="border-bottom:1px dashed #cccccc;"></div>
+				</form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

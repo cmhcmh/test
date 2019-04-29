@@ -1,0 +1,210 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<if condition="$company_id==152">
+<meta name="baidu-site-verification" content="g2yRiP3sXS" />
+</if>
+<if condition="$company_id==172">
+<meta name="baidu-site-verification" content="6AuajaZJNF" />
+</if>
+<if condition="$company_id==166">
+<meta name="baidu-site-verification" content="Sj7RaXzWD2" />
+</if>
+<if condition="$company_id==174">
+<meta name="baidu-site-verification" content="IgWPyMUaKT" />
+</if>
+<if condition="$company_id==181">
+<meta name="baidu-site-verification" content="Za38BzVgwL" />
+</if>
+
+
+
+<link rel="stylesheet" href="__CSS__/animate.css">
+<link type="text/css" rel="stylesheet" href="__CSS__/style.css" />
+<script type="text/javascript" src="__JS__/jquery.js"></script> 
+<script type="text/javascript" src="__JS__/slick.js"></script>
+<script type="text/javascript" src="__JS__/jquery.dotdotdot.js"></script>
+<script type="text/javascript" src="__JS__/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="__JS__/js.js"></script>
+<script type="text/javascript" src="__JS__/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="__JS__/jquery.jscrollpane.min.js"></script>
+<script src="__JS__/jquery.waypoints.min.js"></script>
+<script src="__JS__/layer.js"></script>
+<script type="text/javascript" src="__JS__/jquery.countup.min.js"></script>
+<script src="__JS__/wow.min.js"></script>
+<title>{$site_title}..</title>
+<meta name='keywords' content="{$site_keywords}"/>
+<meta name='description' content="{$site_description}"/>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	    side('.sidel li','.trun','on');
+    });
+  
+
+    
+</script>
+
+	{$site_info['kefu']}
+
+</head>
+<body style='<if condition="$nid eq 1">padding-bottom: 70px;</if>{$css_style}'>
+<div class="header">
+	<div class="layout clearfix">
+		<a href="/" class="logo" style="background: url(/{$other_logo.original_img}) center no-repeat;"></a>
+		<div class="cadd">
+			<a href="{:U('Dot/index')}">切换城市</a>
+			<if condition="$company_id==0">
+			<h3>全国</h3>
+			<else/>
+			 <h3 style="font-size: 16px">{$company_info['c_name']}</h3>
+			</if>
+		</div>
+		
+		<div class="fr">
+			<form class="clearfix" name="searchmyform" id="searchmyform">
+				<if condition="$company_id==0">
+				<div class="call">
+					<div class="dianh"><div class="dhic"></div><b>全国咨询热线</b><font style="font-size:24px">{$site_info_com.tel}</font></div>
+					<!--<dl>
+						<dd><i>全国售后：</i>{$site_info.tel1}</dd>
+					</dl>-->
+				</div>
+				<else/>
+				<style>
+				.header .call:hover{
+					border-color: #FFF;
+				}
+				</style>
+				 <div class="call">
+					<div class="dianh"><div class="dhic"></div><b>公司咨询热线</b><font style="font-size:24px">{$site_info.tel}</font></div>
+				</div>
+
+				</if>
+				<div class="box">
+					<div class="xiala">
+						<div class="xz xzs">案例</div>
+						<ul>
+							<li id="Case">案例</li>
+							<li id="Design">设计师</li>
+						</ul>
+					</div>
+					<input type="text" class="text"  name="keywords" id="keywords"/>
+					 <input type="hidden" name="act" value="Case" id="act">
+					<input type="button" class="button"  id="jsBtn" />
+				</div>
+			</form>
+		<script type="text/javascript">
+					  //js提交   
+		$("#jsBtn").click(function(){ 
+		var action=$("#act").val();
+		var url="/index.php/"+action+"/index";  
+
+		document.searchmyform.action= url;  
+		document.searchmyform.submit();     
+		})  
+
+
+		</script>
+
+		</div>
+	</div>
+	<div class="navnum" style="background:#444444;width:100%; margin-top: 20px;">
+		<ul class="menu clearfix" style="width:1200px; margin:0px auto;">
+			<li>
+				<h3><a href="/">首页<span>|</span></a></h3>
+			</li>
+			<li>
+				<h3><a target="_blank" href="<if condition="$company_id==0">http://www.hxdec.com/ppsl/index.php<else/><if condition="$all_cats[1]['cat_link'] eq ''">{:U('News/index')}<else/>{$all_cats[1]['cat_link']}</if></if>">{$all_cats[1]['cat_name']}<span>|</span></a></h3>
+				<dl>
+
+				<foreach name="all_cats[1]['sub_cat']" item="list" key='k'>
+					<if condition="($list['cat_id'] neq 14)">
+					<dd><a href="<if condition="$list['cat_link'] eq ''"> <if condition="($company_id eq 0 && $list['cat_link2'] neq '')   ">{$list['cat_link2']}<else/>{:U('News/index',array('cat_id'=>$list['cat_id']))}</if> <else/>{$list['cat_link']}</if>">{$list.cat_name}</a></dd>
+					</if>
+				</foreach>
+					<dd><a target="_blank" href="http://hxbwg.hamilan.cn" rel="nofollow"> 华浔时代馆</a></dd>
+				</dl>
+			</li>
+			<li>
+				<h3><a href="{:U('Case/index')}">{$all_cats[2]['cat_name']}<span>|</span></a></h3>
+				<dl>
+
+					<dd><a href="{$all_cats[2]['sub_cat'][15]['cat_link']}" target="_blank">{$all_cats[2]['sub_cat'][15]['cat_name']}</a></dd>
+					<dd><a href="{:U('Case/index')}">{$all_cats[2]['sub_cat'][16]['cat_name']}</a></dd>
+					<dd><a href="{:U('Gallery/index')}">{$all_cats[2]['sub_cat'][17]['cat_name']}</a></dd>
+					<dd><a href="{:U('Vr/index')}">{$all_cats[2]['sub_cat'][18]['cat_name']}</a></dd>
+					<dd><a href="{:U('Hourse/index')}">{$all_cats[2]['sub_cat'][19]['cat_name']}</a></dd>
+					<dd><a href="{:U('Work/index')}">{$all_cats[2]['sub_cat'][20]['cat_name']}</a></dd>
+				</dl>
+			</li>
+			<li>
+				<h3><a href="{:U('Design/index')}">{$all_cats[3]['cat_name']}<span>|</span></a></h3>
+				<dl>
+					<dd style="display: none"><a href="#">{$all_cats[3]['sub_cat'][22]['cat_name']}</a></dd>
+					<dd><a href="{:U('Design/index')}">{$all_cats[3]['sub_cat'][23]['cat_name']}</a></dd>
+					<if condition="$company_id==0"><dd><a href="{:U('Dot/index')}">{$all_cats[3]['sub_cat'][24]['cat_name']}</a></dd></if>
+				</dl>
+			</li>
+			<li>
+				<h3><a href="{:U('Activi/index',array('cat_id'=>26))}">{$all_cats[4]['cat_name']}<span>|</span></a></h3>
+				<dl>
+					<if condition="$company_id==0"><dd><a href="{:U('Activi/index',array('cat_id'=>25))}">{$all_cats[4]['sub_cat'][25]['cat_name']}</a></dd></if>
+					<dd><a href="{:U('Activi/index',array('cat_id'=>26))}">{$all_cats[4]['sub_cat'][26]['cat_name']}</a></dd>
+				</dl>
+			</li>
+			<li>
+			
+			
+				<h3><a href="<if condition="$company_id==0">http://www.hxdec.com/gy/<else/>{:U('Page/index',array('cat_id'=>28))}</if>">{$all_cats[5]['cat_name']}<span>|</span></a></h3>
+				<dl>
+					<dd><a href="<if condition="$all_cats[5]['sub_cat'][27]['cat_link'] eq ''">{:U('Page/index',array('cat_id'=>27))}<else/>{$all_cats[5]['sub_cat'][27]['cat_link']}</if>">{$all_cats[5]['sub_cat'][27]['cat_name']}</a></dd>
+					<dd><a href="<if condition="$company_id==0">{$all_cats[5]['sub_cat'][28]['cat_link2']}<else/><if condition="$all_cats[5]['sub_cat'][28]['cat_link'] eq ''">{:U('Page/index',array('cat_id'=>28))}<else/>{$all_cats[5]['sub_cat'][28]['cat_link']}</if></if>">{$all_cats[5]['sub_cat'][28]['cat_name']}</a></dd>
+				</dl>
+			</li>
+			<li>
+				<h3><a href="{:U('Page/index',array('cat_id'=>30))}">{$all_cats[6]['cat_name']}<span>|</span></a></h3>
+				<dl>
+					<dd><a href="{:U('Page/index',array('cat_id'=>30))}">{$all_cats[6]['sub_cat'][30]['cat_name']}</a></dd>
+					<dd><a href="#" class="boOrder">{$all_cats[6]['sub_cat'][31]['cat_name']}</a></dd>
+					<!--<dd><a href="#"  class="boOrder">{$all_cats[6]['sub_cat'][32]['cat_name']}</a></dd>-->
+					<dd><a href="{:U('Design/index')}"  >{$all_cats[6]['sub_cat'][32]['cat_name']}</a></dd>
+					<dd><a href="#" class="boPro">{$all_cats[6]['sub_cat'][33]['cat_name']}</a></dd>
+					<dd><a href="{:U('News/index',array('cat_id'=>34))}">{$all_cats[6]['sub_cat'][34]['cat_name']}</a></dd>
+				</dl>
+			</li>
+			<li>
+				<h3><a href="{:U('News/index',array('cat_id'=>36))}">{$all_cats[36]['cat_name']}<span>|</span></a></h3>
+			</li>
+			<li class="last">
+			<if condition="$company_id==71">
+				<h3><a target="_blank" style="color:red;"rel="nofollow" href="http://test.hzhxdec.com/">新版网站<span>|</span></a></h3>
+			<else/>
+				<if condition="$company_id!=9 AND $company_id!=172 AND $company_id!=29"><h3><a rel="nofollow" target="_blank" href="http://www.hamilan.cn">设计研究院<span>|</span></a></h3></if>
+			</if>
+			</li>
+			<li class="last">
+				<h3><a target="_blank" rel="nofollow" href="https://www.jiazhuangpei.com/to-hxpwzs">软装商城<span>|</span></a></h3>
+			</li>
+			<li class="last">
+				<h3><a rel="nofollow" href="https://cloud.hxdec.com/?c=a-92d/#/" target="_blank" >云服务平台<span>|</span></a></h3>
+			</li>
+		</ul>
+	
+	</div>
+</div>
+	<div class="clearfix"></div>
+		<div class="sider" style="left: 50%;  margin-left: -675px;">
+			<ul>
+				
+				<li class="li2"><a href="#"  onclick="order_show();"></a></li>
+				<li class="li3"><a rel="nofollow" href="https://cloud.hxdec.com/?c=a-92d/#/" target="_blank"></a></li>
+				
+				<li class="li5"><a href="javascript:void(0);" class="backtop"></a></li>
+			</ul>
+				<if condition="$company_id gt 0">
+				<a class="backjt" href="http://{$host}"></a>
+			</if>
+		</div>

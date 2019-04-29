@@ -1,0 +1,248 @@
+<include file='Public:pagesHeader'/>
+        <div class="content">
+        <div class="hot">
+            <div class="ad" style="background:url(/{$banner}) center no-repeat;background-size: contain;">
+            </div>
+            <form>
+                <div class="box">
+                    <select name="" class="flex1" id="province_id">
+                        <option value="0">省/市</option>
+                        <foreach name="provincelist" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$province_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                    </select>
+                    <select name="" class="flex1" id="city_id">
+                        <option value="0" data-index="0">市/区</option>
+                        <foreach name="city_list" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$city_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                    <select name="" class="flex1" id="district_id">
+                        <option value="0" data-index="0">区域</option>
+                        <foreach name="district_list" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$district_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                </div>
+                <script type="text/javascript">
+                $(document).ready(function(){
+
+                  //选择地区 
+                $('#district_id').change(function(){  
+                //alert($(this).children('option:selected').val());  
+                //alert($('#myYear').children('option:selected').val());
+                var p1 =$('#province_id').children('option:selected').val();
+                var p2 =$('#city_id').children('option:selected').val();
+                var p3=$(this).children('option:selected').val();//这就是selected的值
+                if(p1==0){
+                    layer.open({
+                         content: '请选择省份'
+                         ,time: 2
+                          });
+                   return false;
+                }  
+                if(p2==0){
+                    layer.open({
+                         content: '请选择城市'
+                         ,time: 2
+                          });
+                   return false;
+                }
+                //var p2=$('#param2').val();//获取本页面其他标签的值  
+                window.location.href="/mobile.php/Hourse/index/province_id/"+p1+"/city_id/"+p2+"/district_id/"+p3+"";//页面跳转并传参     
+                });
+
+                //选择城市 
+                $('#city_id').change(function(){  
+                //alert($(this).children('option:selected').val());  
+                //alert($('#myYear').children('option:selected').val());
+                var p1 =$('#province_id').children('option:selected').val();
+                var p2=$(this).children('option:selected').val();//这就是selected的值
+                var p3 =0;
+                if(p1==0){
+                    layer.open({
+                         content: '请选择省份'
+                         ,time: 2
+                          });
+                   return false;
+                }  
+                //var p2=$('#param2').val();//获取本页面其他标签的值  
+                window.location.href="/mobile.php/Hourse/index/province_id/"+p1+"/city_id/"+p2+"/district_id/"+p3+"";//页面跳转并传参      
+                });
+
+                //选择省份
+                $('#province_id').change(function(){  
+                //alert($(this).children('option:selected').val());  
+                //alert($('#myYear').children('option:selected').val());
+                var p1=$(this).children('option:selected').val();//这就是selected的值
+                var p2 =0;
+                var p3 =0;
+                if(p1==0){
+                    layer.open({
+                         content: '请选择省份'
+                         ,time: 2
+                          });
+                   return false;
+                }  
+                //var p2=$('#param2').val();//获取本页面其他标签的值  
+                window.location.href="/mobile.php/Hourse/index/province_id/"+p1+"/city_id/"+p2+"/district_id/"+p3+"";//页面跳转并传参  
+                });
+                })  
+
+                </script>
+                <!--
+                    <script>
+                $("#province_id").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_id").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_id").append(option);
+                        }
+                    }
+                    
+                });
+            });
+
+            </script>
+            <script>
+        $("#city_id").change(function(){
+            var city_id=$(this).val();
+            $.ajax({
+                url:'/mobile.php/Areacompany/get_district',
+                Type:"POST",
+                data:"city_id="+city_id,
+                dataType:"json",
+                success:function(data){
+                    var district = data.district;
+                    var option=$("<option></option>");
+                    $(option).val("0");
+                    $(option).html("请选择");
+                    $("#district_id").html(option);
+                    for(var i in district){
+                        var option=$("<option></option>");
+                        $(option).val(district[i]['a_id']);
+                        $(option).html(district[i]['area_name']);
+                        $("#district_id").append(option);
+                    }
+                }
+            });
+        });
+        </script>-->
+            </form>
+            <div class="hots">
+                <ul class="hot_list">
+                <foreach name="hourse" item="list" key='k'>
+                    <li class="clearfix clearfixs">
+                        <a href="{:U('Hourse/detail',array('id'=>$list['article_id']))}">
+                            <div class="lazy fl"><img data-original="/{$list.original_img}" class="lazy_img"></div>
+                            <div class="fr hot_t">
+                                <h2 class="txt_overflow">{$list.title}（{$list.area_name}）</h2>
+                                <p>{$list.short}</p>
+                                <p>地址：{$list.address}</p>
+                                <div id="mor" class="clearfix"> <span>咨询户数：{$list.com_number}户</span> <span>开工户数：{$list.start_number}户</span>    <a class="ms" href="{:U('Hourse/detail',array('id'=>$list['article_id']))}"> 查看更多</a></div>
+                            </div>
+                        </a>
+                    </li>
+                </foreach>
+                </ul>
+                <div class="adm tc">
+                    <p class="more">加载更多</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    $(function(){
+        var keywords ={$keywords};
+        var province_id ={$province_id};
+        var city_id={$city_id};
+        var district_id={$district_id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Hourse/load",
+                //提交的数据
+                data:{pages:num,keywords:keywords,province_id:province_id,city_id:city_id,district_id:district_id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.hot_list').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多了"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            /*
+            var html = "";
+            html += '<div class="item" style="display:none;"><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li></div>';
+            $('.ser_list ul').append(html);
+            $('.ser_list ul .item:last-child').fadeIn('400',function(){
+                $('.ser_list .item li').unwrap();
+            });*/
+        });
+    });
+</script>
+<script>
+    //单独页面上的js
+    $(function(){
+            $(".lazy_img").lazyload({ effect: "fadeIn" });
+    })
+</script>

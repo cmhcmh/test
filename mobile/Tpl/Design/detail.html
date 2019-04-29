@@ -1,0 +1,152 @@
+<include file='Public:pagesHeader'/>
+    <div class="content">
+        <div class="ssj">
+            <div class="ssj_top clearfix bgc">
+                <div class="lazy fl"><img data-original="{$article_detail.original_img|returnhead1=###}" class="lazy_img"></div>
+                <div class="fr rez_r">
+                    <h2 class="txt_overflow">{$article_detail.title} </h2>
+                    <p class="sz">{$grade[$article_detail['grade']]['com_name']}</p>
+                    <if condition="$article_detail['c_name']!=''"><p>所属公司：{$article_detail['c_name']}  </p></if>
+                    <p>从业时间：{$obtain[$article_detail['obtain']]['com_name']}</p>
+                    <!--<p>案例作品：10套 </p>-->
+                    <p>预约咨询：{$article_detail.com_number}人</p>
+                    <a href="{:U('Contact/index',array('type'=>2,'design_id'=>$article_detail['article_id']))}">预约TA</a>
+                </div>
+            </div>
+            <div class="sj1 bgc clearfix">
+                <div class="fl sj_l">
+                    <h2>荣誉</h2>
+                    <h2>奖项</h2>
+                </div>
+                <div class="fr sj_r">
+                    <p> 
+                       {$article_detail.content}
+                    </p>
+                </div>
+            </div>
+            <div class="sj1  bgc clearfix">
+                <div class="fl sj_l">
+                    <h2>擅长</h2>
+                    <h2>风格</h2>
+                </div>
+                <div class="fr sj_r sj2_r">
+                     <p> 
+                        {$article_detail.content1}
+                    </p>
+                </div>
+            </div>
+            <div class="sj1 bgc clearfix">
+                <div class="fl  sj_l">
+                    <h2>设计</h2>
+                    <h2>理念</h2>
+                </div>
+                <div class="fr sj_r">
+                   <p>
+                    {$article_detail.content2}
+                   </p>
+                </div>
+            </div>
+            <div class="sj2 bgc">
+                <em class="zpin"><span>相关案例作品</span></em>
+                <div class="designListDetail">
+                <foreach name="case" item="list">
+                <div class="item clearfixs">
+                    <a href="{:U('Case/detail',array('id'=>$list['article_id']))}"><div class="pic lazy">
+                        <img data-original="{$list.original_img|returnhead1=###}" class="lazy_img">
+                    </div></a>
+                    <div class="sj2_t">
+                        <h2>{$list.title}</h2>
+                        <p>
+                            {$list.short}
+                        </p>
+                        <div class="clearfix"><!--<span class="fl">已有299人浏览</span>--><a class="fr" href="{:U('Case/detail',array('id'=>$list['article_id']))}">查看详情></a></div>
+                    </div>
+                </div>
+                </foreach>
+                </div>
+
+                <div class="adm tc more">
+                    <p>加载更多</p>
+                </div>
+            </div>
+            <div class="sj3 bgc" style="display: none">
+                <h2>为你推荐</h2>
+                <a href=""><div class="pic lazy">
+                        <img data-original="__IMG__/tjian.png" class="lazy_img">
+                </div></a>
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    //单独页面上的js
+    $(function(){
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+    })
+</script>
+<script>
+    $(function(){
+        var id ={$id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Design/loadcase",
+                //提交的数据
+                data:{pages:num,id:id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.designListDetail').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多案例"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            /*
+            var html = "";
+            html += '<div class="item" style="display:none;"><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="__IMG__/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="__IMG__/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li></div>';
+            $('.ser_list ul').append(html);
+            $('.ser_list ul .item:last-child').fadeIn('400',function(){
+                $('.ser_list .item li').unwrap();
+            });*/
+        });
+    });
+</script>

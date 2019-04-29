@@ -1,0 +1,180 @@
+﻿<include file='Public:pagesHeader'/>
+	<div class="content">
+		<div class="appoin">
+			<div class="ad">
+				<h2>专业设计师在线</h2>
+				<h2>为您提供完整报价</h2>
+				<p><span>{$message_num}</span>名业主进行了预约</p>
+			</div>
+        	<div class="yy"> 
+	        	<div class="swiper-container yuy ">
+					<div class="swiper-wrapper">
+					   <foreach name="message" item="list" key='k'>
+					    <div class="swiper-slide"><a href="">{$list.add_time|date='Y/m/d',###}&nbsp;{$list['name']|mySubstr=1,'**'}预约了家装服务</a></div>
+					</foreach>
+					</div>
+				</div>
+        	</div>
+        	<form id="form2">
+        	  <if condition="$type==2">
+        	    <input type="text" name="design_name" id="design_name" placeholder="梁璟堂"<if condition="$design_name!=''"> value="{$design_name}"</if>  >
+        	    </if>
+				<div class="box">
+					<select name="province_id" class="flex1" id="province_id" >
+						<option value="0">省/市</option>
+						<foreach name="provincelist" item="list" key='k'>
+								<option value="{$list.a_id}">{$list.area_name}</option>
+						</foreach>
+					</select>
+					<i style="display: block;width: 0.19rem;"></i>
+					<select name="city_id" class="flex1" id="city_id"><option value="" data-index="0">市/区</option></select>
+				</div>
+				<input type="text" placeholder="请输入您的楼盘名称" id="hourse"name="hourse"<if condition="$hourse!=''"> value="{$hourse}"</if> >
+				<input type="text" placeholder="请输入您的名字" id="name" name="name">
+				<input type="tel" placeholder="请输入手机号码" id="mobile" name="mobile">
+				<input type="hidden"  name="type" value="{$type}">
+				<input type="hidden"  name="company_id" value="{$company_id}">
+				
+				<div class="yan">
+					<input type="" placeholder="验证码" name="verify" id="verify">
+					<img title="{$list.title }"alt="{$list.title }" src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="imgverify" style="width:20%;margin-left:1%;height: 91%;">
+						<p onclick="document.getElementById('imgverify').src+='?rand='+Math.random();">看不清，换一张</p>
+				</div>
+				<p><font color='red' size='-1' id='cmresult'></font></p>
+				<input type="button" class="sub_btn" value="立即预约" onclick="mySubmit('form2','{:U('/Contact/message')}','cmresult')">
+			</form>
+			   <script type="text/javascript">
+                /****提交表单************/
+			    function mySubmit(theForm,url,result){
+			        var province_id=$('#province_id').val();
+			        var city_id=$('#city_id').val();
+			        var name=$('#name').val();
+			        var mobile=$('#mobile').val();
+			        var verify=$('#verify').val();
+			        var hourse=$('#hourse').val();
+
+
+			        if(province_id==''){
+			            layer.open({
+                                        content: "请选择省份"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			         if(city_id==0){
+			            layer.open({
+                                        content: "请选择城市"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			          if(hourse==''){
+			            layer.open({
+                                        content: "请填写楼盘"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			            if(name==''){
+			            layer.open({
+                                        content: "请填写姓名"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			            if(mobile==''){
+			            layer.open({
+                                        content: "请填写手机"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+			        
+			           if(verify==''){
+			            layer.open({
+                                        content: "请填写验证码"
+                                        ,time: 2
+                                    });
+                                    return false;
+			            return false;
+			        }
+		
+			        //$('#form').submit();
+			        function default_callback(res){
+			            
+			            if(res.status=='1'){
+			                //document.getElementById(theForm).reset();
+			                  layer.open({
+                                        content: "留言提交成功"
+                                        ,time: 2
+                                    });
+			                location.reload();
+			                document.getElementById(theForm).reset();
+
+
+			            }else{
+			                result.html(res.info);
+			            }
+			        }
+
+			        var callback = arguments[3] || default_callback;
+
+			        var result = $('#'+result);
+			        result.html('loading...');
+			        var data = $('#'+theForm).serialize();//2014/10/07更新
+
+			        $.post(url,data,callback,'json');
+			        return false;
+			    }
+
+			</script>
+
+			<script>
+				$("#province_id").change(function(){
+				var province_id=$(this).val();
+				$.ajax({
+					url:'/index.php/Areacompany/get_citys',
+					Type:"POST",
+					data:"province_id="+province_id,
+					dataType:"json",
+					success:function(data){
+						var city = data.city;
+						var option=$("<option></option>");
+						$(option).val("0");
+						$(option).html("请选择");
+						var option1=$("<option></option>");
+						$(option1).val("0");
+						$(option1).html("请选择");
+						$("#city_id").html(option);
+						//$("#company_id").html(option1);
+						for(var i in city){
+							var option=$("<option></option>");
+							$(option).val(city[i]['a_id']);
+							$(option).html(city[i]['area_name']);
+							$("#city_id").append(option);
+						}
+					}
+					
+				});
+			});
+			</script>
+			<p class="baom">我们承诺：您所填写的信息将被严格保密，请放心填写!</p>
+		</div>
+	</div>
+<include file='Public:pageFooter'/>
+<script>
+	//单独页面上的js
+	$(function(){
+		var focusSwiper = new Swiper('.yuy',{
+                loop: true,
+                 direction: 'vertical',
+                autoplay: 5000,
+                autoHeight: true,
+            })
+	})
+</script>

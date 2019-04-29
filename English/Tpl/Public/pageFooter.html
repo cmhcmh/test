@@ -1,0 +1,102 @@
+<div id="footer">
+	<div class="blue">
+		<div class="layout">
+			<div class="foot_hd clearfix">
+				<dl>
+					<dt>公司简介</dt>
+					<foreach name="intro" item="intro">
+					<dd><a href="{:U('Intro/index',array('cat_id'=>$intro['cat_id']))}">{$intro.cat_name}</a></dd>
+					</foreach>
+					<!-- <dd><a href="#">发展历程</a></dd>
+					<dd><a href="#">企业文化</a></dd>
+					<dd><a href="#">荣誉资质</a></dd> -->
+				</dl>
+				<dl>
+					<dt>新闻动态</dt>
+					<foreach name="news" item="news">
+					<dd><a href="{:U('News/index',array('cat_id'=>$news['cat_id']))}">{$news.cat_name}</a></dd>
+					</foreach>
+					<!-- <dd><a href="#">行业资讯</a></dd>
+					<dd><a href="#">产品信息</a></dd> -->
+				</dl>
+				<dl>
+					<dt>产品展示</dt>
+					<foreach name="product" item="product">
+					<dd><a href="{:U('Product/index',array('cat_id'=>$product['cat_id']))}">{$product.cat_name}</a></dd>
+					</foreach>
+						<!-- <dd><a href="#">产品系列二</a></dd>
+					<dd><a href="#">产品系列三</a></dd> -->
+				</dl>
+				<dl>
+					<dt>营销网络</dt>
+					<dd><a href="{:U('Net/index')}">营销网络</a></dd>
+				</dl>
+				<dl>
+					<dt>联系我们</dt>
+					<dd><a href="{:U('Contact/index')}">联系方式</a></dd>
+					<!-- <dd><a href="#">电子地图</a></dd>
+					<dd><a href="#">反馈留言</a></dd> -->
+				</dl>
+				<div class="friend">
+					<p class="title">友情链接</p>
+					<ul>
+					    <foreach name="links" item="value">
+						<li class="mar_rl">{$value}</li>
+						</foreach>
+					<!-- <li class="mar_rl"><a href="#">互诺科技</a></li>
+						<li><a href="#">互诺科技</a></li>
+						<li><a href="#">互诺科技</a></li>
+						<li class="mar_rl"><a href="#">互诺科技</a></li>
+						<li><a href="#">互诺科技</a></li> -->
+					</ul>
+					<p class="contact">联系电话：<i>{$site_info.tel1}</i></p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="blue">
+		<div class="layout">
+			<div class="clearfix foot-bd">
+				<p class="fl">{$site_info.address}</p>
+				<p style="margin-left:20px;" class="fr"><a style="color:#fff" href="http://www.hunuo.com" target="_blank">网站建设</a>：<a style="color:#fff" href="http://www.hunuo.com" target="_blank">互诺科技</a> </p>
+				<p class="fr">{$site_info.footer}</p>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+<div class="fixed">
+	<ul>
+		<li class="ico_1">
+			<a href="#"></a>
+			<div class="display">
+				<div class="phone">
+					<p>全国免费咨询：<i>400-888-8888</i></p>
+					<p>
+						工作时间<br>
+						周一至周五 9：00-18：00<br>
+						(12:00-13:30及法定假日除外)
+					</p>
+				</div>
+			</div>
+		</li>
+		<li class="ico_2"><a href="#"></a></li>
+		<li class="ico_3"><a href="#"></a></li>
+		<li class="ico_4"><a href="#"></a></li>
+		<li class="ico_5">
+			<a href="{:U('Contact/index')}"></a>
+			<div class="display" style="margin-top: 1px;">
+				<div class="wec">
+					意见反馈<br>
+					您的意见是我们不断提升的动力！
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+
+</body>
+</html>

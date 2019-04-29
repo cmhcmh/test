@@ -1,0 +1,105 @@
+<include file='Public:pageHeader'/>
+   <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main layout">
+        <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_less_info.cat_name}</a></p></div>
+        <div class="choose_box">
+            <dl class="clearfix">
+                <dt>户型</dt>
+                <dd class="clearfix">
+                    <a  <if condition="$layout_id==0">class="on"</if> href="{:U('Case/index',array('layout_id'=>0,'acreage_id'=>$acreage_id,'style_id'=>$style_id))}">全部</a>
+                    <foreach name="layout" item="list">
+                      <a <if condition="$layout_id==$list['com_id']">class="on"</if> href="{:U('Case/index',array('layout_id'=>$list['com_id'],'acreage_id'=>$acreage_id,'style_id'=>$style_id))}">{$list.com_name}</a>
+                    </foreach>
+
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>面积</dt>
+                <dd class="clearfix">
+                    <a <if condition="$acreage_id==0">class="on"</if> href="{:U('Case/index',array('acreage_id'=>0,'layout_id'=>$layout_id,'style_id'=>$style_id))}">全部</a>
+                    <foreach name="acreage" item="list">
+                <a href="{:U('Case/index',array('acreage_id'=>$list['com_id'],'layout_id'=>$layout_id,'style_id'=>$style_id))}" <if condition="$acreage_id==$list['com_id']">class="on"</if>>{$list.com_name}</a>
+                    </foreach>
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>风格</dt>
+                <dd class="clearfix">
+                    <a  <if condition="$style_id==0">class="on"</if> href="{:U('Case/index',array('style_id'=>0,'layout_id'=>$layout_id,'acreage_id'=>$acreage_id))}">全部</a>
+                     <foreach name="style" item="list">
+                      <a <if condition="$style_id==$list['com_id']">class="on"</if> href="{:U('Case/index',array('style_id'=>$list['com_id'],'layout_id'=>$layout_id,'acreage_id'=>$acreage_id))}">{$list.com_name}</a>
+                    </foreach>
+                </dd>
+            </dl>
+        </div>
+        <div class="case_list">
+            <div class="hd changehd">
+                <ul class="clearfix">
+                    <li <if condition="$is_hn==1">class="on"</if>><a href="{:U('Case/index',array('is_hn'=>1))}">热门案例</a></li>
+                    <li <if condition="$is_hn==2">class="on"</if>><a href="{:U('Case/index',array('is_hn'=>2))}">最新案例</a></li>
+                </ul>
+            </div>
+            <div class="bd">
+                <div class="changecon">
+                    <ul class="clearfix">
+					<if condition="$company_id==0">
+                    <foreach name="case2" item="list" key='k'>
+                        <li <if condition="$k%3 eq 2">class=""</if>>
+                            <div class="pich"><a href="{:U('Case/detail',array('id'=>$list['article_id']))}"><img title="{$list.title }"alt="{$list.title }" src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+                            <div class="box clearfix">
+                                <div class="tx"><a href="{:U('Design/detail',array('id'=>$list['design_id']))}"><img title="{$list.title }"alt="{$list.title }" src="{$list['design_img']|returnhead1=###}" width="87px" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+                                <div class="fr">
+                                    <h3>{$list.title}</a></h3>
+                                    <h4>{$list.short}</h4>
+                                    <div class="btn clearfix">
+                                        <div class="name"><p  style="cursor:pointer" onclick="javascript:location.href='{:U('Case/detail',array('id'=>$list['article_id']))}'">{$list['design_title']}</p></div>
+                                        <!--<a href="{:U('Case/detail',array('id'=>$list['article_id']))}">详情</a>-->
+                                        <a href= "javascript:design_order('{$list['design_title']}');">预约</a>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                      </foreach>
+						<else/>
+						<foreach name="case" item="list" key='k'>
+                        <li <if condition="$k%3 eq 2">class=""</if>>
+                            <div class="pich"><a href="{:U('Case/detail',array('id'=>$list['article_id']))}"><img title="{$list.title }"alt="{$list.title }" src="{$list.original_img|returnhead1=###}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+                            <div class="box clearfix">
+                                <div class="tx"><a href="{:U('Design/detail',array('id'=>$list['design_id']))}"><img title="{$list.title }"alt="{$list.title }" src="{$list['design_img']|returnhead1=###}" width="87px" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+                                <div class="fr">
+                                    <h3>{$list.title}</a></h3>
+                                    <h4>{$list.short}</h4>
+                                    <div class="btn clearfix">
+                                        <div class="name"><p  style="cursor:pointer" onclick="javascript:location.href='{:U('Case/detail',array('id'=>$list['article_id']))}'">{$list['design_title']}</p></div>
+                                        <!--<a href="{:U('Case/detail',array('id'=>$list['article_id']))}">详情</a>-->
+                                        <a href= "javascript:design_order('{$list['design_title']}');">预约</a>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                      </foreach>
+						</if>
+                    </ul>
+                    <div class="page">
+                        <div class="dis">
+                            {$page}
+                            <!--
+                            <a class="on" href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">&gt;</a>
+                            <a href="#">尾页</a>-->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+</body>
+</html>     

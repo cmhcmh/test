@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华浔品味装饰云设计平台登陆</title>
+	<meta name="keywords" content="华浔品味装饰云设计平台登陆">
+	<meta name="content" content="华浔品味装饰云设计平台登陆">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link type="text/css" rel="stylesheet" href="__CSS__/login.css">
+    <script type="text/javascript" src="__JS__/jquery-1.8.0.min.js"></script>
+</head>
+<body class="login_bj" >
+<div class="zhuce_body">
+    <div class="zhuce_kong login_kuang">
+    	<div class="zc">
+        	<div class="bj_bai">
+            <h3>登录</h3>
+       	  	    <form action="/index.php/Member/login" method="POST">
+                <input name="name" type="text" class="kuang_txt" placeholder="姓名/手机号">
+                <input name="password" type="password" class="kuang_txt" placeholder="密码">
+				<div style="width:100%;">
+					<input style="width:220px;" type="text" name="verify" class="kuang_txt yanzm" placeholder="验证码">
+                	<div class="hui_kuang" style="float:left;"><a style="margin-right:0px;" href="javascript:void(0);" onclick="document.getElementById('imgverify').src+='?rand='+Math.random();">换一张</a><a style="margin-right:0px;" href="javascript:void(0);" onclick="document.getElementById('imgverify').src+='?rand='+Math.random();"><img src="__ROOT__/index.php/Base/verify_code/w/50/h/25.html" onclick="this.src+='?rand='+Math.random();" id="imgverify" style="width: 81px;"></a></div>
+                	
+                </div>
+                <input name="登录" type="submit" class="btn_zhuce" value="登录">
+                <a href="{:U('Member/reg')}">没有账号？立即注册</a>
+                </form>
+            </div>
+        </div>
+        <P>欢迎登陆华浔品味装饰3D云在线设计平台</P>
+    </div>
+
+</div>
+    
+</body>
+</html>

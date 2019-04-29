@@ -1,0 +1,142 @@
+﻿<include file='Public:pageHeader'/>
+<script type="text/javascript">
+	
+	$(function(){
+
+		$(".pro_act .hd li").click(function(){
+				var hd = $(this).index();
+
+				$(".pro_act .hd li").removeClass("on");
+				$(this).addClass("on");
+				$(".pro_act .bd li").hide();
+				$(".pro_act .bd li").eq(hd).fadeIn();
+			})
+
+
+	})
+</script>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="/">首页</a> > <a href="#">产品总介绍</a></div>
+			<ul class="clearfix">
+				<li><a href="{:U('Product/index')}">产品总介绍</a></li>
+				<foreach name="top_cat" item="cat">
+				<li><a href="{:U('Product/index',array('cat_id'=>$cat['cat_id']))}">{$cat.cat_name}</a></li>
+				</foreach>
+				<!-- <li><a href="#">产品系列2</a></li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="pro_area">
+				<ul class="area_ul">
+					<foreach name="son_cat" item="cat">
+					<li><a href="{:U('Product/index',array('cat_id'=>$cat['cat_id']))}">{$cat.cat_name}</a></li>
+					</foreach>
+				<!-- 	<li><a href="#">天虹 II 系列2</a></li>
+					<li><a href="#">天虹 II 系列3</a></li>
+					<li><a href="#">天虹 II 系列4</a></li>
+					<li><a href="#">天虹 II 系列5</a></li>
+					<li><a href="#">天虹 II 系列6</a></li> -->
+				</ul>
+				<div class="pro_tit">
+					<p class="tn">产品总介绍</p>
+					<p class="tt">我们的第二代节能纯二板机</p>
+				</div>
+				<div class="pro_act">
+					<ul class="hd clearfix">
+						<li class="on">亮点</li>
+						<li>驱动系统</li>
+					</ul>
+					<ul class="bd">
+						<li class="block">
+                           <foreach name="point" item="point">
+							<div class="pro_box clearfix">
+							{$point.content}
+								<!-- <img src="__IMG__/img_14.jpg" alt=""> -->
+								<div class="act">
+									<p class="tn">{$point.title}</p>
+									  {$point.short}
+									<!-- <p>并行锁紧螺母的操作</p>
+									<p>具有快速和准确的反应</p> -->
+								</div>
+							</div>
+							</foreach>
+
+	<!-- 						<div class="pro_box clearfix">
+								<img src="__IMG__/img_15.jpg" alt="">
+								<div class="act">
+									<p class="tn">更灵活:</p>
+									<p>倒置式顶住装置</p>
+									<p>顶出行程由电脑控制，可任意设定。</p>
+								</div>
+							</div>
+							<div class="pro_box clearfix">
+								<img src="__IMG__/img_16.jpg" alt="">
+								<div class="act">
+									<p class="tn">平行移动:</p>
+									<p>安装在定模板上的四个短程锁模油缸</p>
+									<p>可快速建立锁模力，模具受力均匀，锁模力通过压力</p>
+									<p>传感器可实时监控，锁模力重复再现性好</p>
+								</div>
+							</div>
+							<div class="pro_box clearfix">
+								<img src="__IMG__/img_17.jpg" alt="">
+								<div class="act">
+									<p class="tn">低摩擦: </p>
+									<p>高精度导向机构（8400KN注射单元除外）</p>
+									<p>完美的螺杆导向</p>
+								</div>
+							</div> -->
+						</li>
+
+						<li>
+                           <foreach name="power" item="power">
+							<div class="pro_box clearfix">
+							{$power.content}
+								<!-- <img src="__IMG__/img_14.jpg" alt=""> -->
+								<div class="act">
+									<p class="tn">{$power.title}</p>
+									{$power.short}
+									<!-- <p>并行锁紧螺母的操作</p>
+									<p>具有快速和准确的反应</p> -->
+								</div>
+							</div>
+							</foreach>
+
+		<!-- 					<div class="pro_box clearfix">
+								<img src="__IMG__/img_15.jpg" alt="">
+								<div class="act">
+									<p class="tn">更灵活:</p>
+									<p>倒置式顶住装置</p>
+									<p>顶出行程由电脑控制，可任意设定。</p>
+								</div>
+							</div>
+							<div class="pro_box clearfix">
+								<img src="__IMG__/img_16.jpg" alt="">
+								<div class="act">
+									<p class="tn">平行移动:</p>
+									<p>安装在定模板上的四个短程锁模油缸</p>
+									<p>可快速建立锁模力，模具受力均匀，锁模力通过压力</p>
+									<p>传感器可实时监控，锁模力重复再现性好</p>
+								</div>
+							</div>
+							<div class="pro_box clearfix">
+								<img src="__IMG__/img_17.jpg" alt="">
+								<div class="act">
+									<p class="tn">低摩擦: </p>
+									<p>高精度导向机构（8400KN注射单元除外）</p>
+									<p>完美的螺杆导向</p>
+								</div>
+							</div> -->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

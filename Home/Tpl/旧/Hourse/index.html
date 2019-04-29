@@ -1,0 +1,80 @@
+<include file='Public:pageHeader'/>
+       <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main clearfix layout">
+        <div class="lefthot">
+              <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Hourse/index')}">{$cat_less_info.cat_name}</a></p></div>
+            <form class="find_box find_box2 clearfix" action="{:U('Hourse/index')}" method="POST">
+                <span>查找您附近的华浔</span>
+                <div data-toggle="distpicker" class="target clearfix">
+                    <select class="form-control" data-province="" id="province_hourse" name="province_hourse">
+                            <option value="">省/市</option>
+                                  <foreach name="provincelist" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$province_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                    <select class="form-control" id="city_hourse" name="city_hourse" >
+                         <option value="0" data-index="0">市/区</option>
+                        <foreach name="city_list" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$city_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                </div>
+                <input type="submit" class="button" />
+                <input type="text" class="text" placeholder="请输入楼盘名称" name="keywords"  value="{$keywords}"/>
+                <input type="submit" class="button" />
+            </form>
+               <script>
+                $("#province_hourse").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_hourse").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_hourse").append(option);
+                        }
+                    }
+                    
+                });
+            });
+            </script>
+            <ul class="lp_list">
+            <foreach name="hourse" item="list" key='k'>
+                <li class="clearfix">
+                    <div class="pich"><a href="{:U('Hourse/detail',array('id'=>$list['article_id']))}"><img style="width:100%" src="/{$list.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>
+                    <div class="word">
+                        <h3>{$list.title}（{$list.area_name}）</h3>
+                        <p class="dot">{$list.short}</p>
+                        <h4>咨询户数：{$list.com_number}户  开工户数：{$list.start_number}户</h4>
+                        <a href="{:U('Hourse/detail',array('id'=>$list['article_id']))}" class="more">查看详情</a>
+                    </div>
+                </li>
+            </foreach>
+                
+            </ul>
+            <div class="page">
+                <div class="dis">
+                    {$page}
+                </div>
+            </div>
+        </div>
+        <include file="Public:pcright" thumb_width='54' thumb_height='41'/>
+       
+    </div>
+<include file='Public:pageFooter'/>
+</body>
+</html>

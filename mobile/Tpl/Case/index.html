@@ -1,0 +1,179 @@
+<include file='Public:pagesHeader'/>
+    <div class="content">
+        <div class="zxiu">
+            <div class="catTab pr">
+                <ul class="box">
+                    <li class="flex1">
+                        <span>户型</span><i></i>
+                    </li>
+                    <li class="flex1">
+                        <span>面积</span><i></i>
+                    </li>
+                    <li class="flex1">
+                        <span>风格</span><i></i>
+                    </li>
+                    
+                </ul>
+                <div class="tabLayer">
+                    <div>
+                        <a href="{:U('Case/index',array('layout_id'=>0,'acreage_id'=>$acreage_id,'style_id'=>$style_id))}" <if condition="$layout_id==0">class="active"</if>>全部</a>
+                        <foreach name="layout" item="list">
+                             <a href="{:U('Case/index',array('layout_id'=>$list['com_id'],'acreage_id'=>$acreage_id,'style_id'=>$style_id))}" <if condition="$layout_id==$list['com_id']">class="active"</if>>{$list.com_name}</a>
+                        </foreach>
+                    </div>
+                   
+                    <div>
+                        <a href="{:U('Case/index',array('acreage_id'=>0,'layout_id'=>$layout_id,'style_id'=>$style_id))}" <if condition="$acreage_id==0">class="active"</if>>全部</a>
+                         <foreach name="acreage" item="list">
+                             <a href="{:U('Case/index',array('acreage_id'=>$list['com_id'],'layout_id'=>$layout_id,'style_id'=>$style_id))}" <if condition="$acreage_id==$list['com_id']">class="active"</if>>{$list.com_name}</a>
+                        </foreach>
+
+                    </div>
+                     <div>
+                        <a href="{:U('Case/index',array('style_id'=>0,'layout_id'=>$layout_id,'acreage_id'=>$acreage_id))}"  <if condition="$style_id==0">class="active"</if>>全部</a>
+                       <foreach name="style" item="list">
+                             <a href="{:U('Case/index',array('style_id'=>$list['com_id'],'layout_id'=>$layout_id,'acreage_id'=>$acreage_id))}"<if condition="$style_id==$list['com_id']">class="active"</if>>{$list.com_name}</a>
+                        </foreach>
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+            <div class="caseList">
+                <foreach name="case" item="list" key='k'>
+                <div class="item clearfixs">
+                    <a href="{:U('Case/detail',array('id'=>$list['article_id']))}"><div class="pic pr lazy">
+                        <div class="lazy"><img data-original="{$list.original_img|returnhead1=###}" class="lazy_img"></div>
+                        <!-- <span class="picNum pa"><i></i><span class="num vm">10</span></span> -->
+                    </div></a>
+                    <div class="info pr">
+                        <p class="name">{$list.title}</p>
+                        <p class="tag"><a href="">{$layout[$list['a_layout']]['com_name']}</a><font>|</font><a href="">{$style[$list['a_style']]['com_name']}</a><font>|</font><a href="">{$acreage[$list['a_acreage']]['com_name']}</a> </p>
+                        <p class="tag"><a href="">设计师：{$list['design_title']}</a>&nbsp;<a href="">楼盘：{$list['hourse_title']|mySubstr=18,'..'}</a></p>
+                        <!-- <p class="like liked pa"><i></i><span class="num vm">2</span></p> -->
+                    </div>
+                </div>
+                </foreach>
+            </div>
+            <div class="adm tc">
+                    <p class="more">加载更多</p>
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script>
+    $(function(){
+        var keywords ='{$keywords}';
+        var acreage_id ={$acreage_id};
+        var style_id={$style_id};
+        var layout_id={$layout_id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Case/load",
+                //提交的数据
+                data:{pages:num,keywords:keywords,acreage_id:acreage_id,style_id:style_id,layout_id:layout_id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.caseList').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多案例"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            /*
+            var html = "";
+            html += '<div class="item" style="display:none;"><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li><li class="clearfix"><a href="service_detail.html" class="img_box"><img src="images/pic5.jpg" class="fl imghover"/></a><div class="fr"><a href="service_detail.html"><h2>我敬仰这些设计同行们！</h2></a><p>前些天，朋友发来一个视频，视频题目是《意大利NHK汽车设计所的六个月-见证意大利超级跑车的诞生》。反复看了几遍，感想也随之而来。这个视频讲述了意大利NHK汽车设计所，为2005年3月在日内瓦举办的世界汽车展而设计的超级跑车的设计过程。据说这是一款玛莎拉蒂概念车。... </p><span>发布日期：2016-12-30</span></div></li></div>';
+            $('.ser_list ul').append(html);
+            $('.ser_list ul .item:last-child').fadeIn('400',function(){
+                $('.ser_list .item li').unwrap();
+            });*/
+        });
+    });
+</script>
+<script>
+    //单独页面上的js
+    $(function(){
+        $('.catTab li').click(function() {
+            if($(this).hasClass('on')){
+                $(this).removeClass('on');
+                $('.tabLayer > div').slideUp(300);
+                $('.tabLayer').hide();
+                return false;
+            }
+            $('.catTab li').removeClass('on');
+            $(this).addClass('on');
+            var eq = $(this).index();
+            $('.tabLayer > div').hide();
+            $('.tabLayer').show();
+            $('.tabLayer > div').eq(eq).slideDown(300);
+        });
+        $('.catTab .tabLayer>div a').click(function() {
+            $(this).parent('div').find('a').removeClass('active');
+            $(this).addClass('active');
+        });
+        $(window).scroll(function() {
+            var scrollTop = $(window).scrollTop();
+            if(scrollTop >= $('.catTab').offset().top){
+                $('.catTab li').removeClass('on');
+                $('.tabLayer > div').slideUp(300);
+                $('.tabLayer').hide();
+            }
+        });
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+</script>

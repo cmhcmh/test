@@ -1,0 +1,43 @@
+<include file='Public:pageHeader'/>
+<div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+    <div class="main layout">
+        <div class="loca"><p>当前位置：<a href="/">首页</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_info.cat_name}</a><em>&gt;</em><a href="{:U('Case/index')}">{$cat_less_info.cat_name}</a></p></div>
+      
+        <div class="case_list">
+
+            <div class="bd">
+                <div class="changecon">
+                    <ul class="clearfix">
+                    <foreach name="vrlist" item="list" key='k'>
+                        <li style="height:190px;" <if condition="$k%4 eq 3">class="nomar"</if>>
+                            <div class="pich layer-demolist" data="/{$list.file_url}" style="height:190px;"><a href="{$list.link}" target="_blank" >
+                            <img style="width: 266px; height: 150px;"src="/{$list.original_img}" onerror="this.onerror=null; this.src='__IMG__/default.jpg'" style="height: auto"></a>
+                            <h3 style="margin-top: 11px;">{$list.title}</h3>
+                            </div>
+                
+                        </li>
+                      </foreach>
+             
+                    </ul>
+                    <div class="page">
+                        <div class="dis">
+                            {$page}
+                            <!--
+                            <a class="on" href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">&gt;</a>
+                            <a href="#">尾页</a>-->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+</body>
+
+</html>     

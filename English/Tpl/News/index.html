@@ -1,0 +1,50 @@
+﻿<include file='Public:pageHeader'/>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="/">首页</a> > <a href="{:U('News/index',array('cat_id'=>$cat_info['cat_id']))}">{$cat_info.cat_name}</a></div>
+			<ul class="clearfix">
+				<volist name="all_cat" id='cat'>
+				<li><a href="{:U('News/index',array('cat_id'=>$cat['cat_id']))}">{$cat.cat_name}</a></li>
+				</volist>
+				
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="about">
+				<p class="about_tit">
+					{$cat_info.cat_name}
+				</p>
+				<div class="new">
+					<ul>
+						<volist name="article_list" id="list">
+						<li class="clearfix"><a href="{:U('News/detail',array('id'=>$list['article_id']))}">
+							<img src="/{$list['original_img']}" alt="">
+							<div class="act">
+								<p class="tn">{$list.title}</p>
+								<p class="cn">{$list.short}</p>
+								<p class="bn"><span>{$list.add_time|date="Y-m-d",###}</span><i>{$cat_info.cat_name}</i></p>
+							</div>
+						</a></li>
+						</volist>
+				
+					</ul>
+				</div>
+				<div class="h14"></div>
+				<div class="page">
+				{$page}
+				  <span>共{$totalPage}页</span>
+					<!-- <a href="#" class="prev">上一页</a>
+					<a href="#">1</a>
+					<a href="#">2</a>
+					<a href="#" class="next">下一页</a>
+					<span>共2页　到 <input type="text" value="1" class="text">页 <input type="button" value="确定" class="but"></span> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

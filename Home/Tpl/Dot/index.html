@@ -1,0 +1,83 @@
+	<include file='Public:pageHeader'/>
+         <div class="inbanner" style="background-image: url(/{$banner.original_img});"></div>
+        <div class="main layout">
+            <form class="find_box clearfix" action="{:U('Dot/index')}" method="POST">
+                <span>查找您附近的华浔</span>
+                <div data-toggle="distpicker" class="target clearfix">
+                    <select class="form-control" id="province_dot" name="province_dot" data-province="">
+                             <option value="">省/市</option>
+                                  <foreach name="provincelist" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$province_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                    <select class="form-control" id="city_dot"  name="city_dot">
+                          <option value="0" data-index="0">市/区</option>
+                        <foreach name="city_list" item="list" key='k'>
+                                <option value="{$list.a_id}" <if condition="$city_id==$list['a_id']">selected = "selected"</if>>{$list.area_name}</option>
+                        </foreach>
+                    </select>
+                </div>
+                <input type="submit" class="button" style="font-size: 0px" />
+                <input type="text" class="text" placeholder="请输入分公司名称"  name="keywords" value="{$keywords}"/>
+                <input type="submit" class="button"  style="font-size: 0px" />
+            </form>
+                  <script>
+                $("#province_dot").change(function(){
+                var province_id=$(this).val();
+                $.ajax({
+                    url:'/mobile.php/Areacompany/get_citys',
+                    Type:"POST",
+                    data:"province_id="+province_id,
+                    dataType:"json",
+                    success:function(data){
+                        var city = data.city;
+                        var option=$("<option></option>");
+                        $(option).val("0");
+                        $(option).html("请选择");
+                        var option1=$("<option></option>");
+                        $(option1).val("0");
+                        $(option1).html("请选择");
+                        $("#city_dot").html(option);
+                        //$("#company_id").html(option1);
+                        for(var i in city){
+                            var option=$("<option></option>");
+                            $(option).val(city[i]['a_id']);
+                            $(option).html(city[i]['area_name']);
+                            $("#city_dot").append(option);
+                        }
+                    }
+                    
+                });
+            });
+            </script>
+            <div class="intel_dot">
+                <ul class="clearfix">
+                 <foreach name="dotlist" item="list" key='k'>
+                    <li class="clearfix <if condition="$k%2 eq 1">sli</if>">
+                       <!-- <div class="pich"><a href="#"><img src="__IMG__/pic14.jpg" onerror="this.onerror=null; this.src='__IMG__/default.jpg'"></a></div>-->
+                         <div class="pich"><a href="#"><img title="{$list.title }"alt="{$list.title }"style="width:209px;height: 156px;" src="/{$list.c_img}" onerror="this.onerror=null; this.src='__IMG__/de_com.jpg'"></a></div>
+                        <div class="word">
+                            <h3><em>{$list.c_name}</em>  <if condition="($list['c_domain']!='')"><a href="http://{$list['c_domain']}.{$host_domain}" class="more">立即进入</a></if></h3>
+                            <p>
+                                电话：{$list.c_mobile} <br />
+                                传真：{$list.c_fx}<br />
+                                地 址：{$list.c_address}
+                            </p>
+                        </div>
+                    </li>
+                 </foreach>
+                 
+                </ul>
+        <div class="page">
+            <div class="dis">
+              {$page}
+            </div>
+        </div>
+            </div>
+
+        </div>
+
+    <include file='Public:pageFooter'/>
+
+</body>
+</html>

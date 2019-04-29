@@ -1,0 +1,38 @@
+﻿<include file='Public:pageHeader'/>
+<div id="main">
+	<div class="banner"><img src="/{$banner}" alt=""></div>
+	<div class="warp_title">
+		<div class="layout">
+			<div class="add">当前位置：<a href="#">首页</a> > <a href="#">文件下载</a></div>
+			<ul class="clearfix">
+				<li><a href="#">文件下载</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="white">
+		<div class="layout">
+			<div class="download">
+				<ul>
+					<volist name="download" id="down" mod="2">
+					<li <eq name="mod" value="1"> class="no" </eq> >
+						<a href="/{$down['file_url']}"><i></i>立即下载</a>
+						{$down.title}
+					</li>
+					</volist>
+
+				</ul>
+			</div>
+			<div class="page">
+			{$page}
+				<!-- <a href="#" class="prev">上一页</a>
+				<a href="#">1</a>
+				<a href="#">2</a>
+				<a href="#" class="next">下一页</a> -->
+				<span>共{$totalPage}页
+				<!-- 　到 <input type="text" value="1" class="text">页 <input type="button" value="确定" class="but"> -->
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+<include file='Public:pageFooter'/>

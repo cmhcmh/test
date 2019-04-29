@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华浔品味装饰云设计平台</title>
+	<meta name="keywords" content="华浔品味装饰云设计平台">
+	<meta name="content" content="华浔品味装饰云设计平台">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link type="text/css" rel="stylesheet" href="__CSS__/login.css">
+    <script type="text/javascript" src="__JS__/jquery-1.8.0.min.js"></script>
+	 <script type="text/javascript">
+     function changeFrameHeight(){
+    var ifm= document.getElementById("iframepage"); 
+    ifm.height=document.documentElement.clientHeight;
+}
+window.onresize=function(){  
+     changeFrameHeight();  
+} 
+</script>
+    <style type="text/css">
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+body { font:12px/1.5 "Microsoft Yahei"; margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;overflow: hidden;}
+
+#wraper
+{
+    position:relative;
+    width:100%;
+    height:847px;
+    overflow:hidden;
+}
+#btnshow
+{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:170px;
+    background:#fff;
+    z-index:999;
+}
+#kjlshow
+{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:888;
+}
+
+.m-new-btn
+{
+    position:absolute;
+	font-size:24px;
+    color: #fff;
+    height: 68px;
+    line-height: 68px;
+    border: 1px solid #000;
+    margin: 0;
+    right:40px;
+    bottom:100px;
+    padding: 0 50px;
+    border-radius: 8px;
+	background-color:#000;
+    text-decoration: none;
+     z-index:999;
+}
+.m-new-btn1
+{
+    position:absolute;
+	font-size:17px;
+    color: #c50000;
+    height: 68px;
+    line-height: 38px;
+  /*  border: 1px solid #000;*/
+    margin: 0;
+    margin-right: 10px;
+    right:570px;
+    top:3px;
+    font-weight: bold;
+    padding: 0 50px;
+ /*   border-radius: 8px;*/
+/*	background-color:#000;*/
+    text-decoration: none;
+     z-index:999;
+}
+.m-new-btn:hover,.m-new-btn1:hover {
+/*    background-color: #fff;*/
+    color: #fff;
+}
+    </style>
+
+</head>
+
+<body>
+<iframe name="kjlshow" id="kjlshow" width="100%" height="100%"  frameborder='0' marginheight="0" marginwidth="0" border="0" src="{$durl}"></iframe>
+    <a class="m-new-btn1" href="http://www.hxdec.com" >返回首页</a>
+   <!--  <a class="m-new-btn" onclick="showall();" href="javascript:" >设计我的家</a>
+	<script>
+	function showall(){
+	document.getElementById("kjlshow").src="https://www.kujiale.com/v/auth?accesstoken=CPVPlok8jRXYI7wJpyGN3J1jm2r969Ii&dest=4&dest=4";
+    }
+	</script> -->
+</body>
+</html>

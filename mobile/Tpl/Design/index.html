@@ -1,0 +1,233 @@
+<include file='Public:pagesHeader'/>
+    <div class="content">
+        <div class="des">
+            <div class="catTab pr">
+                <ul class="box">
+                 <li class="flex1">
+                        <span>擅长风格</span><i></i>
+                    </li>
+                    <li class="flex1">
+                        <span>设计级别</span><i></i>
+                    </li>
+                   
+                </ul>
+                <div class="tabLayer">
+                    <div>
+                         <a href="{:U('Design/index',array('special_style_id'=>0,'grade_id'=>$grade_id))}" <if condition="$special_style_id==0">class="active"</if>>全部</a>
+                        <foreach name="special_style" item="list">
+                             <a href="{:U('Design/index',array('special_style_id'=>$list['com_id'],'grade_id'=>$grade_id))}" <if condition="$special_style_id==$list['com_id']">class="active"</if>>{$list.com_name}</a>
+                        </foreach>
+                    </div>
+                    <div>
+                       <a href="{:U('Design/index',array('special_style_id'=>$special_style_id,'grade_id'=>0))}" <if condition="$grade_id==0">class="active"</if>>全部</a>
+                        <foreach name="grade" item="list">
+                             <a href="{:U('Design/index',array('grade_id'=>$list['com_id'],'special_style_id'=>$special_style_id))}" <if condition="$grade_id==$list['com_id']">class="active"</if>>{$list.com_name}</a>
+                        </foreach>
+
+                    </div>
+                </div>
+            </div>
+            <ul class="designList">
+			 <if condition="$company_id==0">
+                 <foreach name="design2" item="list" key='k'>
+                <li class="clearfix clearfixs">
+                    <div class="lazy fl"><a href="{:U('Design/detail',array('id'=>$list['article_id']))}"><img data-original="/{$list.original_img}" class="lazy_img"></a></div>
+                    <div class="fl des_t">
+                    <a href="{:U('Design/detail',array('id'=>$list['article_id']))}">
+                        <h2><font>{$list.title}</font><span>{$grade[$list['grade']]['com_name']}</span></h2>
+                        <if condition="$list['c_name']!=''"><p>所属公司：{$list.c_name}</p></if>
+                        <p>擅长：
+                       <foreach name="special_style_data[$list['article_id']]" item="vos">
+                                    {$vos.com_name}&nbsp;
+                        </foreach>
+                        </p>
+                        <p class="flsub">{$obtain[$list['obtain']]['com_name']}<font>|</font>{$list.short}</p>
+                     </a>
+                    </div>
+                </li>
+                </foreach>
+				<else/>
+				 <foreach name="design" item="list" key='k'>
+                <li class="clearfix clearfixs">
+                    <div class="lazy fl"><a href="{:U('Design/detail',array('id'=>$list['article_id']))}"><img data-original="/{$list.original_img}" class="lazy_img"></a></div>
+                    <div class="fl des_t">
+                    <a href="{:U('Design/detail',array('id'=>$list['article_id']))}">
+                        <h2><font>{$list.title}</font><span>{$grade[$list['grade']]['com_name']}</span></h2>
+                        <if condition="$list['c_name']!=''"><p>所属公司：{$list.c_name}</p></if>
+                        <p>擅长：
+                       <foreach name="special_style_data[$list['article_id']]" item="vos">
+                                    {$vos.com_name}&nbsp;
+                        </foreach>
+                        </p>
+                        <p class="flsub">{$obtain[$list['obtain']]['com_name']}<font>|</font>{$list.short}</p>
+                     </a>
+                    </div>
+                </li>
+                </foreach>
+				</if>
+             </ul>
+             <div class="adm tc">
+                    <p class="more">加载更多</p>
+            </div>
+        </div>
+    </div>
+<include file='Public:pageFooter'/>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<if condition="$company_id==0">
+<script>
+    $(function(){
+        var keywords ='{$keywords}';
+        var special_style_id ={$special_style_id};
+        var grade_id={$grade_id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Design/load2",
+                //提交的数据
+                data:{pages:num,keywords:keywords,special_style_id:special_style_id,grade_id:grade_id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.designList').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多了"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            
+        });
+    });
+</script>
+<else/>
+<script>
+    $(function(){
+        var keywords ='{$keywords}';
+        var special_style_id ={$special_style_id};
+        var grade_id={$grade_id};
+        $('.more').click(function() {
+            var num =$(".clearfixs").length;
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"post",
+                //提交的网址
+                url:"/mobile.php/Design/load",
+                //提交的数据
+                data:{pages:num,keywords:keywords,special_style_id:special_style_id,grade_id:grade_id},
+                //返回数据的格式
+                datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+                //在请求之前调用的函数
+               // beforeSend:function(){$("#msg").html("logining");},
+                //成功返回之后调用的函数
+                success:function(data){
+                    var html = data;
+                    if(html!==""){
+                    $('.designList').append(html);
+                   // $('.newsc ul .item:last-child').fadeIn('400',function(){
+                     //   $('.newsc .item li').unwrap();
+                    //});
+                      $(function(){
+ 
+        $(".lazy_img").lazyload({ effect: "fadeIn" });
+        $('.like').click(function() {
+            if($(this).hasClass('liked')){
+                $(this).removeClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) - 1;
+                $(this).find('.num').text(num);
+            }else{
+                $(this).addClass('liked');
+                var num = $(this).find('.num').text();
+                num = parseInt(num) + 1;
+                $(this).find('.num').text(num);
+            }
+        }); 
+    })
+                    }else{
+                        layer.open({
+                                        content: "没有更多了"
+                                        ,time: 2
+                                    });
+    
+                              $('.more').remove();
+                        return false;
+                        //$('.more').html("");
+
+
+                    }
+                }
+            });
+            
+        });
+    });
+</script>
+</if>
+<script>
+    //单独页面上的js
+    $(function(){
+            $('.catTab li').click(function() {
+                if($(this).hasClass('on')){
+                    $(this).removeClass('on');
+                    $('.tabLayer > div').slideUp(300);
+                    $('.tabLayer').hide();
+                    return false;
+                }
+                $('.catTab li').removeClass('on');
+                $(this).addClass('on');
+                var eq = $(this).index();
+                $('.tabLayer > div').hide();
+                $('.tabLayer').show();
+                $('.tabLayer > div').eq(eq).slideDown(300);
+            });
+            $('.catTab .tabLayer>div a').click(function() {
+                $(this).parent('div').find('a').removeClass('active');
+                $(this).addClass('active');
+            });
+            $(window).scroll(function() {
+                var scrollTop = $(window).scrollTop();
+                if(scrollTop >= $('.catTab').offset().top){
+                    $('.catTab li').removeClass('on');
+                    $('.tabLayer > div').slideUp(300);
+                    $('.tabLayer').hide();
+                }
+            });
+    $(".lazy_img").lazyload({ effect: "fadeIn" });
+    })
+</script>
+

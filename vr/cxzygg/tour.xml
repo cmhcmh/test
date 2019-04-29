@@ -1,0 +1,77 @@
+<krpano version="1.19" title="马良全景平台" debugmode="false">
+ 
+<include url="%SWFPATH%/skin/vtourskin.xml" />
+<include url="%SWFPATH%/autorotate.xml" />
+<include url="%SWFPATH%/object.xml" />
+<contextmenu fullscreen="false" versioninfo="false">
+        <item name="logo" caption="马良全景平台" separator="true" onclick="openurl('http://vr.mlabc.com/')" devices="flash|webgl"/>
+        </contextmenu>
+<events name="musicevents"
+    onnewpano="indexoftxt(result, get(scene[get(xml.scene)].bgmusic),sound); if(result GE 0,tween(sound[bgsnd].volume, 0.5)); set(music_bgmusic,get(scene[get(xml.scene)].bgmusic)); if(music_bgmusic,js(openMusicVoiceBtn());playsound(bgm,get(scene[get(xml.scene)].bgmusic),1,tween(sound[bgsnd].volume, 1)););"
+    keep="true"/>
+ <layer name="open_alert" url="" keep="true" align="center" edge="center" x="0" y="0" maxwidth="160" maxheight="160"
+           enabled="false" visible="false"/>
+<action name="show_open_alert">set(layer[open_alert].url,%1); set(layer[open_alert].visible,true); delayedcall(5,
+    tween(layer[open_alert].alpha,0,1));
+</action>
+	 <hotspot name="shadelogo" url="" ath="0" atv="90" distorted="true" scale="1.0" rotate="0.0" rotatewithview="true"
+         visible="false" keep="true" onloaded="set(hotspot[shadelogo].rotate,get(view.hlookat));"/>
+<events name="shadelogorotation" keep="true"
+        onviewchange="if(hotspot[shadelogo].rotatewithview, set(hotspot[shadelogo].rotate,get(view.hlookat)) );"/>
+<action name="show_shade">
+    set(hotspot[shadelogo].url,%1);
+    set(hotspot[shadelogo].atv,%2);
+    set(hotspot[shadelogo].visible,true);
+    set(hotspot[shadelogo].depth,2000);
+</action>
+<action name="addShade">
+    txtadd(shade_name, 'shade_',%1); 
+    addhotspot(get(shade_name));
+    set(hotspot[get(shade_name)].url,%2); 
+    <!-- set(hotspot[get(shade_name)].ath,0);  -->
+    set(hotspot[get(shade_name)].atv,%3);
+    set(hotspot[get(shade_name)].distorted,true); 
+    set(hotspot[get(shade_name)].scale,"1.0");
+    set(hotspot[get(shade_name)].rotate,"0.0");
+     set(hotspot[get(shade_name)].rotatewithview,"true");
+    set(hotspot[get(shade_name)].visible,"true"); 
+    set(hotspot[get(shade_name)].keep,"false");
+    set(hotspot[get(shade_name)].onloaded,"set(hotspot[get(shade_name)].rotate,get(view.hlookat));");
+</action>  
+ <action name="startup" autorun="onstart">
+ 	copy(startscene,scene[0].name); 
+    if(device.fullscreensupport == true,js(showFullscreenBtn()););
+    if(device.mobile OR device.tablet,js(hideShareAndFootmarkBtn()););
+    loadscene(get(startscene), null, MERGE);
+    if(startactions !== null, startactions());
+ </action>
+	   	 <scene name="scene_41cad569d652d459" title="餐厅"    onstart="activatespot(90)" thumburl="resource/pano/41cad569d652d459/thumb.jpg?1510709712" lat="" lng="" heading="">
+   
+		 <view hlookat="0" vlookat="0" fovtype="MFOV" fov="90" fovmin="5" fovmax="120" vlookatmin="-90" vlookatmax="90" limitview="lookat"/>
+		<preview url="resource/pano/41cad569d652d459/preview.jpg" />
+		<image>
+			<cube url="resource/pano/41cad569d652d459/pano_%s.jpg" />
+			<cube url="resource/pano/41cad569d652d459/mobile/pano_%s.jpg" devices="mobile" />
+		</image>	
+		
+	</scene>   
+	  	 <scene name="scene_624d386950b0950c" title="客厅"    onstart="activatespot(90)" thumburl="resource/pano/624d386950b0950c/thumb.jpg?1510709712" lat="" lng="" heading="">
+   
+		 <view hlookat="0" vlookat="0" fovtype="MFOV" fov="90" fovmin="5" fovmax="120" vlookatmin="-90" vlookatmax="90" limitview="lookat"/>
+		<preview url="resource/pano/624d386950b0950c/preview.jpg" />
+		<image>
+			<cube url="resource/pano/624d386950b0950c/pano_%s.jpg" />
+			<cube url="resource/pano/624d386950b0950c/mobile/pano_%s.jpg" devices="mobile" />
+		</image>	
+		
+	</scene>   
+	
+		 
+		 
+					 	 
+		 
+					 			   
+	
+	
+	
+</krpano>

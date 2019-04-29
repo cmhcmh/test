@@ -1,0 +1,92 @@
+<include file="Index:pageHeader" />
+	<script src="__PUBLIC__/Admin/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+$(function(){
+	autoHeight(jQuery('.autoHeight'));
+	jQuery(".column_Box").each(function () {
+		var t = jQuery(this);
+		if (t.length < 1) return;
+		Tab_click(t.find('.tab ul li'), t.find(".wrapBox .body"));
+	});
+});
+
+KindEditor.ready(function(K) {
+	K.create('#content', {
+		allowFileManager : false,
+		pasteType : 2,
+		newlineTag : 'p',
+		urlType : 'domain'
+	});
+});
+</script>
+
+<div class="column_Box mainAutoHeight">
+	<div class="tab">
+		<ul>
+			<li class="current"><a href="javascript:">{$arr['name'][$type]}详情</a></li>
+		</ul>
+	</div>
+	<div class="column_Box mainAutoHeight wrapBox">
+        <div class="body">
+			<form method="post" action="{:U('Comcat/insert')}" id="submitForm" name="submitForm" enctype="multipart/form-data">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+
+						<tr>
+							<td style="text-align:right;">属性名称：</td>
+							<td style="text-align:left;"><input type="text" name="com_name" value="" size="35" /><em>*</em></td>
+						</tr>
+
+						<tr>
+							<td style="text-align:right;">所属的分类：</td>
+							<td style="text-align:left;"><b>{$catinfo.cat_name}</b></td>
+						</tr>
+						
+						<tr>
+							<td style="text-align:right;">首页推荐：</td>
+							<td style="text-align:left;">
+						      <input type="radio" name="is_show" value="1" <eq name='info.is_show' value='1'>checked</eq>/>是&nbsp;&nbsp;
+						      <input type="radio" name="is_show" value="0" <empty name='info.is_show'>checked</empty>/>否
+							</td>
+						</tr>
+						
+						<tr>
+							<td style="text-align:right;">排序：</td>
+							<td style="text-align:left;"><input type="text" name="sort_order" value="1" size="20" /><em>*</em></td>
+						</tr>
+	
+						<tr>
+							<td style="text-align:right;">属性图片：</td>
+							<td style="text-align:left;">
+								<!-- <if condition="$cat_id eq 1001"> -->
+									<include file="Control:album" thumb_width='54' thumb_height='41'/>
+								<!-- <else/> -->
+									<input type="file" name="com_img" size="35" /><br/>
+									<font color="#ff0000">
+										风格首页图片尺寸建议为：328px * 250px;<br/>
+									</font> 
+								<!-- </if> -->
+							</td>
+						</tr>
+						
+						<tr>
+							<td>&nbsp;</td>
+							<td style="text-align:left;">
+							<input type="hidden" name="type" value="{$type}"/>
+								<input type="hidden" name="cat_id" value="{$catinfo.cat_id}"/>
+								<input type="hidden" name="com_id" value="{$info.com_id}"/>
+								<input type="hidden" name="prefix" value="{$prefix}"/>
+								<input type="submit" value="提交"/>
+								<a href="{:U('Comcat/index',array('cat_id'=>$_REQUEST['cat_id'],'prefix'=>$prefix,'type'=>$_REQUEST['type']))}"><input type="button" value="返回"/></a>
+							</td>
+						</tr>
+						<tr><tr>
+					</tbody>
+				</table>
+
+			</form>
+        </div>
+    </div>
+</div>
+</body>
+</htm
